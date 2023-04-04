@@ -1,0 +1,232 @@
+---
+title: "Methods"
+output:
+  word_document:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: yes
+    theme: journal
+    highlight: textmate
+    code_folding: hide
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
+bibliography:
+    - "`r here::here('3_Results/methods/references.bib')`"
+    - "`r here::here('3_Results/methods/packages.bib')`"
+---
+
+```{r knitr, include = FALSE}
+DOCNAME = "methods"
+NOW <- Sys.time()
+
+# Time chunks during knitting
+knitr::knit_hooks$set(timeit = function(before) {
+    if (before) {
+        print(paste("Start:", Sys.time()))
+        NOW <<- Sys.time()
+    } else {
+        print(paste("Stop:", Sys.time()))
+        print(Sys.time() - NOW)
+    }
+})
+
+knitr::opts_chunk$set(
+    autodep        = TRUE,
+    cache          = FALSE,
+    cache.path     = paste0("cache/", DOCNAME, "/"),
+    cache.comments = FALSE,
+    echo           = TRUE,
+    error          = FALSE,
+    fig.align      = "center",
+    fig.width      = 10,
+    fig.height     = 8,
+    message        = FALSE,
+    warning        = FALSE,
+    timeit         = TRUE
+)
+```
+
+```{r libaries, cache = FALSE}
+# Presentation
+library("glue")
+library("knitr")
+
+# JSON
+library("jsonlite")
+
+# Tidyverse
+library("tidyverse")
+```
+
+```{r pkg-bib}
+dir.create(here::here("3_Results", DOCNAME), showWarnings = FALSE)
+
+write_bib(c("base", "reshape2", "tidyverse", "here", "furrr", "ggpubr",
+            "cowplot", "patchwork", "raster", "skimr", "pspearman",
+            "ggstatsplot", "ggasym", "cowplot", "ggstatsplot",
+            "gridExtra", "tidyverse", "dplyr", "tidyr", "magrittr", "stringr", 
+            "future", "purrr", "here", "workflowr", "knitr",
+            "kableExtra", "rmarkdown"),
+          file = here::here("3_Results", DOCNAME, "packages.bib"))
+```
+
+```{r load}
+versions <- list(
+    cowplot     = packageVersion("cowplot"),
+    dplyr       = packageVersion("dplyr"),
+    furrr       = packageVersion("furrr"),
+    future      = packageVersion("future"),
+    ggasym      = packageVersion("ggasym"),
+    ggpubr      = packageVersion("ggpubr"),
+    ggstatsplot = packageVersion("ggstatsplot"),
+    gridExtra   = packageVersion("gridExtra"),
+    here        = packageVersion("here"),
+    kableExtra  = packageVersion("kableExtra"),
+    knitr       = packageVersion("knitr"),
+    magrittr    = packageVersion("magrittr"),
+    patchwork   = packageVersion("patchwork"),
+    pspearman   = packageVersion("pspearman"),
+    purrr       = packageVersion("purrr"),
+    python      = "3.8.8",
+    R           = str_extract(R.version.string, "[0-9\\.]+"),
+    raster      = packageVersion("raster"),
+    reshape2    = packageVersion("reshape2"),
+    rmarkdown   = packageVersion("rmarkdown"),
+    skimr       = packageVersion("skimr"),
+    stringr     = packageVersion("stringr"),
+    tidyr       = packageVersion("tidyr"),
+    tidyverse   = packageVersion("tidyverse"),
+    viridis     = packageVersion("viridis"),
+    workflowr   = packageVersion("workflowr")
+)
+```
+
+## Distribution of the centers:
+
+For each deletion from MitoBreak in the major arc (5781-16569), its
+midpoint was found. Next, each of the real deletions was moved randomly
+within the major arc, and their midpoints were also obtained. For the
+observed means of the observed deletions and randomly simulated ones,
+the corresponding standard deviations were obtained and compared.
+
+## Hi-C mtDNA contact matrix:
+
+The publicly available mtDNA matrix was visualized using
+[Juicebox](http://aidenlab.org/juicebox/?juiceboxURL=http://bit.ly/2Rmz4wy)
+[@robinsonJuiceboxJsProvides2018]. The corresponding paper describing
+the methodology of obtaining Hi-C data derived from the human
+lymphoblastoid cell line is by [@rao3DMapHuman2014]. Additionally, we
+obtained six Hi-C mtDNA contact matrixes from olfactory receptors of
+covid patients and controls. Details of the in situ Hi-C protocol, as
+well as bioinformatics analyses, are described in the original paper
+[@zazhytskaNoncellautonomousDisruptionNuclear2022]. Matrices were
+visualized using Juicebox [@robinsonJuiceboxJsProvides2018].
+
+## In silico folding:
+
+We used the heavy chain of the reference human mtDNA sequence
+(NC_012920.1) since it spends the most time being single-stranded
+according to the asymmetric model of mtDNA replication
+[@perssonCopychoiceRecombinationMitochondrial2019a]. Using Mfold
+[@zukerMfoldWebServer2003] with parameters set for DNA folding and a
+circular sequence, we constrained everything but the major arc from
+forming base pairs. We obtained the global (genome-wide) secondary
+structure, which we then translated into the number of hydrogen bonds
+connecting our regions of interest (100 bp windows for the analyses and
+visualization). Next, within the single-stranded heavy chain of the
+major arc, we defined 100 bp windows and hybridized all potential pairs
+of such windows using ViennaRna Package 2 [@lorenzViennaRNAPackage2011].
+Obtained Gibbs Energies for each pair of such windows was used as a
+metric of a strength of a potential interaction between two
+single-stranded DNA regions.
+
+## The density of inverted/direct repeats:
+
+For each pair of 100 bp window, we estimated the number of nucleotides
+involved in at least one inverted/direct degraded repeat. The
+corresponding repeat should have one arm located in the first window and
+another arm located in the second window. All degraded (with the maximal
+level of imperfection of 80%) repeats in the human mtDNA were called
+using our algorithm described previously
+[@shamanskiyImtRDBDatabaseSoftware2019].
+
+## Clusterization of deletions:
+
+For clusterization, we used all MitoBreak
+[@damasMitoBreakMitochondrialDNA2014] deletions from the major arc. We
+used 5' and 3'coordinates as input for a hierarchical density-based
+clustering algorithm (python hdbscan v0.8.24) [@mcinnes2017]. DBSCAN is
+a well-known algorithm for probability density-based clusterization,
+which detects clusters as regions with more densely located sample data
+as well as outlier samples. The advantage of this method is soft
+clustering. We variated cluster density parameters in order to ensure
+cluster stability and found that cluster formations stay relatively
+stable for a wide range of parameters. Thus, DBSCAN produces a robust
+set of clusters, producing additional evidence for regions with elevated
+deletion rates. We also performed affinity propagation clustering
+[@freyClusteringPassingMessages2007] as a data exploration experiment,
+which also yields robust clustering.
+
+## Perfect direct repeats of the human mtDNA:
+
+The list of the perfect direct repeats with a length of 10 or more base
+pairs was used from our algorithm described in
+[@guoRepeatsLongevitySources2010].
+
+## Realized and non-realized direct degraded repeats:
+
+We used our database of degraded mtDNA repeats
+[@shamanskiyImtRDBDatabaseSoftware2019] with a length of 10 bp or more
+and a similarity of 80% or more. We took into account only direct
+repeats with both arms located in the major arc. We grouped repeats with
+similar motifs into clusters so that each considered cluster should
+contain at least three arms of the repeat, and at least one deletion
+should be associated with two of them. We additionally restricted our
+subset of clusters, considering only non-realized repeats as pairs of
+arms, where at least one of them (the first or the second) is the same
+as in realized repeat. Visually in Fig 2D, it means that within each
+cluster, we compare realized repeats (red dot) with non-realized ones
+(grey dot) located on the same horizontal (the same Y coordinate) or
+vertical (the same X coordinate) axis. We got 618 clusters like this.
+Pairwise alignments for microhomology matrix: A measure for the degree
+of similarity between segments of the major arc was obtained by aligning
+small windows of the mitochondrial major arc sequence with each other.
+We sliced the mitochondrial major arc sequence into 100 nucleotide
+pieces and aligned them against each other using EMBOSS Needle
+[@needlemanGeneralMethodApplicable1970] with default parameters (match
++5, gap open - 10, gap extend - 0.5), parsed out the alignment scores,
+thus obtaining data for the matrix of microhomology.
+
+# Other packages
+
+Visualisations and figures were primarily created using the ggplot2
+(v`r versions$ggplot2`), cowplot (v`r versions$cowplot`) [@R-cowplot],
+patchwork (v`r versions$patchwork`) [@R-patchwork], ggasym
+(v`r versions$ggasym`) [@R-ggasym], ggpubr (v`r versions$ggpubr`)
+[@R-ggpubr] and ggstatsplot (v`r versions$ggstatsplot`) [@patil2021]
+packages using the viridis colour palette (v`r versions$viridis`) for
+continuous data. Data manipulation was performed using other packages in
+the tidyverse (v`r versions$tidyverse`) [@R-tidyverse] particularly
+dplyr (v`r versions$dplyr`) [@R-dplyr], tidyr (v`r versions$dplyr`)
+[@R-tidyr] and purrr (v`r versions$purrr`) [@R-purrr]. The analysis
+project was managed using the workflowr (v`r versions$workflowr`)
+[@R-workflowr] package which was also used to produce the publicly
+available website displaying the analysis code, results and output.
+Reproducible reports were produced using knitr (v`r versions$knitr`)
+[@R-knitr] and R Markdown (v`r versions$rmarkdown`) [@R-rmarkdown] and
+converted to HTML using Pandoc (v`r versions$pandoc`).
+
+# Summary
+
+## Output files
+
+```{r save}
+versions <- purrr::map(versions, as.character)
+versions <- jsonlite::toJSON(versions, pretty = TRUE)
+readr::write_lines(versions,
+                   here::here("3_Results", DOCNAME, "package-versions.json"))
+```
+
+# References

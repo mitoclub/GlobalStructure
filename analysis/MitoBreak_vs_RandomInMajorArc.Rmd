@@ -1,0 +1,129 @@
+---
+title: "Compare Good Mitobreak with Rand version of major arc"
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: yes
+    theme: journal
+    highlight: textmate
+    code_folding: hide
+    df_print: paged
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+  autodep        = TRUE,
+  cache          = FALSE,
+  cache.lazy     = FALSE,
+  dev            = c("png", "pdf"),
+  echo           = TRUE,
+  error          = FALSE,
+  fig.align      = "center",
+  fig.width      = 8,
+  fig.asp        = 0.618,
+  message        = FALSE,
+  warning        = FALSE
+)
+# Load tidyverse infrastructure packages
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(ggpubr)
+})
+
+# Set paths
+src_dir     <- here('code')
+raw_dir     <- here('1_Raw')
+data_dir    <- here('2_Derived')
+results_dir <- here("3_Results")
+
+# set seed
+reseed <- 42
+set.seed(seed = reseed)
+```
+
+```{r load}
+data <- read.csv(
+    here(results_dir, "MitoBreakDB_121219_good.csv"),
+    sep = ";"
+)
+
+data2 <- read.csv(
+    here(results_dir, "MitoBreakDB_121219_rand.csv"),
+    sep = ";"
+)
+
+data3 <- read.csv(
+    here(results_dir, "breaks_comp.csv"),
+    sep = ";"
+)
+```
+
+## 1: MitoBreak
+
+```{r plt-good}
+xplot <- ggplot(data, aes(Middle)) +
+  geom_histogram(alpha=0.4, position = 'dodge') + theme_minimal() +
+  xlab('') + ylab('') + scale_x_continuous(breaks=c(6000, 9000, 12000, 15000)) +
+  scale_y_continuous(breaks = c(100, 200, 300, 400, 500, 600)) +
+  scale_fill_manual(values=c('red', 'grey'))
+
+xplot
+```
+
+## 2: Rand
+
+```{r plt-rand}
+yplot <- ggplot(data2, aes(Middle)) +
+  geom_histogram(alpha=0.4, position = 'dodge') + theme_minimal() +
+  xlab('') + ylab('') + scale_x_continuous(breaks=c(6000, 9000, 12000, 15000)) +
+  scale_y_continuous(breaks = c(100, 200, 300, 400, 500, 600)) +
+  scale_fill_manual(values=c('red'))
+```
+
+## 3: Arranging the plot
+
+```{r plt-clean}
+ggarrange(xplot, NULL, yplot, 
+          ncol = 1, nrow = 3, align = "hv", 
+          widths = c(2, 1), heights = c(1, 2),
+          common.legend = TRUE)
+```
+
+```{r plt-combined}
+zplot <- ggdensity(data2$Middle, palette = "red")
+
+ggarrange(xplot, zplot, 
+          ncol = 1, nrow = 2,
+          heights = c(1, 0.5))
+
+ggarrange(xplot, yplot, zplot, 
+          ncol = 1, nrow = 3,
+          heights = c(1, 0.5, 0.3))
+```
+
+```{r plt-multi-histogram}
+plot_multi_histogram <- function(df, feature, label_column) {
+  plt <-
+    ggplot(df, aes(x = eval(parse(text = feature)), fill = eval(parse(text =
+                                                                        label_column)))) +
+    geom_histogram(
+      alpha = 0.7,
+      position = "identity",
+      aes(y = ..density..),
+      color = "black"
+    ) +
+    geom_density(alpha = 0.7) +
+    geom_vline(
+      aes(xintercept = mean(eval(
+        parse(text = feature)
+      ))),
+      color = "black",
+      linetype = "dashed",
+      size = 1
+    ) +
+    labs(x = feature, y = "Density")
+  plt + guides(fill = guide_legend(title = label_column))
+}
+plot_multi_histogram(data3, 'Middle', 'Group')
+```

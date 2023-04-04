@@ -1,0 +1,39 @@
+name: "Risk of mitochondrial deletions is affected by the global secondary structure of the human mitochondrial genome"
+output_dir: ../docs
+navbar:
+  title: "Risk of mitochondrial deletions is affected by the global secondary structure of the human mitochondrial genome"
+  left:
+    - text: "HOME"
+      href: index.html
+    - text: "Analysis"
+      menu:
+        - text: "Figures"
+          menu:
+            - text: "Fig.2A. Clustering analysis of mtDNA deletions"
+              href: Revision_Clustering_mt_deletions.html
+            - text: "Fig.2B. Influence of repeats on mtDNA deletions distributon"
+              href: figure_2b.html
+            - text: "Fig.2C-D. *In silico* estimates of mtDNA global structure"
+              href: figure_2cd.html
+        - text: "Reanalysis of Deletions PCA data from Copeland et al"
+          href: CopelandDeletionsPca.html
+        - text: "Exploratory MITOBREAK and Orlovs data analysis"
+          href: MitoBreakDeletionsAndOrlovRepeats.html
+        - text: "Compare Good Mitobreak with Rand version of major arc"
+          href: MitoBreak_vs_RandomInMajorArc.html
+    - text: "Methods"
+      href: methods.html
+  right:
+    - text: "License"
+      href: license.html
+    - icon: fa-github
+      href: https://github.com/mitoclub/GlobalStructure
+
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: journal
+    highlight: textmate
+    code_folding: hide
+    df_print: paged

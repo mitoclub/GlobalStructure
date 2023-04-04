@@ -1,0 +1,1253 @@
+---
+title: Fig.2C-D. *In silico* estimates of mtDNA global structure
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: yes
+    theme: journal
+    highlight: textmate
+    code_folding: hide
+    df_print: paged
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+  autodep        = TRUE,
+  cache          = FALSE,
+  cache.lazy     = FALSE,
+  dev            = c("png", "pdf"),
+  echo           = TRUE,
+  error          = FALSE,
+  fig.align      = "center",
+  fig.width      = 8,
+  fig.asp        = 0.618,
+  message        = FALSE,
+  warning        = FALSE
+)
+# Load tidyverse infrastructure packages
+suppressPackageStartupMessages({
+  library(reshape2)
+  library(tidyverse)
+  library(here)
+  library(furrr)
+  library(cowplot)
+  library(patchwork)
+  library(raster)
+  library(skimr)
+  library(pspearman)
+  library(ggstatsplot)
+  library(ggasym)
+})
+
+# Set paths
+src_dir   <- here('code')
+raw_dir   <- here('1_Raw')
+data_dir  <- here('2_Derived')
+plots_dir <- here("3_Results")
+
+# set seed
+reseed <- 42
+set.seed(seed = reseed)
+```
+
+## 1: READ microhomology from pair-wise alignments
+
+```{r load-microhomology}
+homol <- read.table(
+  here(data_dir, "HeatMaps/100x100.csv") %>%
+    normalizePath(),
+  sep = ";",
+  header = TRUE
+)
+row.names(homol) <- homol$X
+homol <- homol[, -1]
+# make long vertical table from the matrix
+for (i in seq_len(nrow(homol))) {
+  for (j in seq_len(ncol(homol))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(homol)[i])
+    SecondWindow <- as.character(names(homol)[j])
+    Score <- as.numeric(homol[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+MicroHomology <- Final
+```
+
+## 2: READ density of direct repeats per window
+
+```{r load-repeats-density}
+DirectRepDensity <-
+  here(
+    data_dir, 
+    "HeatMaps/Link_matrix_direct_major_activ_left.csv") %>%
+  normalizePath() %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  )
+DirectRepDensity <- DirectRepDensity[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(DirectRepDensity))) {
+  for (j in seq_len(ncol(DirectRepDensity))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(DirectRepDensity)[i])
+    SecondWindow <- as.character(names(DirectRepDensity)[j])
+    Score <- as.numeric(DirectRepDensity[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+DirectRepDensity <- Final
+```
+
+## 3: correlate MicroHomology and DirectRepDensity, derive HomologyAndRepeats dataset
+
+```{r repeats-density-vs-microhomology-all}
+DirectRepDensity <- DirectRepDensity[
+  order(DirectRepDensity$FirstWindow, DirectRepDensity$SecondWindow),
+]
+
+MicroHomology <- MicroHomology[
+  order(MicroHomology$FirstWindow, MicroHomology$SecondWindow),
+]
+pspearman::spearman.test(
+  DirectRepDensity$Score,
+  MicroHomology$Score
+)
+
+nrow(DirectRepDensity) # 4950
+```
+
+```{r repeats-density-vs-microhomology-nonzero}
+pspearman::spearman.test(
+  DirectRepDensity[DirectRepDensity$Score > 0, ]$Score,
+  MicroHomology[DirectRepDensity$Score > 0, ]$Score
+)
+```
+
+```{r homology-and-repeats}
+HomologyAndRepeats <- data.frame(
+  DirectRepDensity$FirstWindow,
+  DirectRepDensity$SecondWindow,
+  DirectRepDensity$Score,
+  MicroHomology$Score
+)
+names(HomologyAndRepeats) <- c(
+  "FirstWindow",
+  "SecondWindow",
+  "DirectRepeatsDensity",
+  "MicroHomologyScore"
+)
+```
+
+## 4: READ MITOBREAK AND FILTER (KEEP ONLY MAJOR ARC DELETIONS):
+
+```{r load-mitobreak}
+breaks <- read.table(
+  here(raw_dir, "MitoBreakDB_12122019.csv") %>%
+    normalizePath(),
+  sep = ",",
+  header = TRUE
+)
+breaks$X5..breakpoint <- as.numeric(as.character(breaks$X5..breakpoint))
+summary(breaks$X5..breakpoint)
+breaks$X3..breakpoint <- as.numeric(as.character(breaks$X3..breakpoint))
+summary(breaks$X3..breakpoint)
+breaks <- breaks[!is.na(breaks$X3..breakpoint) &
+                   !is.na(breaks$X5..breakpoint), ]
+
+breaks$FirstWindowBreakpoint <- breaks$X3..breakpoint
+breaks$SecondWindowBreakpoint <- breaks$X5..breakpoint
+breaks <- breaks[breaks$FirstWindowBreakpoint > 5781 &
+                   breaks$FirstWindowBreakpoint < 16569 &
+                   breaks$SecondWindowBreakpoint > 5781 &
+                   breaks$SecondWindowBreakpoint < 16569, ]
+# can make it better!! take in ot account 0-100?
+# OH: 110-441
+# OL: 5721-5781
+
+HomologyAndRepeats$Deletion <- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  FirstWindow <- HomologyAndRepeats$FirstWindow[i]
+  SecondWindow <- HomologyAndRepeats$SecondWindow[i]
+  TempBreaks <- breaks[breaks$FirstWindowBreakpoint >= FirstWindow &
+                         breaks$FirstWindowBreakpoint < (FirstWindow + 100) &
+                         breaks$SecondWindowBreakpoint >= SecondWindow &
+                         breaks$SecondWindowBreakpoint < (SecondWindow + 100), ]
+  if (nrow(TempBreaks) > 0) {
+    HomologyAndRepeats$Deletion[i] <- 1
+  }
+}
+
+table(HomologyAndRepeats$Deletion)
+```
+
+```{r explore-dat}
+skimr::skim(HomologyAndRepeats)
+```
+
+```{r plt-fit-binomial-glm-dens-reps-and-microhomology}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$DirectRepeatsDensity + HomologyAndRepeats$MicroHomologyScore,
+    family = binomial
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a)
+
+broom::tidy(a)
+broom::glance(a)
+
+```
+
+```{r plt-fit-binomial-glm-microhomology}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore),
+    family = binomial
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a)
+
+broom::tidy(a)
+broom::glance(a)
+```
+
+may be add perfect repeats of Orlov - yes or no for each deletion? and
+see, if microhomology still important?
+
+## 5: READ GLOBAL FOLDING:
+
+```{r load-global-folding-temp}
+GlobalFolding <-
+  here(
+    data_dir,
+    "HeatMaps/Link_matrix1000_major.csv") %>%
+  normalizePath() %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  )
+row.names(GlobalFolding) <- GlobalFolding$X
+GlobalFolding <- GlobalFolding[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(GlobalFolding))) {
+  for (j in seq_len(ncol(GlobalFolding))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(GlobalFolding)[i])
+    SecondWindow <- as.character(names(GlobalFolding)[j])
+    Score <- as.numeric(GlobalFolding[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+## the matrix is symmetric - I need to keep only one triangle: X>Y (don't need also diagonal, which is noizy and bold)
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+GlobalFolding1000 <- Final
+GlobalFolding1000 <- GlobalFolding1000[order(
+  GlobalFolding1000$FirstWindow,
+  GlobalFolding1000$SecondWindow
+), ]
+names(GlobalFolding1000) <- c(
+  "FirstWindowWholeKbRes",
+  "SecondWindowWholeKbRes",
+  "GlobalFolding1000Score"
+)
+```
+
+## 5.1: UPDATE GLOBAL FOLDING WITH WINDOW = 100 bp: (it automaticaly rewrites the GlobalFolding matrix from the previous point 5)
+
+```{r load-global-folding}
+GlobalFolding <-
+  here(
+    data_dir,
+    "HeatMaps/Link_matrix100hydra_major.csv") %>%
+  normalizePath() %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  )
+row.names(GlobalFolding) <- GlobalFolding$X
+GlobalFolding <- GlobalFolding[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(GlobalFolding))) {
+  for (j in seq_len(ncol(GlobalFolding))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(GlobalFolding)[i])
+    SecondWindow <- as.character(names(GlobalFolding)[j])
+    Score <- as.numeric(GlobalFolding[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+# Should we delete bold diagonal or erase it to zeroes??? If delete, dimension will be decreased - try this. delete 5 windows next to diagonal (500)
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow + 1000, ]
+nrow(Final) # 500 or 1000!!!!!! similarly good results but 1000 is a bit better
+GlobalFolding <- Final
+GlobalFolding <- GlobalFolding[order(GlobalFolding$FirstWindow, GlobalFolding$SecondWindow), ]
+names(GlobalFolding)[3] <- c("GlobalFoldingScore")
+```
+
+```{r plt-heatmap-global-folding, fig.width=11.594, fig.height=8.316}
+pltHeatmap_gFolding_sw100 <-
+  here(data_dir, "HeatMaps/Link_matrix100hydra_major.csv") %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  ) %>%
+  gather(-X,
+         key = "SecondWindow",
+         value = "Score"
+  ) %>%
+  rename(FirstWindow = X) %>%
+  mutate(SecondWindow = stringr::str_extract(
+    SecondWindow,
+    "\\d+"
+  ) %>%
+    as.integer()) %>%
+  filter(
+    FirstWindow >= 5950,
+    SecondWindow >= 5950
+  ) %>%
+  tibble() %>%
+  ggplot(aes(
+    x = FirstWindow,
+    y = SecondWindow,
+    fill = Score
+  )) +
+  geom_tile() +
+  scale_y_reverse() +
+  scale_fill_viridis_c(option = "D", direction = -1) +
+  theme_bw(base_size = 18)
+
+cowplot::save_plot(
+  plot = pltHeatmap_gFolding_sw100,
+  base_height = 8.316,
+  base_width = 11.594,
+  file = normalizePath(
+    file.path(plots_dir, "heatmap_global_folding_sw100.pdf")
+  )
+)
+
+pltHeatmap_gFolding_sw100
+```
+
+```{r}
+folding_df <-
+  here(
+    data_dir,
+    "HeatMaps/Link_matrix100hydra_major.csv") %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  ) %>%
+  gather(-X,
+         key = "SecondWindow",
+         value = "Score"
+  ) %>%
+  rename(FirstWindow = X) %>%
+  mutate(SecondWindow = stringr::str_extract(
+    SecondWindow,
+    "\\d+"
+  ) %>%
+    as.integer()) %>%
+  filter(
+    FirstWindow >= 5950,
+    SecondWindow >= 5950
+  ) %>%
+  tibble()
+```
+
+GlobalFolding - is the whole genome without bold diagonal, not only the
+major arc!! Keep only major arc in downstream analyses. (will do it when
+merge with InvRepDens)
+
+## 5.2: STABILITY OF DUPLEXES
+
+```{r plt-heatmap-duplex-stablility, fig.width=11.594, fig.height=8.316}
+stblt_df <-
+  read.csv(here(
+    data_dir,
+    "HeatMaps/duplex-stablility_100x100.mtrx"),
+    sep = ";",
+    row.names = 1
+  ) %>% .[, -dim(.)[2]]
+# I don't know why coordinates aren't equal so I match them first
+all((dimnames(stblt_df)[[2]] |> str_remove("X")) %in% dimnames(stblt_df)[[1]]) # TRUE
+all(dimnames(stblt_df)[[1]] %in% (dimnames(stblt_df)[[2]] |> str_remove("X"))) # FALSE
+dimnames(stblt_df)[[2]] <-
+  dimnames(stblt_df)[[1]][match(
+    dimnames(stblt_df)[[2]] |> str_remove("X"),
+    dimnames(stblt_df)[[1]]
+  )]
+# stblt_df <- stblt_df[dimnames(stblt_df)[[2]], ]
+# dim(stblt_df) # 108 x 108
+
+stblt_mtrx <- as.matrix(stblt_df)
+dimnames(stblt_mtrx) <- list(
+  x = as.integer(dimnames(stblt_df)[[1]]),
+  y = as.integer(dimnames(stblt_df)[[2]])
+)
+stblt_plot2d <-
+  melt(stblt_mtrx, value.name = "duplexes_stability") |>
+  mutate(x = x + 19, y = y + 19)
+gg_stblt <-
+  ggplot(
+    stblt_plot2d,
+    aes(x, y,
+        z = duplexes_stability,
+        fill = duplexes_stability
+    )
+  )
+gg_duplexes_stability <- gg_stblt + geom_raster(interpolate = TRUE)
+gg_duplexes_stability
+
+```
+
+### Article version Figure 2D: Heatmap merged Stability of duplexes and Global folding scores
+
+```{r plt-heatmap-folding-stablility, fig.width=11.594, fig.height=8.316}
+bind_df <-
+  inner_join(
+    folding_df, stblt_plot2d,
+    by = c(
+      "FirstWindow" = "x",
+      "SecondWindow" = "y"
+    ),
+    keep = FALSE
+  ) %>%
+  asymmetrise(
+    .,
+    FirstWindow,
+    SecondWindow
+  )
+
+gg_bind <-
+  ggplot(
+    bind_df,
+    aes(
+      x = FirstWindow,
+      y = SecondWindow
+    )
+  ) +
+  geom_asymmat(aes(
+    fill_br = duplexes_stability,
+    fill_tl = Score
+  )) +
+  scale_fill_br_gradientn(
+    colours = viridis::viridis(2000)[250:2000],
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 1,
+      title.position = "top",
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = "div",
+    palette = "RdYlBu",
+    direction = 1,
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 2,
+      title.position = "top",
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  labs(
+    fill_tl = "bottom-left Stability of duplexes",
+    fill_br = "top-right Global folding",
+    title = "Model of mtDNA structural stability"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_blank(),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  )
+
+cowplot::save_plot(
+  plot = gg_bind,
+  base_height = 8.316,
+  base_asp = 0.9,
+  file = here(plots_dir, "heatmap_folding_stability.svg")
+)
+
+gg_bind
+```
+
+## 6: READ INVERTED REPEATS WITH STEP 1000
+
+```{r load-dens-inverted-reps-temp}
+InvRepDens <-
+  here(
+    data_dir,
+    "HeatMaps/Link_matrix_1000_invert_major_activ_left.csv") %>%
+  normalizePath() %>%
+  read.table(
+    sep = ";",
+    header = TRUE
+  )
+row.names(InvRepDens) <- InvRepDens$X
+InvRepDens <- InvRepDens[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(InvRepDens))) {
+  for (j in seq_len(ncol(InvRepDens))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(InvRepDens)[i])
+    SecondWindow <- as.character(names(InvRepDens)[j])
+    Score <- as.numeric(InvRepDens[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+InvRepDens <- Final
+InvRepDens <- InvRepDens[order(InvRepDens$FirstWindow, InvRepDens$SecondWindow), ]
+```
+
+## 6.1: UPDATE INVERTED REPEATS WITH STEP 100 bp (it automatically rewrites InvRepDens from previous point 6)
+
+```{r load-dens-inverted-reps}
+InvRepDens <-
+  here("2_Derived/HeatMaps/Link_matrix_invert_major_activ_left.modified.csv") %>%
+  normalizePath() %>%
+  read.table(
+    sep = "\t",
+    header = TRUE,
+    row.names = 1
+  ) # , row.names = NULL)
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(InvRepDens))) {
+  for (j in seq_len(ncol(InvRepDens))) {
+    # i  = 2; j = 1
+    FirstWindow <- as.character(row.names(InvRepDens)[i])
+    SecondWindow <- as.character(names(InvRepDens)[j])
+    Score <- as.numeric(InvRepDens[i, j])
+    OneLine <- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 & j == 1) {
+      Final <- OneLine
+    }
+    if (i > 1 | j > 1) {
+      Final <- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow <- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow <- gsub("X", "", Final$SecondWindow) %>% as.numeric()
+
+nrow(Final)
+Final <- Final[Final$FirstWindow > Final$SecondWindow, ]
+nrow(Final)
+InvRepDens <- Final
+InvRepDens <- InvRepDens[order(InvRepDens$FirstWindow, InvRepDens$SecondWindow), ]
+```
+
+```{r explore-dens-inverted-reps}
+names(InvRepDens)[3] <- c("InvRepDensScore")
+skimr::skim(InvRepDens)
+```
+
+## 7: CORRELATE InvRepDens$Score and GlobalFolding$Score
+
+-   weak positive!
+
+```{r corr-dens-inverted-reps-global-folding}
+merged <- merge(InvRepDens, GlobalFolding, by = c("FirstWindow", "SecondWindow"))
+summary(merged$FirstWindow) # diag 500: 6500 15800; diag 1000: 7000 - 15800
+summary(merged$SecondWindow) # diag 500: 5900 15200; diag 1000: 5900 14700
+skimr::skim(merged)
+pspearman::spearman.test(merged$InvRepDensScore, merged$GlobalFoldingScore)
+nrow(merged) # 4005
+```
+
+## 8: ADD InfinitySign parameter into HomologyAndRepeats dataset (13 - 16 kb vs 6-9 kb):
+
+```{r init-infinity-sign}
+HomologyAndRepeats$InfinitySign <- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  if (HomologyAndRepeats$FirstWindow[i] >= 13000 &
+      HomologyAndRepeats$FirstWindow[i] <= 16000 &
+      HomologyAndRepeats$SecondWindow[i] >= 6000 &
+      HomologyAndRepeats$SecondWindow[i] <= 9000) {
+    HomologyAndRepeats$InfinitySign[i] <- 1
+  }
+}
+janitor::tabyl(HomologyAndRepeats$InfinitySign)
+janitor::tabyl(HomologyAndRepeats, Deletion, InfinitySign)
+sjmisc::frq(HomologyAndRepeats)
+HomologyAndRepeats %>% skim()
+HomologyAndRepeats %>%
+  group_by(Deletion) %>%
+  skim()
+HomologyAndRepeats %>%
+  group_by(InfinitySign) %>%
+  skim()
+
+## merge HomologyAndRepeats with merged(InvRepDens + GlobalFolding)
+dim(HomologyAndRepeats) # 4950
+HomologyAndRepeats <- merge(HomologyAndRepeats,
+                            merged,
+                            by = c("FirstWindow", "SecondWindow")
+)
+dim(HomologyAndRepeats) # diag 500: 4465; diag 1000:  4005
+
+```
+
+### is GlobalFoldingScore higher within the cross according to our InfinitySign model? YES!!!
+
+```{r plt-boxplot-test-infinity-sign}
+wilcox.test(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+) # diag 1000: 3.358e-09
+
+boxplot(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore,
+  notch = TRUE,
+  names = c("stem", "loop"),
+  ylab = "in silico folding score",
+  outline = FALSE
+)
+```
+
+```{r plt-violin-test-infinity-sign, fig.height=12, fig.asp=1.618}
+pltViolRepFoldingInfSign <-
+  ggbetweenstats(
+    data = HomologyAndRepeats,
+    x = InfinitySign,
+    y = GlobalFoldingScore,
+    type = "np",
+    # Wilcoxon for two group
+    mean.ci = TRUE,
+    nboot = 10000,
+    # number of iteration for statistical CI
+    k = 5,
+    # number of decimal places for statistical results
+    outlier.tagging = TRUE, # whether outliers need to be tagged
+    outlier.label = Deletion,
+    xlab = '"3D" Position',
+    # label for the x-axis variable
+    ylab = "in silico folding score",
+    # label for the y-axis variable
+    title = "The effect of repeats' position on folding score",
+    # title text for the plot
+    ggtheme = ggthemes::theme_fivethirtyeight(),
+    # choosing a different theme
+    package = "wesanderson",
+    # package from which color palette is to be taken
+    palette = "Royal1",
+    # choosing a different color palette
+    notch = TRUE,
+    messages = TRUE
+  )
+# Note: 95% CI for effect size estimate was computed with 10000 bootstrap samples
+# Note: Shapiro-Wilk Normality Test for in silico folding score: p-value = < 0.001
+# Note: Bartlett's test for homogeneity of variances for factor "3D" Position: p-value = < 0.001
+cowplot::save_plot(
+  plot = pltViolRepFoldingInfSign,
+  base_height = 12,
+  base_asp = 1.618,
+  file = normalizePath(
+    file.path(plots_dir, "violin_rep_folding_infsign_np.pdf")
+  )
+)
+
+pltViolRepFoldingInfSign
+```
+
+```{r t-test-infinity-sign}
+t.test(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+) # diag 1000: 0.002639
+```
+
+```{r plt-violin-test-infinity-sign-p, fig.height=12, fig.asp=1.618}
+pltViolRepFoldingInfSignP <-
+  ggbetweenstats(
+    data = HomologyAndRepeats,
+    x = InfinitySign,
+    y = GlobalFoldingScore,
+    type = "p",
+    # Wilcoxon for two group
+    mean.ci = TRUE,
+    nboot = 10000,
+    # number of iteration for statistical CI
+    k = 5,
+    # number of decimal places for statistical results
+    outlier.tagging = TRUE, # whether outliers need to be tagged
+    outlier.label = FirstWindow,
+    xlab = '"3D" Position',
+    # label for the x-axis variable
+    ylab = "in silico folding score",
+    # label for the y-axis variable
+    title = "The effect of repeats' position on folding score",
+    # title text for the plot
+    ggtheme = ggthemes::theme_fivethirtyeight(),
+    # choosing a different theme
+    package = "wesanderson",
+    # package from which color palette is to be taken
+    palette = "Royal1",
+    # choosing a different color palette
+    notch = TRUE,
+    messages = TRUE
+  )
+# Note: 95% CI for effect size estimate was computed with 10000 bootstrap samples
+# Note: Shapiro-Wilk Normality Test for in silico folding score: p-value = < 0.001
+# Note: Bartlett's test for homogeneity of variances for factor "3D" Position: p-value = < 0.001
+cowplot::save_plot(
+  plot = pltViolRepFoldingInfSignP,
+  base_height = 8,
+  base_asp = 1.618,
+  file = normalizePath(
+    file.path(plots_dir, "violin_rep_folding_infsign_p.pdf")
+  )
+)
+
+pltViolRepFoldingInfSignP
+```
+
+```{r check-folding-in-and-out-sign}
+summary(HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore) # diag 1000: 0.3893
+summary(HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore) # diag 1000: 0.09755
+```
+
+### we have to link better global folding and InfinitySign model - till now it was done by eye. Clusterisation? One cluster?
+
+## 9: LOGISTIC REGRESSION: HomologyAndRepeats$Deletion as a function of HomologyAndRepeats$MicroHomologyScore and HomologyAndRepeats\$InfinitySign:
+
+```{r plt-glm-microhomology-infinity-sign}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + HomologyAndRepeats$InfinitySign,
+    family = "binomial"
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a)
+broom::tidy(a)
+broom::glance(a)
+```
+
+```{r plt-glm-microhomology-infinity-sign-scaled}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$InfinitySign),
+    family = "binomial"
+  )
+summary(a) # PAPER!!! 0.33 + 0.91
+ggstatsplot::ggcoefstats(a)
+broom::tidy(a)
+broom::glance(a)
+```
+
+```{r plt-glm-microhomology-globfold}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + HomologyAndRepeats$GlobalFoldingScore,
+    family = "binomial"
+  )
+summary(a) # non significant - may be I have to take it on bigger scale! (1kb without diagonal, because this is global parameter not precise)
+# to reconstruct 100 bp matrix back from 1 kb matrix!!!!!
+ggstatsplot::ggcoefstats(a)
+broom::tidy(a)
+broom::glance(a)
+```
+
+### get residuals and correlate them with global matrix
+
+```{r plt-glm-microhomology-derive-and-test-corr-residuals-global-folding}
+a <-
+  glm(HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore,
+      family = "binomial"
+  )
+ggstatsplot::ggcoefstats(a)
+
+HomologyAndRepeats$Residuals <- residuals(a)
+summary(HomologyAndRepeats$Residuals)
+
+pspearman::spearman.test(
+  HomologyAndRepeats$Residuals,
+  HomologyAndRepeats$GlobalFoldingScore
+)
+```
+
+#### reconstruct Global folding 100 bp back from 1kb resolution (GlobalFolding1000) assuming that global folding can work remotely enough.
+
+#### another idea - to use a distance from a given cell to closest contact (from global matrix) - so, infinity sign is not zero or one, but continuos!
+
+```{r derive-bigger-scale}
+HomologyAndRepeats$FirstWindowWholeKbRes <-
+  round(HomologyAndRepeats$FirstWindow, -3)
+HomologyAndRepeats$SecondWindowWholeKbRes <-
+  round(HomologyAndRepeats$SecondWindow, -3)
+janitor::tabyl(
+  HomologyAndRepeats,
+  FirstWindowWholeKbRes,
+  SecondWindowWholeKbRes
+)
+```
+
+```{r update-dataset-for-testing}
+HomologyAndRepeats <- merge(
+  HomologyAndRepeats,
+  GlobalFolding1000,
+  by = c("FirstWindowWholeKbRes", "SecondWindowWholeKbRes")
+)
+```
+
+```{r plt-final-glm-microhomology-global-folding-scaled}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$GlobalFolding1000Score),
+    family = "binomial"
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a)
+broom::tidy(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+
+broom::glance(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+```
+
+#### derive distance to the strongest contact: 6500 vs 14500 (see heatmap: global folding 1 kb resolution)
+
+```{r derive-distance-to-the-contact-zone}
+HomologyAndRepeats$DistanceToContact <- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  HomologyAndRepeats$DistanceToContact[i] <- raster::pointDistance(
+    c(
+      HomologyAndRepeats$FirstWindow[i],
+      HomologyAndRepeats$SecondWindow[i]
+    ),
+    c(14550, 6550),
+    lonlat = FALSE
+  )
+}
+
+skim(HomologyAndRepeats$DistanceToContact) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+# the closest: -70; the most distant: -8245
+```
+
+```{r plt-final-glm-microhomology-distnce-to-contact-zone-scaled}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$DistanceToContact),
+    family = "binomial"
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a)
+
+broom::tidy(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+
+broom::glance(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+```
+
+#### derive distance to the common repeat:
+
+```{r derive-distance-to-the-common-repeat}
+HomologyAndRepeats$DistanceToContact <- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  HomologyAndRepeats$DistanceToContact[i] <- pointDistance(
+    c(
+      HomologyAndRepeats$FirstWindow[i],
+      HomologyAndRepeats$SecondWindow[i]
+    ),
+    c(13447, 8469),
+    lonlat = FALSE
+  ) #  (8469-8482 - 13447-13459)
+}
+skim(HomologyAndRepeats$DistanceToContact) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+```
+
+```{r plt-final-glm-microhomology-distnce-to-the-common-repeat-scaled}
+a <-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$DistanceToContact),
+    family = "binomial"
+  )
+summary(a)
+ggstatsplot::ggcoefstats(a) 
+
+broom::tidy(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+
+broom::glance(a) %>%
+  kableExtra::kbl() %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      "bordered", "condensed", "responsive", "striped"
+    )
+  )
+```
+
+## 10: run many logistic regression in the loop and find the Contact Point/zone with the best AIC
+
+```{r derive-matrix-of-contact-point}
+mod_fun <- function(Coord1, Coord2) {
+  TempDF <-
+    HomologyAndRepeats %>%
+    dplyr::select(
+      FirstWindow,
+      SecondWindow,
+      Deletion,
+      MicroHomologyScore
+    ) %>%
+    mutate(TempDistanceToContact = purrr::map2_dbl(
+      FirstWindow,
+      SecondWindow,
+      ~ raster::pointDistance(c(.x, .y),
+                              c(
+                                Coord1,
+                                Coord2
+                              ),
+                              lonlat = F
+      )
+    ))
+  a <-
+    glm(
+      TempDF$Deletion ~ scale(TempDF$MicroHomologyScore) + scale(TempDF$TempDistanceToContact),
+      family = "binomial"
+    )
+  return(a)
+}
+
+Results <- HomologyAndRepeats %>%
+  mutate(
+    LogRegr.ContactPoint.Coord1 = FirstWindow + 50,
+    LogRegr.ContactPoint.Coord2 = SecondWindow + 50
+  ) %>%
+  mutate(model = furrr::future_map2(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    mod_fun
+  ))
+
+ResultsTidy <- Results$model %>% purrr::map_dfr(~ broom::tidy(.x)[3, ])
+ResultsGlance <- Results$model %>% purrr::map_dfr(broom::glance)
+
+HomologyAndRepeats$LogRegr.ContactPoint.PiValue <- ResultsTidy$p.value
+HomologyAndRepeats$LogRegr.ContactPoint.Coeff <- ResultsTidy$estimate
+HomologyAndRepeats$LogRegr.ContactPoint.AIC <- ResultsGlance$AIC
+HomologyAndRepeats$LogRegr.ContactPoint.ResidualDeviance <- ResultsGlance$deviance
+HomologyAndRepeats$LogRegr.ContactPoint.Coord1 <- Results$LogRegr.ContactPoint.Coord1
+HomologyAndRepeats$LogRegr.ContactPoint.Coord2 <- Results$LogRegr.ContactPoint.Coord2
+
+rm(Results, ResultsGlance, ResultsTidy)
+invisible(gc())
+
+write.table(
+  HomologyAndRepeats,
+  here(plots_dir, "SlipAndJump.HomologyAndRepeats.txt") %>%
+    normalizePath(),
+  sep = "\t"
+)
+```
+
+```{r load-aic-contact-matrix}
+HomologyAndRepeats <- read.table(
+  here(plots_dir, "SlipAndJump.HomologyAndRepeats.txt") %>%
+    normalizePath(),
+  sep = "\t"
+)
+
+HomologyAndRepeats <- HomologyAndRepeats[order(HomologyAndRepeats$LogRegr.ContactPoint.AIC), ]
+names(HomologyAndRepeats)
+summary(HomologyAndRepeats$LogRegr.ContactPoint.ResidualDeviance)
+summary(HomologyAndRepeats$LogRegr.ContactPoint.AIC)
+HomologyAndRepeats %>% skim()
+
+temp <- HomologyAndRepeats[
+  HomologyAndRepeats$LogRegr.ContactPoint.Coord1 == 11950 &
+    HomologyAndRepeats$LogRegr.ContactPoint.Coord2 == 8950,
+]
+temp
+```
+
+### Heatmap merged microhomology and AIC scores
+
+```{r plt-heatmap-microhomology_contact_aic, fig.width=11.594, fig.height=8.316}
+tib <- HomologyAndRepeats %>%
+  dplyr::select(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    MicroHomologyScore,
+    LogRegr.ContactPoint.AIC
+  ) %>%
+  ggasym::asymmetrise(
+    .,
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2
+  )
+
+pltHeatmap_mhAIC <- ggplot(
+  tib,
+  aes(
+    x = LogRegr.ContactPoint.Coord1,
+    y = LogRegr.ContactPoint.Coord2
+  )
+) +
+  geom_asymmat(aes(
+    fill_br = LogRegr.ContactPoint.AIC,
+    fill_tl = MicroHomologyScore
+  )) +
+  scale_fill_br_distiller(
+    type = "seq",
+    palette = "Spectral",
+    direction = 1,
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 1,
+      title.position = "top"
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = "seq",
+    palette = "RdYlGn",
+    direction = 1,
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 2,
+      title.position = "top"
+    )
+  ) +
+  labs(
+    fill_br = "top-right Contact AIC",
+    fill_tl = "bottom-left Microhomology",
+    title = "Model of mtDNA contacts"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_blank()
+  )
+
+cowplot::save_plot(
+  plot = pltHeatmap_mhAIC,
+  base_height = 8.316,
+  base_width = 11.594,
+  file = normalizePath(
+    file.path(plots_dir, "heatmap_microhomology_AIC.pdf")
+  )
+)
+
+pltHeatmap_mhAIC
+```
+
+### Article version Figure 2C: Heatmap merged microhomology and AIC scores with actual deletions circles
+
+```{r plt-final-heatmap-microhomology_contact_aic, fig.width=11.594, fig.height=8.316}
+tib <- HomologyAndRepeats %>%
+  dplyr::select(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    MicroHomologyScore,
+    LogRegr.ContactPoint.AIC,
+    Deletion
+  ) %>%
+  asymmetrise(
+    .,
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2
+  )
+
+pltHeatmap_mhAIC_wt_deletions <- ggplot(
+  tib,
+  aes(
+    x = LogRegr.ContactPoint.Coord1,
+    y = LogRegr.ContactPoint.Coord2
+  )
+) +
+  geom_asymmat(aes(
+    fill_br = LogRegr.ContactPoint.AIC,
+    fill_tl = MicroHomologyScore
+  )) +
+  geom_point(
+    data = subset(tib, Deletion > 0),
+    aes(alpha = 0.3),
+    shape = 1,
+    size = 2.3,
+    color = "#d73027", # "#041c00",
+    show.legend = FALSE,
+    na.rm = TRUE
+  ) +
+  scale_fill_br_gradientn(
+    colours = viridis::viridis(2000)[250:2000],
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 1,
+      title.position = "top",
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = "div",
+    palette = "RdYlBu",
+    direction = 1,
+    na.value = "white",
+    guide = guide_colourbar(
+      direction = "horizontal",
+      order = 2,
+      title.position = "top",
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  labs(
+    fill_br = "top-right Contact AIC",
+    fill_tl = "bottom-left Microhomology",
+    title = "Model of mtDNA contacts and deletions"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_blank(),
+    legend.position = "bottom",
+    legend.box = "horizontal"
+  )
+
+
+cowplot::save_plot(
+  plot = pltHeatmap_mhAIC_wt_deletions,
+  base_height = 8.316,
+  base_asp = 0.9,
+  file = normalizePath(
+    file.path(plots_dir, "heatmap_microhomology_AIC_wt_deledions.svg")
+  )
+)
+
+pltHeatmap_mhAIC_wt_deletions
+```
+
+## Figures 2C-D:
+
+```{r figures_2cd, fig.height=8.316, fig.width=23.188}
+pltHeatmap_mhAIC_wt_deletions | gg_bind
+```

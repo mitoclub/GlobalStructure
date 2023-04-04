@@ -1,0 +1,138 @@
+---
+title: "Home"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+  echo           = TRUE,
+  cache          = FALSE,
+  error          = FALSE,
+  fig.align      = "center",
+  fig.width      = 8,
+  fig.asp        = 0.618,
+  message        = FALSE,
+  warning        = FALSE
+)
+# Load tidyverse infrastructure packages
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+})
+
+figures_dir <- here("4_Figures")
+```
+
+This websyte contains code and output of the analysis of mitochondrial
+DNA deletions and Global structure data for the article [Shamanskiy V et
+al., 2023](https://doi.org/ "Shamanskiy V et al.,").
+
+# Background
+
+Aging in postmitotic tissues is associated with clonal expansion of
+somatic mitochondrial deletions, the origin of which is not well
+understood. Deletions in mitochondrial DNA (mtDNA) are often flanked by
+direct nucleotide repeats, but this alone does not fully explain their
+distribution.
+
+## Figure 1:
+
+![](assets/Figure_1.png)
+
+Figure_1. Potential secondary structures formed by a single-stranded
+parental heavy chain during mtDNA replication. The lower panel shows
+that direct repeats, marked by black arrows, have different chances of
+being realized into deletions as a function of a spatial structure. The
+close spatial proximity of repeats (bold dotted lines) increases the
+probability of deletion formation, while for repeats that are spatially
+separated by a greater distance, this probability is decreased (thin
+dotted line).
+
+# Results
+
+Here, we hypothesized that the close proximity of direct repeats on
+single-stranded DNA might play a role in the formation of deletions. By
+analyzing human mtDNA deletions in the major arc of mtDNA, which is
+single-stranded during replication and is characterized by a high number
+of deletions, we found a non-uniform distribution with a "hot spot"
+where one deletion breakpoint occurred within the region of 6-9kb and
+another within 13-16kb of the mtDNA. This distribution was not explained
+by the presence of direct repeats, suggesting that other factors, such
+as the spatial proximity of these two regions can be the cause. In
+silico analyses revealed that the single-stranded major arc may be
+organized as a large-scale hairpin-like loop with a center close to 11kb
+and contacting regions between 6-9 kb and 13-16 kb, which would explain
+the high deletion activity in this contact zone. The direct repeats
+located within the contact zone, such as the well-known common repeat
+with a first arm at 8470-8482 bp (base pair) and a second arm at
+13447-13459 bp, are three times more likely to cause deletions compared
+to direct repeats located outside of the contact zone.
+
+## Figure 2:
+
+![](assets/Figure_2.png)
+
+Figure_2. Secondary structure of mtDNA. A. Clusters of deletions within
+the major arc. The majority of clusters are located close to each other
+within the potential contact zone. The colors on the scheme on top
+correspond to the clusters. The vertical density plots on the right part
+of the figure demonstrate the distribution of deletion centers: real
+(observed) and random (expected); B. Realized (red) versus non-realized
+(gray) repeats tend to be enriched in the potential contact zone.
+Mosaic-plot of repeats (realized versus non-realized) within and outside
+the potential contact zone; C. Bottom-left: heatmap of the
+microhomologies between 100 bp windows within the major arc.
+Microhomology alone poorly explains the distribution of the deletions
+(empty circles). Top right: heatmap of the data-driven contact zone,
+based on the AIC of the compared models. D. In silico approach for major
+arc global folding prediction. Bottom left triangle: contact matrix
+derived from the in silico folding estimation of the major arc's whole
+single-stranded heavy chain; top right triangle: contact matrix derived
+from the in silico folding estimation of 100 bp windows of the
+single-stranded heavy chain of the major arc.
+
+# Conclusions
+
+An analysis of age- and disease-associated deletions demonstrated that
+the contact zone plays a crucial role in explaining the age-associated
+deletions, emphasizing its importance in the rate of healthy aging.
+Overall, we provide topological insights into the mechanism of
+age-associated deletion formation in human mtDNA, which could be used to
+predict somatic deletion burden and maximum lifespan in different human
+haplogroups and mammalian species.
+
+## Figure 3:
+
+![](assets/Figure_3.png)
+
+Figure 3. Integral scheme of the origin of mtDNA deletions. The parental
+heavy strand is marked by a grey line, while the parental light strand
+is marked by a black line. Daughter strands are indicated by dotted
+lines. Direct nucleotide repeats are marked by red arrows, and inverted
+nucleotide repeats are marked by green arrows. The origin of replication
+of the heavy strand (OH) and the origin of replication of the light
+strand (OL) are labeled. (A) At the start of replication, the daughter
+heavy strand (dotted gray line) is replicated on the template of the
+parental light strand (black line), and the replication fork begins to
+move from OH towards OL. (B) During this time, the parental heavy strand
+remains single-stranded (ssDNA) for a significant amount of time, and
+different types of microhomology, including inverted repeats (green
+arrows), can fold the spatial structure. (C) Once the first replication
+fork reaches OL, the second one begins replicating the daughter's light
+strand (dotted back line) on the template of the parental heavy strand.
+(D) The second replication fork stalls near the stem initiated by the
+inverted repeats. If the stalling time is sufficiently long and the
+spatial structure of ssDNA cannot be resolved, the new-synthesized
+daughter chain dissociates partially and re-aligns with the second arm
+of the direct repeat. If ssDNA forms a stem, it may rotate (as indicated
+by the black arrow), potentially bringing direct repeats even closer
+together. (E) This allows the replication fork to continue replication.
+(F) Replication of the daughter light strand is finished, and the ssDNA
+loop region disappears either in the second round of mtDNA replication
+(See figure 5f in Persson Ö et al, 2019) or when mtDNA with deletions is
+repaired, and ssDNA is degraded.
