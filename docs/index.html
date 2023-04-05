@@ -334,7 +334,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -345,8 +345,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -359,9 +359,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>GlobalStructure/</code> <span
@@ -384,21 +384,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -489,15 +486,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretree20a1fd5507bcf0a4c652332873c4aa2fec961291targetblank20a1fd5a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/mitoclub/GlobalStructure/tree/20a1fd5507bcf0a4c652332873c4aa2fec961291" target="_blank">20a1fd5</a>
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretree20a1fd5507bcf0a4c652332873c4aa2fec961291targetblank20a1fd5a"
+id="strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -507,7 +504,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/mitoclub/GlobalStructure/tree/20a1fd5507bcf0a4c652332873c4aa2fec961291" target="_blank">20a1fd5</a>.
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -526,72 +523,19 @@ Ignored files:
     Ignored:    1_Raw/.DS_Store
     Ignored:    2_Derived/.DS_Store
     Ignored:    3_Results/.DS_Store
-
-Untracked files:
-    Untracked:  .here
-    Untracked:  .ipynb_checkpoints/
-    Untracked:  1_Raw/MitoBreakDB_12122019.csv
-    Untracked:  2_Derived/HeatMaps/
-    Untracked:  2_Derived/Homo_sapiens_triangles.txt
-    Untracked:  3_Results/5top_clusters.svg
-    Untracked:  3_Results/5top_clusters_no_spike.svg
-    Untracked:  3_Results/RealizedVsNonrealizedDeletions.R.01.pdf
-    Untracked:  3_Results/SlipAndJump.HomologyAndRepeats.txt
-    Untracked:  3_Results/SlipAndJump.R.01.pdf
-    Untracked:  3_Results/cluster_spike_stats.csv
-    Untracked:  3_Results/cluster_stats.csv
-    Untracked:  3_Results/clusters.svg
-    Untracked:  3_Results/clusters_5_colours2_no_spike.svg
-    Untracked:  3_Results/clusters_5_colours3_no_spike.svg
-    Untracked:  3_Results/clusters_5_colours_no_spike.svg
-    Untracked:  3_Results/clusters_with_spike.svg
-    Untracked:  3_Results/data_clusters.csv
-    Untracked:  3_Results/data_clusters_no_spike.csv
-    Untracked:  3_Results/heatmap_folding_stability.svg
-    Untracked:  3_Results/heatmap_global_folding_sw100.pdf
-    Untracked:  3_Results/heatmap_microhomology_AIC.pdf
-    Untracked:  3_Results/heatmap_microhomology_AIC_wt_deledions.svg
-    Untracked:  3_Results/methods/
-    Untracked:  3_Results/real-vs-nonreal-repeats.svg
-    Untracked:  3_Results/violin_rep_center_release.pdf
-    Untracked:  3_Results/violin_rep_flanked_length_release.pdf
-    Untracked:  3_Results/violin_rep_folding_infsign_np.pdf
-    Untracked:  3_Results/violin_rep_folding_infsign_p.pdf
-    Untracked:  4_Figures/Figure_1.png
-    Untracked:  4_Figures/Figure_2.png
-    Untracked:  4_Figures/Figure_3.png
-    Untracked:  CITATION
-    Untracked:  LICENSE
-    Untracked:  Revision_Clustering_mt_deletions.ipynb
-    Untracked:  analysis/CopelandDeletionsPca.Rmd
-    Untracked:  analysis/MitoBreakDeletionsAndOrlovRepeats.Rmd
-    Untracked:  analysis/MitoBreak_vs_RandomInMajorArc.Rmd
-    Untracked:  analysis/figure_2b.Rmd
-    Untracked:  analysis/figure_2cd.Rmd
-    Untracked:  analysis/methods.Rmd
-    Untracked:  code/CopelandThirdComponentPca.R
-    Untracked:  code/MitoBreakDeletionsAndOrlovRepeats.R
-    Untracked:  code/MitoBreak_vs_RandomInMajorArc.R
-    Untracked:  code/RealandRandomCentersOfDeletions.py
-    Untracked:  code/RealizedVsNonrealizedDeletions.R
-    Untracked:  code/SlipAndJump.R
-    Untracked:  renv/
+    Ignored:    renv/library/
+    Ignored:    renv/staging/
 
 Unstaged changes:
-    Modified:   .Rprofile
-    Modified:   4_Figures/Figure_3.pdf
-    Deleted:    CopelandThirdComponentPca.R
-    Modified:   GlobalStructure.Rproj
-    Deleted:    MitoBreakDeletionsAndOrlovRepeats.R
-    Deleted:    MitoBreak_vs_RandomInMajorArc.R
-    Deleted:    RealandRandomCentersOfDeletions.py
-    Deleted:    RealizedVsNonrealizedDeletions.R
-    Modified:   analysis/_site.yml
-    Deleted:    analysis/about.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   analysis/license.Rmd
-    Deleted:    data/README.md
-    Deleted:    output/README.md
+    Modified:   3_Results/SlipAndJump.HomologyAndRepeats.txt
+    Modified:   3_Results/heatmap_folding_stability.svg
+    Modified:   3_Results/heatmap_global_folding_sw100.pdf
+    Modified:   3_Results/heatmap_microhomology_AIC.pdf
+    Modified:   3_Results/heatmap_microhomology_AIC_wt_deledions.svg
+    Modified:   3_Results/violin_rep_center_release.pdf
+    Modified:   3_Results/violin_rep_flanked_length_release.pdf
+    Modified:   3_Results/violin_rep_folding_infsign_np.pdf
+    Modified:   3_Results/violin_rep_folding_infsign_p.pdf
 
 </code></pre>
 <p>
@@ -641,13 +585,30 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/mitoclub/GlobalStructure/blob/20a1fd5507bcf0a4c652332873c4aa2fec961291/analysis/index.Rmd" target="_blank">20a1fd5</a>
+<a href="https://github.com/mitoclub/GlobalStructure/blob/baf2fd420af75e5168da862f783d48ecaa29dc66/analysis/index.Rmd" target="_blank">baf2fd4</a>
 </td>
 <td>
 Evgenii O. Tretiakov
 </td>
 <td>
-2023-04-04
+2023-04-05
+</td>
+<td>
+Start workflowr project.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/mitoclub/GlobalStructure/baf2fd420af75e5168da862f783d48ecaa29dc66/docs/index.html" target="_blank">baf2fd4</a>
+</td>
+<td>
+Evgenii O. Tretiakov
+</td>
+<td>
+2023-04-05
 </td>
 <td>
 Start workflowr project.
@@ -673,19 +634,15 @@ direct nucleotide repeats, but this alone does not fully explain their
 distribution.</p>
 <div id="figure-1" class="section level2">
 <h2>Figure 1:</h2>
-<div class="figure" style="text-align: center">
-<img src="../4_Figures/Figure_1.png" alt="Figure_1. Potential secondary structures formed by a single-stranded parental heavy chain during mtDNA replication. The lower panel shows that direct repeats, marked by black arrows, have different chances of being realized into deletions as a function of a spatial structure. The close spatial proximity of repeats (bold dotted lines) increases the probability of deletion formation, while for repeats that are spatially separated by a greater distance, this probability is decreased (thin dotted line)."  />
-<p class="caption">
-Figure_1. Potential secondary structures formed by a single-stranded
+<p><img src="assets/Figure_1.png" /></p>
+<p>Figure_1. Potential secondary structures formed by a single-stranded
 parental heavy chain during mtDNA replication. The lower panel shows
 that direct repeats, marked by black arrows, have different chances of
 being realized into deletions as a function of a spatial structure. The
 close spatial proximity of repeats (bold dotted lines) increases the
 probability of deletion formation, while for repeats that are spatially
 separated by a greater distance, this probability is decreased (thin
-dotted line).
-</p>
-</div>
+dotted line).</p>
 </div>
 </div>
 <div id="results" class="section level1">
@@ -709,16 +666,10 @@ with a first arm at 8470-8482 bp (base pair) and a second arm at
 to direct repeats located outside of the contact zone.</p>
 <div id="figure-2" class="section level2">
 <h2>Figure 2:</h2>
-<div class="figure" style="text-align: center">
-<img src="../4_Figures/Figure_2.png" alt="Figure_2. Secondary structure of mtDNA.
- A. Clusters of deletions within the major arc. The majority of clusters are located close to each other within the potential contact zone. The colors on the scheme on top correspond to the clusters. The vertical density plots on the right part of the figure demonstrate the distribution of deletion centers: real (observed) and random (expected);
- B. Realized (red) versus non-realized (gray) repeats tend to be enriched in the potential contact zone. Mosaic-plot of repeats (realized versus non-realized) within and outside the potential contact zone; 
- C. Bottom-left: heatmap of the microhomologies between 100 bp windows within the major arc. Microhomology alone poorly explains the distribution of the deletions (empty circles). Top right: heatmap of the data-driven contact zone, based on the AIC of the compared models. 
- D. In silico approach for major arc global folding prediction. Bottom left triangle: contact matrix derived from the in silico folding estimation of the major arc's whole single-stranded heavy chain; top right triangle: contact matrix derived from the in silico folding estimation of 100 bp windows of the single-stranded heavy chain of the major arc. "  />
-<p class="caption">
-Figure_2. Secondary structure of mtDNA. A. Clusters of deletions within
-the major arc. The majority of clusters are located close to each other
-within the potential contact zone. The colors on the scheme on top
+<p><img src="assets/Figure_2.png" /></p>
+<p>Figure_2. Secondary structure of mtDNA. A. Clusters of deletions
+within the major arc. The majority of clusters are located close to each
+other within the potential contact zone. The colors on the scheme on top
 correspond to the clusters. The vertical density plots on the right part
 of the figure demonstrate the distribution of deletion centers: real
 (observed) and random (expected); B. Realized (red) versus non-realized
@@ -733,9 +684,7 @@ arc global folding prediction. Bottom left triangle: contact matrix
 derived from the in silico folding estimation of the major arc’s whole
 single-stranded heavy chain; top right triangle: contact matrix derived
 from the in silico folding estimation of 100 bp windows of the
-single-stranded heavy chain of the major arc.
-</p>
-</div>
+single-stranded heavy chain of the major arc.</p>
 </div>
 </div>
 <div id="conclusions" class="section level1">
@@ -749,37 +698,33 @@ could be used to predict somatic deletion burden and maximum lifespan in
 different human haplogroups and mammalian species.</p>
 <div id="figure-3" class="section level2">
 <h2>Figure 3:</h2>
-<div class="figure" style="text-align: center">
-<img src="../4_Figures/Figure_3.png" alt="Figure 3. Integral scheme of the origin of mtDNA deletions. The parental heavy strand is marked by a grey line, while the parental light strand is marked by a black line. Daughter strands are indicated by dotted lines. Direct nucleotide repeats are marked by red arrows, and inverted nucleotide repeats are marked by green arrows. The origin of replication of the heavy strand (OH) and the origin of replication of the light strand (OL) are labeled. (A) At the start of replication, the daughter heavy strand (dotted gray line) is replicated on the template of the parental light strand (black line), and the replication fork begins to move from OH towards OL. (B) During this time, the parental heavy strand remains single-stranded (ssDNA) for a significant amount of time, and different types of microhomology, including inverted repeats (green arrows), can fold the spatial structure. (C) Once the first replication fork reaches OL, the second one begins replicating the daughter's light strand (dotted back line) on the template of the parental heavy strand. (D) The second replication fork stalls near the stem initiated by the inverted repeats. If the stalling time is sufficiently long and the spatial structure of ssDNA cannot be resolved, the new-synthesized daughter chain dissociates partially and re-aligns with the second arm of the direct repeat. If ssDNA forms a stem, it may rotate (as indicated by the black arrow), potentially bringing direct repeats even closer together. (E) This allows the replication fork to continue replication. (F) Replication of the daughter light strand is finished, and the ssDNA loop region disappears either in the second round of mtDNA replication (See figure 5f in Persson Ö et al, 2019) or when mtDNA with deletions is repaired, and ssDNA is degraded."  />
-<p class="caption">
-Figure 3. Integral scheme of the origin of mtDNA deletions. The parental
-heavy strand is marked by a grey line, while the parental light strand
-is marked by a black line. Daughter strands are indicated by dotted
-lines. Direct nucleotide repeats are marked by red arrows, and inverted
-nucleotide repeats are marked by green arrows. The origin of replication
-of the heavy strand (OH) and the origin of replication of the light
-strand (OL) are labeled. (A) At the start of replication, the daughter
-heavy strand (dotted gray line) is replicated on the template of the
-parental light strand (black line), and the replication fork begins to
-move from OH towards OL. (B) During this time, the parental heavy strand
-remains single-stranded (ssDNA) for a significant amount of time, and
-different types of microhomology, including inverted repeats (green
-arrows), can fold the spatial structure. (C) Once the first replication
-fork reaches OL, the second one begins replicating the daughter’s light
-strand (dotted back line) on the template of the parental heavy strand.
-(D) The second replication fork stalls near the stem initiated by the
-inverted repeats. If the stalling time is sufficiently long and the
-spatial structure of ssDNA cannot be resolved, the new-synthesized
-daughter chain dissociates partially and re-aligns with the second arm
-of the direct repeat. If ssDNA forms a stem, it may rotate (as indicated
-by the black arrow), potentially bringing direct repeats even closer
-together. (E) This allows the replication fork to continue replication.
-(F) Replication of the daughter light strand is finished, and the ssDNA
-loop region disappears either in the second round of mtDNA replication
-(See figure 5f in Persson Ö et al, 2019) or when mtDNA with deletions is
-repaired, and ssDNA is degraded.
-</p>
-</div>
+<p><img src="assets/Figure_3.png" /></p>
+<p>Figure 3. Integral scheme of the origin of mtDNA deletions. The
+parental heavy strand is marked by a grey line, while the parental light
+strand is marked by a black line. Daughter strands are indicated by
+dotted lines. Direct nucleotide repeats are marked by red arrows, and
+inverted nucleotide repeats are marked by green arrows. The origin of
+replication of the heavy strand (OH) and the origin of replication of
+the light strand (OL) are labeled. (A) At the start of replication, the
+daughter heavy strand (dotted gray line) is replicated on the template
+of the parental light strand (black line), and the replication fork
+begins to move from OH towards OL. (B) During this time, the parental
+heavy strand remains single-stranded (ssDNA) for a significant amount of
+time, and different types of microhomology, including inverted repeats
+(green arrows), can fold the spatial structure. (C) Once the first
+replication fork reaches OL, the second one begins replicating the
+daughter’s light strand (dotted back line) on the template of the
+parental heavy strand. (D) The second replication fork stalls near the
+stem initiated by the inverted repeats. If the stalling time is
+sufficiently long and the spatial structure of ssDNA cannot be resolved,
+the new-synthesized daughter chain dissociates partially and re-aligns
+with the second arm of the direct repeat. If ssDNA forms a stem, it may
+rotate (as indicated by the black arrow), potentially bringing direct
+repeats even closer together. (E) This allows the replication fork to
+continue replication. (F) Replication of the daughter light strand is
+finished, and the ssDNA loop region disappears either in the second
+round of mtDNA replication (See figure 5f in Persson Ö et al, 2019) or
+when mtDNA with deletions is repaired, and ssDNA is degraded.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -820,14 +765,14 @@ loaded via a namespace (and not attached):
 [13] pillar_1.9.0     glue_1.6.2       withr_2.5.0      lifecycle_1.0.3 
 [17] munsell_0.5.0    gtable_0.3.3     evaluate_0.20    knitr_1.42      
 [21] tzdb_0.3.0       callr_3.7.3      fastmap_1.1.1    httpuv_1.6.9    
-[25] ps_1.7.4         fansi_1.0.4      highr_0.10       Rcpp_1.0.10     
-[29] renv_0.17.2      promises_1.2.0.1 scales_1.2.1     cachem_1.0.7    
-[33] jsonlite_1.8.4   fs_1.6.1         hms_1.1.3        digest_0.6.31   
-[37] stringi_1.7.12   processx_3.8.0   getPass_0.2-2    rprojroot_2.0.3 
-[41] grid_4.2.2       cli_3.6.1        tools_4.2.2      magrittr_2.0.3  
-[45] sass_0.4.5       whisker_0.4.1    pkgconfig_2.0.3  timechange_0.2.0
-[49] rmarkdown_2.21   httr_1.4.5       rstudioapi_0.14  R6_2.5.1        
-[53] git2r_0.31.0     compiler_4.2.2  </code></pre>
+[25] ps_1.7.4         fansi_1.0.4      Rcpp_1.0.10      renv_0.17.2     
+[29] promises_1.2.0.1 scales_1.2.1     cachem_1.0.7     jsonlite_1.8.4  
+[33] fs_1.6.1         hms_1.1.3        digest_0.6.31    stringi_1.7.12  
+[37] processx_3.8.0   getPass_0.2-2    rprojroot_2.0.3  grid_4.2.2      
+[41] cli_3.6.1        tools_4.2.2      magrittr_2.0.3   sass_0.4.5      
+[45] whisker_0.4.1    pkgconfig_2.0.3  timechange_0.2.0 rmarkdown_2.21  
+[49] httr_1.4.5       rstudioapi_0.14  R6_2.5.1         git2r_0.31.0    
+[53] compiler_4.2.2  </code></pre>
 </div>
 </div>
 </div>

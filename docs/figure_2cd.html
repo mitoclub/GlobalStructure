@@ -1,0 +1,5046 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Fig.2C-D. In silico estimates of mtDNA global structure</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Risk of mitochondrial deletions is affected by the global secondary structure of the human mitochondrial genome</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">HOME</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Figures</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Revision_Clustering_mt_deletions.html">Fig.2A. Clustering analysis of mtDNA deletions</a>
+        </li>
+        <li>
+          <a href="figure_2b.html">Fig.2B. Influence of repeats on mtDNA deletions distributon</a>
+        </li>
+        <li>
+          <a href="figure_2cd.html">Fig.2C-D. *In silico* estimates of mtDNA global structure</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="CopelandDeletionsPca.html">Reanalysis of Deletions PCA data from Copeland et al</a>
+    </li>
+    <li>
+      <a href="MitoBreakDeletionsAndOrlovRepeats.html">Exploratory MITOBREAK and Orlovs data analysis</a>
+    </li>
+    <li>
+      <a href="MitoBreak_vs_RandomInMajorArc.html">Compare Good Mitobreak with Rand version of major arc</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="methods.html">Methods</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="license.html">License</a>
+</li>
+<li>
+  <a href="https://github.com/mitoclub/GlobalStructure">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Fig.2C-D. <em>In silico</em> estimates of
+mtDNA global structure</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-05
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>GlobalStructure/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230404code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20230404)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230404code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230404)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+    Ignored:    1_Raw/.DS_Store
+    Ignored:    2_Derived/.DS_Store
+    Ignored:    3_Results/.DS_Store
+    Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+Unstaged changes:
+    Modified:   3_Results/violin_rep_center_release.pdf
+    Modified:   3_Results/violin_rep_flanked_length_release.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/figure_2cd.Rmd</code>) and HTML
+(<code>docs/figure_2cd.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/mitoclub/GlobalStructure/blob/baf2fd420af75e5168da862f783d48ecaa29dc66/analysis/figure_2cd.Rmd" target="_blank">baf2fd4</a>
+</td>
+<td>
+Evgenii O. Tretiakov
+</td>
+<td>
+2023-04-05
+</td>
+<td>
+Start workflowr project.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="read-microhomology-from-pair-wise-alignments"
+class="section level2">
+<h2>1: READ microhomology from pair-wise alignments</h2>
+<pre class="r"><code>homol &lt;- read.table(
+  here(data_dir, &quot;HeatMaps/100x100.csv&quot;) %&gt;%
+    normalizePath(),
+  sep = &quot;;&quot;,
+  header = TRUE
+)
+row.names(homol) &lt;- homol$X
+homol &lt;- homol[, -1]
+# make long vertical table from the matrix
+for (i in seq_len(nrow(homol))) {
+  for (j in seq_len(ncol(homol))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(homol)[i])
+    SecondWindow &lt;- as.character(names(homol)[j])
+    Score &lt;- as.numeric(homol[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 10000</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 4950</code></pre>
+<pre class="r"><code>MicroHomology &lt;- Final</code></pre>
+</div>
+<div id="read-density-of-direct-repeats-per-window"
+class="section level2">
+<h2>2: READ density of direct repeats per window</h2>
+<pre class="r"><code>DirectRepDensity &lt;-
+  here(
+    data_dir, 
+    &quot;HeatMaps/Link_matrix_direct_major_activ_left.csv&quot;) %&gt;%
+  normalizePath() %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  )
+DirectRepDensity &lt;- DirectRepDensity[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(DirectRepDensity))) {
+  for (j in seq_len(ncol(DirectRepDensity))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(DirectRepDensity)[i])
+    SecondWindow &lt;- as.character(names(DirectRepDensity)[j])
+    Score &lt;- as.numeric(DirectRepDensity[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 10000</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 4950</code></pre>
+<pre class="r"><code>DirectRepDensity &lt;- Final</code></pre>
+</div>
+<div
+id="correlate-microhomology-and-directrepdensity-derive-homologyandrepeats-dataset"
+class="section level2">
+<h2>3: correlate MicroHomology and DirectRepDensity, derive
+HomologyAndRepeats dataset</h2>
+<pre class="r"><code>DirectRepDensity &lt;- DirectRepDensity[
+  order(DirectRepDensity$FirstWindow, DirectRepDensity$SecondWindow),
+]
+
+MicroHomology &lt;- MicroHomology[
+  order(MicroHomology$FirstWindow, MicroHomology$SecondWindow),
+]
+pspearman::spearman.test(
+  DirectRepDensity$Score,
+  MicroHomology$Score
+)</code></pre>
+<pre><code>
+    Spearman&#39;s rank correlation rho
+
+data:  DirectRepDensity$Score and MicroHomology$Score
+S = 1.8841e+10, p-value = 1.707e-06
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+0.06796994 </code></pre>
+<pre class="r"><code>nrow(DirectRepDensity) # 4950</code></pre>
+<pre><code>[1] 4950</code></pre>
+<pre class="r"><code>pspearman::spearman.test(
+  DirectRepDensity[DirectRepDensity$Score &gt; 0, ]$Score,
+  MicroHomology[DirectRepDensity$Score &gt; 0, ]$Score
+)</code></pre>
+<pre><code>
+    Spearman&#39;s rank correlation rho
+
+data:  DirectRepDensity[DirectRepDensity$Score &gt; 0, ]$Score and MicroHomology[DirectRepDensity$Score &gt; 0, ]$Score
+S = 1424127962, p-value = 0.006126
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+0.05998883 </code></pre>
+<pre class="r"><code>HomologyAndRepeats &lt;- data.frame(
+  DirectRepDensity$FirstWindow,
+  DirectRepDensity$SecondWindow,
+  DirectRepDensity$Score,
+  MicroHomology$Score
+)
+names(HomologyAndRepeats) &lt;- c(
+  &quot;FirstWindow&quot;,
+  &quot;SecondWindow&quot;,
+  &quot;DirectRepeatsDensity&quot;,
+  &quot;MicroHomologyScore&quot;
+)</code></pre>
+</div>
+<div id="read-mitobreak-and-filter-keep-only-major-arc-deletions"
+class="section level2">
+<h2>4: READ MITOBREAK AND FILTER (KEEP ONLY MAJOR ARC DELETIONS):</h2>
+<pre class="r"><code>breaks &lt;- read.table(
+  here(raw_dir, &quot;MitoBreakDB_12122019.csv&quot;) %&gt;%
+    normalizePath(),
+  sep = &quot;,&quot;,
+  header = TRUE
+)
+breaks$X5..breakpoint &lt;- as.numeric(as.character(breaks$X5..breakpoint))
+summary(breaks$X5..breakpoint)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+     83    6165    7668    7135    8562   16266       1 </code></pre>
+<pre class="r"><code>breaks$X3..breakpoint &lt;- as.numeric(as.character(breaks$X3..breakpoint))
+summary(breaks$X3..breakpoint)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+     24   13787   15075   14349   16035   16599       1 </code></pre>
+<pre class="r"><code>breaks &lt;- breaks[!is.na(breaks$X3..breakpoint) &amp;
+                   !is.na(breaks$X5..breakpoint), ]
+
+breaks$FirstWindowBreakpoint &lt;- breaks$X3..breakpoint
+breaks$SecondWindowBreakpoint &lt;- breaks$X5..breakpoint
+breaks &lt;- breaks[breaks$FirstWindowBreakpoint &gt; 5781 &amp;
+                   breaks$FirstWindowBreakpoint &lt; 16569 &amp;
+                   breaks$SecondWindowBreakpoint &gt; 5781 &amp;
+                   breaks$SecondWindowBreakpoint &lt; 16569, ]
+# can make it better!! take in ot account 0-100?
+# OH: 110-441
+# OL: 5721-5781
+
+HomologyAndRepeats$Deletion &lt;- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  FirstWindow &lt;- HomologyAndRepeats$FirstWindow[i]
+  SecondWindow &lt;- HomologyAndRepeats$SecondWindow[i]
+  TempBreaks &lt;- breaks[breaks$FirstWindowBreakpoint &gt;= FirstWindow &amp;
+                         breaks$FirstWindowBreakpoint &lt; (FirstWindow + 100) &amp;
+                         breaks$SecondWindowBreakpoint &gt;= SecondWindow &amp;
+                         breaks$SecondWindowBreakpoint &lt; (SecondWindow + 100), ]
+  if (nrow(TempBreaks) &gt; 0) {
+    HomologyAndRepeats$Deletion[i] &lt;- 1
+  }
+}
+
+table(HomologyAndRepeats$Deletion)</code></pre>
+<pre><code>
+   0    1 
+4466  484 </code></pre>
+<pre class="r"><code>skimr::skim(HomologyAndRepeats)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">HomologyAndRepeats</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4950</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="8%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12533.33</td>
+<td align="right">2345.21</td>
+<td align="right">6000</td>
+<td align="right">10900</td>
+<td align="right">12900</td>
+<td align="right">14500</td>
+<td align="right">15800</td>
+<td align="left">▁▃▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9166.67</td>
+<td align="right">2345.21</td>
+<td align="right">5900</td>
+<td align="right">7200</td>
+<td align="right">8800</td>
+<td align="right">10800</td>
+<td align="right">15700</td>
+<td align="left">▇▆▅▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.72</td>
+<td align="right">7.74</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">57</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">MicroHomologyScore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">90.09</td>
+<td align="right">17.27</td>
+<td align="right">27</td>
+<td align="right">79</td>
+<td align="right">89</td>
+<td align="right">101</td>
+<td align="right">160</td>
+<td align="left">▁▅▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Deletion</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.10</td>
+<td align="right">0.30</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$DirectRepeatsDensity + HomologyAndRepeats$MicroHomologyScore,
+    family = binomial
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ HomologyAndRepeats$DirectRepeatsDensity + 
+    HomologyAndRepeats$MicroHomologyScore, family = binomial)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.7475  -0.4768  -0.4359  -0.3951   2.5114  
+
+Coefficients:
+                                         Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                             -3.693239   0.260347 -14.186  &lt; 2e-16
+HomologyAndRepeats$DirectRepeatsDensity  0.003526   0.006049   0.583     0.56
+HomologyAndRepeats$MicroHomologyScore    0.015763   0.002729   5.776 7.63e-09
+                                           
+(Intercept)                             ***
+HomologyAndRepeats$DirectRepeatsDensity    
+HomologyAndRepeats$MicroHomologyScore   ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3169.7  on 4949  degrees of freedom
+Residual deviance: 3135.5  on 4947  degrees of freedom
+AIC: 3141.5
+
+Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-fit-binomial-glm-dens-reps-and-microhomology-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-3.69323942","3":"0.260346741","4":"-14.1858485","5":"1.121016e-45"},{"1":"HomologyAndRepeats$DirectRepeatsDensity","2":"0.00352566","3":"0.006048875","4":"0.5828622","5":"5.599861e-01"},{"1":"HomologyAndRepeats$MicroHomologyScore","2":"0.01576317","3":"0.002728921","4":"5.7763384","5":"7.634375e-09"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>broom::glance(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["null.deviance"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df.null"],"name":[2],"type":["int"],"align":["right"]},{"label":["logLik"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["int"],"align":["right"]},{"label":["nobs"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"3169.709","2":"4949","3":"-1567.769","4":"3141.538","5":"3161.059","6":"3135.538","7":"4947","8":"4950"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore),
+    family = binomial
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore), 
+    family = binomial)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.7445  -0.4746  -0.4368  -0.3956   2.5063  
+
+Coefficients:
+                                             Estimate Std. Error z value
+(Intercept)                                  -2.25264    0.04914 -45.838
+scale(HomologyAndRepeats$MicroHomologyScore)  0.27442    0.04697   5.843
+                                             Pr(&gt;|z|)    
+(Intercept)                                   &lt; 2e-16 ***
+scale(HomologyAndRepeats$MicroHomologyScore) 5.13e-09 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3169.7  on 4949  degrees of freedom
+Residual deviance: 3135.9  on 4948  degrees of freedom
+AIC: 3139.9
+
+Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-fit-binomial-glm-microhomology-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-2.2526361","3":"0.04914367","4":"-45.837768","5":"0.000000e+00"},{"1":"scale(HomologyAndRepeats$MicroHomologyScore)","2":"0.2744186","3":"0.04696619","4":"5.842897","5":"5.130062e-09"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>broom::glance(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["null.deviance"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df.null"],"name":[2],"type":["int"],"align":["right"]},{"label":["logLik"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["int"],"align":["right"]},{"label":["nobs"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"3169.709","2":"4949","3":"-1567.937","4":"3139.874","5":"3152.889","6":"3135.874","7":"4948","8":"4950"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>may be add perfect repeats of Orlov - yes or no for each deletion?
+and see, if microhomology still important?</p>
+</div>
+<div id="read-global-folding" class="section level2">
+<h2>5: READ GLOBAL FOLDING:</h2>
+<pre class="r"><code>GlobalFolding &lt;-
+  here(
+    data_dir,
+    &quot;HeatMaps/Link_matrix1000_major.csv&quot;) %&gt;%
+  normalizePath() %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  )
+row.names(GlobalFolding) &lt;- GlobalFolding$X
+GlobalFolding &lt;- GlobalFolding[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(GlobalFolding))) {
+  for (j in seq_len(ncol(GlobalFolding))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(GlobalFolding)[i])
+    SecondWindow &lt;- as.character(names(GlobalFolding)[j])
+    Score &lt;- as.numeric(GlobalFolding[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+## the matrix is symmetric - I need to keep only one triangle: X&gt;Y (don&#39;t need also diagonal, which is noizy and bold)
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 289</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 136</code></pre>
+<pre class="r"><code>GlobalFolding1000 &lt;- Final
+GlobalFolding1000 &lt;- GlobalFolding1000[order(
+  GlobalFolding1000$FirstWindow,
+  GlobalFolding1000$SecondWindow
+), ]
+names(GlobalFolding1000) &lt;- c(
+  &quot;FirstWindowWholeKbRes&quot;,
+  &quot;SecondWindowWholeKbRes&quot;,
+  &quot;GlobalFolding1000Score&quot;
+)</code></pre>
+</div>
+<div
+id="update-global-folding-with-window-100-bp-it-automaticaly-rewrites-the-globalfolding-matrix-from-the-previous-point-5"
+class="section level2">
+<h2>5.1: UPDATE GLOBAL FOLDING WITH WINDOW = 100 bp: (it automaticaly
+rewrites the GlobalFolding matrix from the previous point 5)</h2>
+<pre class="r"><code>GlobalFolding &lt;-
+  here(
+    data_dir,
+    &quot;HeatMaps/Link_matrix100hydra_major.csv&quot;) %&gt;%
+  normalizePath() %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  )
+row.names(GlobalFolding) &lt;- GlobalFolding$X
+GlobalFolding &lt;- GlobalFolding[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(GlobalFolding))) {
+  for (j in seq_len(ncol(GlobalFolding))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(GlobalFolding)[i])
+    SecondWindow &lt;- as.character(names(GlobalFolding)[j])
+    Score &lt;- as.numeric(GlobalFolding[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 27556</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 13695</code></pre>
+<pre class="r"><code># Should we delete bold diagonal or erase it to zeroes??? If delete, dimension will be decreased - try this. delete 5 windows next to diagonal (500)
+nrow(Final)</code></pre>
+<pre><code>[1] 13695</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow + 1000, ]
+nrow(Final) # 500 or 1000!!!!!! similarly good results but 1000 is a bit better</code></pre>
+<pre><code>[1] 12090</code></pre>
+<pre class="r"><code>GlobalFolding &lt;- Final
+GlobalFolding &lt;- GlobalFolding[order(GlobalFolding$FirstWindow, GlobalFolding$SecondWindow), ]
+names(GlobalFolding)[3] &lt;- c(&quot;GlobalFoldingScore&quot;)</code></pre>
+<pre class="r"><code>pltHeatmap_gFolding_sw100 &lt;-
+  here(data_dir, &quot;HeatMaps/Link_matrix100hydra_major.csv&quot;) %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  ) %&gt;%
+  gather(-X,
+         key = &quot;SecondWindow&quot;,
+         value = &quot;Score&quot;
+  ) %&gt;%
+  rename(FirstWindow = X) %&gt;%
+  mutate(SecondWindow = stringr::str_extract(
+    SecondWindow,
+    &quot;\\d+&quot;
+  ) %&gt;%
+    as.integer()) %&gt;%
+  filter(
+    FirstWindow &gt;= 5950,
+    SecondWindow &gt;= 5950
+  ) %&gt;%
+  tibble() %&gt;%
+  ggplot(aes(
+    x = FirstWindow,
+    y = SecondWindow,
+    fill = Score
+  )) +
+  geom_tile() +
+  scale_y_reverse() +
+  scale_fill_viridis_c(option = &quot;D&quot;, direction = -1) +
+  theme_bw(base_size = 18)
+
+cowplot::save_plot(
+  plot = pltHeatmap_gFolding_sw100,
+  base_height = 8.316,
+  base_width = 11.594,
+  file = normalizePath(
+    file.path(plots_dir, &quot;heatmap_global_folding_sw100.pdf&quot;)
+  )
+)
+
+pltHeatmap_gFolding_sw100</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-heatmap-global-folding-1.png" width="1113.024" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>folding_df &lt;-
+  here(
+    data_dir,
+    &quot;HeatMaps/Link_matrix100hydra_major.csv&quot;) %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  ) %&gt;%
+  gather(-X,
+         key = &quot;SecondWindow&quot;,
+         value = &quot;Score&quot;
+  ) %&gt;%
+  rename(FirstWindow = X) %&gt;%
+  mutate(SecondWindow = stringr::str_extract(
+    SecondWindow,
+    &quot;\\d+&quot;
+  ) %&gt;%
+    as.integer()) %&gt;%
+  filter(
+    FirstWindow &gt;= 5950,
+    SecondWindow &gt;= 5950
+  ) %&gt;%
+  tibble()</code></pre>
+<p>GlobalFolding - is the whole genome without bold diagonal, not only
+the major arc!! Keep only major arc in downstream analyses. (will do it
+when merge with InvRepDens)</p>
+</div>
+<div id="stability-of-duplexes" class="section level2">
+<h2>5.2: STABILITY OF DUPLEXES</h2>
+<pre class="r"><code>stblt_df &lt;-
+  read.csv(here(
+    data_dir,
+    &quot;HeatMaps/duplex-stablility_100x100.mtrx&quot;),
+    sep = &quot;;&quot;,
+    row.names = 1
+  ) %&gt;% .[, -dim(.)[2]]
+# I don&#39;t know why coordinates aren&#39;t equal so I match them first
+all((dimnames(stblt_df)[[2]] |&gt; str_remove(&quot;X&quot;)) %in% dimnames(stblt_df)[[1]]) # TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>all(dimnames(stblt_df)[[1]] %in% (dimnames(stblt_df)[[2]] |&gt; str_remove(&quot;X&quot;))) # FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
+<pre class="r"><code>dimnames(stblt_df)[[2]] &lt;-
+  dimnames(stblt_df)[[1]][match(
+    dimnames(stblt_df)[[2]] |&gt; str_remove(&quot;X&quot;),
+    dimnames(stblt_df)[[1]]
+  )]
+# stblt_df &lt;- stblt_df[dimnames(stblt_df)[[2]], ]
+# dim(stblt_df) # 108 x 108
+
+stblt_mtrx &lt;- as.matrix(stblt_df)
+dimnames(stblt_mtrx) &lt;- list(
+  x = as.integer(dimnames(stblt_df)[[1]]),
+  y = as.integer(dimnames(stblt_df)[[2]])
+)
+stblt_plot2d &lt;-
+  melt(stblt_mtrx, value.name = &quot;duplexes_stability&quot;) |&gt;
+  mutate(x = x + 19, y = y + 19)
+gg_stblt &lt;-
+  ggplot(
+    stblt_plot2d,
+    aes(x, y,
+        z = duplexes_stability,
+        fill = duplexes_stability
+    )
+  )
+gg_duplexes_stability &lt;- gg_stblt + geom_raster(interpolate = TRUE)
+gg_duplexes_stability</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-heatmap-duplex-stablility-1.png" width="1113.024" style="display: block; margin: auto;" /></p>
+<div
+id="article-version-figure-2d-heatmap-merged-stability-of-duplexes-and-global-folding-scores"
+class="section level3">
+<h3>Article version Figure 2D: Heatmap merged Stability of duplexes and
+Global folding scores</h3>
+<pre class="r"><code>bind_df &lt;-
+  inner_join(
+    folding_df, stblt_plot2d,
+    by = c(
+      &quot;FirstWindow&quot; = &quot;x&quot;,
+      &quot;SecondWindow&quot; = &quot;y&quot;
+    ),
+    keep = FALSE
+  ) %&gt;%
+  asymmetrise(
+    .,
+    FirstWindow,
+    SecondWindow
+  )
+
+gg_bind &lt;-
+  ggplot(
+    bind_df,
+    aes(
+      x = FirstWindow,
+      y = SecondWindow
+    )
+  ) +
+  geom_asymmat(aes(
+    fill_br = duplexes_stability,
+    fill_tl = Score
+  )) +
+  scale_fill_br_gradientn(
+    colours = viridis::viridis(2000)[250:2000],
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 1,
+      title.position = &quot;top&quot;,
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = &quot;div&quot;,
+    palette = &quot;RdYlBu&quot;,
+    direction = 1,
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 2,
+      title.position = &quot;top&quot;,
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  labs(
+    fill_tl = &quot;bottom-left Stability of duplexes&quot;,
+    fill_br = &quot;top-right Global folding&quot;,
+    title = &quot;Model of mtDNA structural stability&quot;
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = &quot;white&quot;),
+    panel.grid = element_blank(),
+    legend.position = &quot;bottom&quot;,
+    legend.box = &quot;horizontal&quot;
+  )
+
+cowplot::save_plot(
+  plot = gg_bind,
+  base_height = 8.316,
+  base_asp = 0.9,
+  file = here(plots_dir, &quot;heatmap_folding_stability.svg&quot;)
+)
+
+gg_bind</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-heatmap-folding-stablility-1.png" width="1113.024" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="read-inverted-repeats-with-step-1000" class="section level2">
+<h2>6: READ INVERTED REPEATS WITH STEP 1000</h2>
+<pre class="r"><code>InvRepDens &lt;-
+  here(
+    data_dir,
+    &quot;HeatMaps/Link_matrix_1000_invert_major_activ_left.csv&quot;) %&gt;%
+  normalizePath() %&gt;%
+  read.table(
+    sep = &quot;;&quot;,
+    header = TRUE
+  )
+row.names(InvRepDens) &lt;- InvRepDens$X
+InvRepDens &lt;- InvRepDens[, -1]
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(InvRepDens))) {
+  for (j in seq_len(ncol(InvRepDens))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(InvRepDens)[i])
+    SecondWindow &lt;- as.character(names(InvRepDens)[j])
+    Score &lt;- as.numeric(InvRepDens[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 289</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 136</code></pre>
+<pre class="r"><code>InvRepDens &lt;- Final
+InvRepDens &lt;- InvRepDens[order(InvRepDens$FirstWindow, InvRepDens$SecondWindow), ]</code></pre>
+</div>
+<div
+id="update-inverted-repeats-with-step-100-bp-it-automatically-rewrites-invrepdens-from-previous-point-6"
+class="section level2">
+<h2>6.1: UPDATE INVERTED REPEATS WITH STEP 100 bp (it automatically
+rewrites InvRepDens from previous point 6)</h2>
+<pre class="r"><code>InvRepDens &lt;-
+  here(&quot;2_Derived/HeatMaps/Link_matrix_invert_major_activ_left.modified.csv&quot;) %&gt;%
+  normalizePath() %&gt;%
+  read.table(
+    sep = &quot;\t&quot;,
+    header = TRUE,
+    row.names = 1
+  ) # , row.names = NULL)
+
+# make long vertical table from the matrix
+for (i in seq_len(nrow(InvRepDens))) {
+  for (j in seq_len(ncol(InvRepDens))) {
+    # i  = 2; j = 1
+    FirstWindow &lt;- as.character(row.names(InvRepDens)[i])
+    SecondWindow &lt;- as.character(names(InvRepDens)[j])
+    Score &lt;- as.numeric(InvRepDens[i, j])
+    OneLine &lt;- data.frame(FirstWindow, SecondWindow, Score)
+    if (i == 1 &amp; j == 1) {
+      Final &lt;- OneLine
+    }
+    if (i &gt; 1 | j &gt; 1) {
+      Final &lt;- rbind(Final, OneLine)
+    }
+  }
+}
+
+
+Final$FirstWindow &lt;- as.numeric(as.character(Final$FirstWindow))
+Final$SecondWindow &lt;- gsub(&quot;X&quot;, &quot;&quot;, Final$SecondWindow) %&gt;% as.numeric()
+
+nrow(Final)</code></pre>
+<pre><code>[1] 10000</code></pre>
+<pre class="r"><code>Final &lt;- Final[Final$FirstWindow &gt; Final$SecondWindow, ]
+nrow(Final)</code></pre>
+<pre><code>[1] 4950</code></pre>
+<pre class="r"><code>InvRepDens &lt;- Final
+InvRepDens &lt;- InvRepDens[order(InvRepDens$FirstWindow, InvRepDens$SecondWindow), ]</code></pre>
+<pre class="r"><code>names(InvRepDens)[3] &lt;- c(&quot;InvRepDensScore&quot;)
+skimr::skim(InvRepDens)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">InvRepDens</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4950</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="17%" />
+<col width="10%" />
+<col width="15%" />
+<col width="9%" />
+<col width="8%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12533.33</td>
+<td align="right">2345.21</td>
+<td align="right">6000</td>
+<td align="right">10900</td>
+<td align="right">12900</td>
+<td align="right">14500</td>
+<td align="right">15800</td>
+<td align="left">▁▃▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9166.67</td>
+<td align="right">2345.21</td>
+<td align="right">5900</td>
+<td align="right">7200</td>
+<td align="right">8800</td>
+<td align="right">10800</td>
+<td align="right">15700</td>
+<td align="left">▇▆▅▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">InvRepDensScore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.42</td>
+<td align="right">3.88</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">31</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="correlate-invrepdensscore-and-globalfoldingscore"
+class="section level2">
+<h2>7: CORRELATE InvRepDens<span class="math inline">\(Score and
+GlobalFolding\)</span>Score</h2>
+<ul>
+<li>weak positive!</li>
+</ul>
+<pre class="r"><code>merged &lt;- merge(InvRepDens, GlobalFolding, by = c(&quot;FirstWindow&quot;, &quot;SecondWindow&quot;))
+summary(merged$FirstWindow) # diag 500: 6500 15800; diag 1000: 7000 - 15800</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   7000   11400   13200   12867   14700   15800 </code></pre>
+<pre class="r"><code>summary(merged$SecondWindow) # diag 500: 5900 15200; diag 1000: 5900 14700</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   5900    7000    8500    8833   10300   14700 </code></pre>
+<pre class="r"><code>skimr::skim(merged)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">merged</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4005</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="20%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="8%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12866.67</td>
+<td align="right">2109.50</td>
+<td align="right">7000</td>
+<td align="right">11400</td>
+<td align="right">13200</td>
+<td align="right">14700</td>
+<td align="right">15800</td>
+<td align="left">▁▃▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">8833.33</td>
+<td align="right">2109.50</td>
+<td align="right">5900</td>
+<td align="right">7000</td>
+<td align="right">8500</td>
+<td align="right">10300</td>
+<td align="right">14700</td>
+<td align="left">▇▆▅▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">InvRepDensScore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.39</td>
+<td align="right">3.81</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">31</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">GlobalFoldingScore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.16</td>
+<td align="right">1.74</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">47</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pspearman::spearman.test(merged$InvRepDensScore, merged$GlobalFoldingScore)</code></pre>
+<pre><code>
+    Spearman&#39;s rank correlation rho
+
+data:  merged$InvRepDensScore and merged$GlobalFoldingScore
+S = 1.0177e+10, p-value = 0.001745
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+0.04945796 </code></pre>
+<pre class="r"><code>nrow(merged) # 4005</code></pre>
+<pre><code>[1] 4005</code></pre>
+</div>
+<div
+id="add-infinitysign-parameter-into-homologyandrepeats-dataset-13---16-kb-vs-6-9-kb"
+class="section level2">
+<h2>8: ADD InfinitySign parameter into HomologyAndRepeats dataset (13 -
+16 kb vs 6-9 kb):</h2>
+<pre class="r"><code>HomologyAndRepeats$InfinitySign &lt;- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  if (HomologyAndRepeats$FirstWindow[i] &gt;= 13000 &amp;
+      HomologyAndRepeats$FirstWindow[i] &lt;= 16000 &amp;
+      HomologyAndRepeats$SecondWindow[i] &gt;= 6000 &amp;
+      HomologyAndRepeats$SecondWindow[i] &lt;= 9000) {
+    HomologyAndRepeats$InfinitySign[i] &lt;- 1
+  }
+}
+janitor::tabyl(HomologyAndRepeats$InfinitySign)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["HomologyAndRepeats$InfinitySign"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"4051","3":"0.8183838"},{"1":"1","2":"899","3":"0.1816162"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>janitor::tabyl(HomologyAndRepeats, Deletion, InfinitySign)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Deletion"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["0"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["1"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"3870","3":"596"},{"1":"1","2":"181","3":"303"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>sjmisc::frq(HomologyAndRepeats)</code></pre>
+<pre><code>FirstWindow &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=12533.33 sd=2345.21
+
+Value |  N | Raw % | Valid % | Cum. %
+-------------------------------------
+ 6000 |  1 |  0.02 |    0.02 |   0.02
+ 6100 |  2 |  0.04 |    0.04 |   0.06
+ 6200 |  3 |  0.06 |    0.06 |   0.12
+ 6300 |  4 |  0.08 |    0.08 |   0.20
+ 6400 |  5 |  0.10 |    0.10 |   0.30
+ 6500 |  6 |  0.12 |    0.12 |   0.42
+ 6600 |  7 |  0.14 |    0.14 |   0.57
+ 6700 |  8 |  0.16 |    0.16 |   0.73
+ 6800 |  9 |  0.18 |    0.18 |   0.91
+ 6900 | 10 |  0.20 |    0.20 |   1.11
+ 7000 | 11 |  0.22 |    0.22 |   1.33
+ 7100 | 12 |  0.24 |    0.24 |   1.58
+ 7200 | 13 |  0.26 |    0.26 |   1.84
+ 7300 | 14 |  0.28 |    0.28 |   2.12
+ 7400 | 15 |  0.30 |    0.30 |   2.42
+ 7500 | 16 |  0.32 |    0.32 |   2.75
+ 7600 | 17 |  0.34 |    0.34 |   3.09
+ 7700 | 18 |  0.36 |    0.36 |   3.45
+ 7800 | 19 |  0.38 |    0.38 |   3.84
+ 7900 | 20 |  0.40 |    0.40 |   4.24
+ 8000 | 21 |  0.42 |    0.42 |   4.67
+ 8100 | 22 |  0.44 |    0.44 |   5.11
+ 8200 | 23 |  0.46 |    0.46 |   5.58
+ 8300 | 24 |  0.48 |    0.48 |   6.06
+ 8400 | 25 |  0.51 |    0.51 |   6.57
+ 8500 | 26 |  0.53 |    0.53 |   7.09
+ 8600 | 27 |  0.55 |    0.55 |   7.64
+ 8700 | 28 |  0.57 |    0.57 |   8.20
+ 8800 | 29 |  0.59 |    0.59 |   8.79
+ 8900 | 30 |  0.61 |    0.61 |   9.39
+ 9000 | 31 |  0.63 |    0.63 |  10.02
+ 9100 | 32 |  0.65 |    0.65 |  10.67
+ 9200 | 33 |  0.67 |    0.67 |  11.33
+ 9300 | 34 |  0.69 |    0.69 |  12.02
+ 9400 | 35 |  0.71 |    0.71 |  12.73
+ 9500 | 36 |  0.73 |    0.73 |  13.45
+ 9600 | 37 |  0.75 |    0.75 |  14.20
+ 9700 | 38 |  0.77 |    0.77 |  14.97
+ 9800 | 39 |  0.79 |    0.79 |  15.76
+ 9900 | 40 |  0.81 |    0.81 |  16.57
+10000 | 41 |  0.83 |    0.83 |  17.39
+10100 | 42 |  0.85 |    0.85 |  18.24
+10200 | 43 |  0.87 |    0.87 |  19.11
+10300 | 44 |  0.89 |    0.89 |  20.00
+10400 | 45 |  0.91 |    0.91 |  20.91
+10500 | 46 |  0.93 |    0.93 |  21.84
+10600 | 47 |  0.95 |    0.95 |  22.79
+10700 | 48 |  0.97 |    0.97 |  23.76
+10800 | 49 |  0.99 |    0.99 |  24.75
+10900 | 50 |  1.01 |    1.01 |  25.76
+11000 | 51 |  1.03 |    1.03 |  26.79
+11100 | 52 |  1.05 |    1.05 |  27.84
+11200 | 53 |  1.07 |    1.07 |  28.91
+11300 | 54 |  1.09 |    1.09 |  30.00
+11400 | 55 |  1.11 |    1.11 |  31.11
+11500 | 56 |  1.13 |    1.13 |  32.24
+11600 | 57 |  1.15 |    1.15 |  33.39
+11700 | 58 |  1.17 |    1.17 |  34.57
+11800 | 59 |  1.19 |    1.19 |  35.76
+11900 | 60 |  1.21 |    1.21 |  36.97
+12000 | 61 |  1.23 |    1.23 |  38.20
+12100 | 62 |  1.25 |    1.25 |  39.45
+12200 | 63 |  1.27 |    1.27 |  40.73
+12300 | 64 |  1.29 |    1.29 |  42.02
+12400 | 65 |  1.31 |    1.31 |  43.33
+12500 | 66 |  1.33 |    1.33 |  44.67
+12600 | 67 |  1.35 |    1.35 |  46.02
+12700 | 68 |  1.37 |    1.37 |  47.39
+12800 | 69 |  1.39 |    1.39 |  48.79
+12900 | 70 |  1.41 |    1.41 |  50.20
+13000 | 71 |  1.43 |    1.43 |  51.64
+13100 | 72 |  1.45 |    1.45 |  53.09
+13200 | 73 |  1.47 |    1.47 |  54.57
+13300 | 74 |  1.49 |    1.49 |  56.06
+13400 | 75 |  1.52 |    1.52 |  57.58
+13500 | 76 |  1.54 |    1.54 |  59.11
+13600 | 77 |  1.56 |    1.56 |  60.67
+13700 | 78 |  1.58 |    1.58 |  62.24
+13800 | 79 |  1.60 |    1.60 |  63.84
+13900 | 80 |  1.62 |    1.62 |  65.45
+14000 | 81 |  1.64 |    1.64 |  67.09
+14100 | 82 |  1.66 |    1.66 |  68.75
+14200 | 83 |  1.68 |    1.68 |  70.42
+14300 | 84 |  1.70 |    1.70 |  72.12
+14400 | 85 |  1.72 |    1.72 |  73.84
+14500 | 86 |  1.74 |    1.74 |  75.58
+14600 | 87 |  1.76 |    1.76 |  77.33
+14700 | 88 |  1.78 |    1.78 |  79.11
+14800 | 89 |  1.80 |    1.80 |  80.91
+14900 | 90 |  1.82 |    1.82 |  82.73
+15000 | 91 |  1.84 |    1.84 |  84.57
+15100 | 92 |  1.86 |    1.86 |  86.42
+15200 | 93 |  1.88 |    1.88 |  88.30
+15300 | 94 |  1.90 |    1.90 |  90.20
+15400 | 95 |  1.92 |    1.92 |  92.12
+15500 | 96 |  1.94 |    1.94 |  94.06
+15600 | 97 |  1.96 |    1.96 |  96.02
+15700 | 98 |  1.98 |    1.98 |  98.00
+15800 | 99 |  2.00 |    2.00 | 100.00
+ &lt;NA&gt; |  0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
+
+SecondWindow &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=9166.67 sd=2345.21
+
+Value |  N | Raw % | Valid % | Cum. %
+-------------------------------------
+ 5900 | 99 |  2.00 |    2.00 |   2.00
+ 6000 | 98 |  1.98 |    1.98 |   3.98
+ 6100 | 97 |  1.96 |    1.96 |   5.94
+ 6200 | 96 |  1.94 |    1.94 |   7.88
+ 6300 | 95 |  1.92 |    1.92 |   9.80
+ 6400 | 94 |  1.90 |    1.90 |  11.70
+ 6500 | 93 |  1.88 |    1.88 |  13.58
+ 6600 | 92 |  1.86 |    1.86 |  15.43
+ 6700 | 91 |  1.84 |    1.84 |  17.27
+ 6800 | 90 |  1.82 |    1.82 |  19.09
+ 6900 | 89 |  1.80 |    1.80 |  20.89
+ 7000 | 88 |  1.78 |    1.78 |  22.67
+ 7100 | 87 |  1.76 |    1.76 |  24.42
+ 7200 | 86 |  1.74 |    1.74 |  26.16
+ 7300 | 85 |  1.72 |    1.72 |  27.88
+ 7400 | 84 |  1.70 |    1.70 |  29.58
+ 7500 | 83 |  1.68 |    1.68 |  31.25
+ 7600 | 82 |  1.66 |    1.66 |  32.91
+ 7700 | 81 |  1.64 |    1.64 |  34.55
+ 7800 | 80 |  1.62 |    1.62 |  36.16
+ 7900 | 79 |  1.60 |    1.60 |  37.76
+ 8000 | 78 |  1.58 |    1.58 |  39.33
+ 8100 | 77 |  1.56 |    1.56 |  40.89
+ 8200 | 76 |  1.54 |    1.54 |  42.42
+ 8300 | 75 |  1.52 |    1.52 |  43.94
+ 8400 | 74 |  1.49 |    1.49 |  45.43
+ 8500 | 73 |  1.47 |    1.47 |  46.91
+ 8600 | 72 |  1.45 |    1.45 |  48.36
+ 8700 | 71 |  1.43 |    1.43 |  49.80
+ 8800 | 70 |  1.41 |    1.41 |  51.21
+ 8900 | 69 |  1.39 |    1.39 |  52.61
+ 9000 | 68 |  1.37 |    1.37 |  53.98
+ 9100 | 67 |  1.35 |    1.35 |  55.33
+ 9200 | 66 |  1.33 |    1.33 |  56.67
+ 9300 | 65 |  1.31 |    1.31 |  57.98
+ 9400 | 64 |  1.29 |    1.29 |  59.27
+ 9500 | 63 |  1.27 |    1.27 |  60.55
+ 9600 | 62 |  1.25 |    1.25 |  61.80
+ 9700 | 61 |  1.23 |    1.23 |  63.03
+ 9800 | 60 |  1.21 |    1.21 |  64.24
+ 9900 | 59 |  1.19 |    1.19 |  65.43
+10000 | 58 |  1.17 |    1.17 |  66.61
+10100 | 57 |  1.15 |    1.15 |  67.76
+10200 | 56 |  1.13 |    1.13 |  68.89
+10300 | 55 |  1.11 |    1.11 |  70.00
+10400 | 54 |  1.09 |    1.09 |  71.09
+10500 | 53 |  1.07 |    1.07 |  72.16
+10600 | 52 |  1.05 |    1.05 |  73.21
+10700 | 51 |  1.03 |    1.03 |  74.24
+10800 | 50 |  1.01 |    1.01 |  75.25
+10900 | 49 |  0.99 |    0.99 |  76.24
+11000 | 48 |  0.97 |    0.97 |  77.21
+11100 | 47 |  0.95 |    0.95 |  78.16
+11200 | 46 |  0.93 |    0.93 |  79.09
+11300 | 45 |  0.91 |    0.91 |  80.00
+11400 | 44 |  0.89 |    0.89 |  80.89
+11500 | 43 |  0.87 |    0.87 |  81.76
+11600 | 42 |  0.85 |    0.85 |  82.61
+11700 | 41 |  0.83 |    0.83 |  83.43
+11800 | 40 |  0.81 |    0.81 |  84.24
+11900 | 39 |  0.79 |    0.79 |  85.03
+12000 | 38 |  0.77 |    0.77 |  85.80
+12100 | 37 |  0.75 |    0.75 |  86.55
+12200 | 36 |  0.73 |    0.73 |  87.27
+12300 | 35 |  0.71 |    0.71 |  87.98
+12400 | 34 |  0.69 |    0.69 |  88.67
+12500 | 33 |  0.67 |    0.67 |  89.33
+12600 | 32 |  0.65 |    0.65 |  89.98
+12700 | 31 |  0.63 |    0.63 |  90.61
+12800 | 30 |  0.61 |    0.61 |  91.21
+12900 | 29 |  0.59 |    0.59 |  91.80
+13000 | 28 |  0.57 |    0.57 |  92.36
+13100 | 27 |  0.55 |    0.55 |  92.91
+13200 | 26 |  0.53 |    0.53 |  93.43
+13300 | 25 |  0.51 |    0.51 |  93.94
+13400 | 24 |  0.48 |    0.48 |  94.42
+13500 | 23 |  0.46 |    0.46 |  94.89
+13600 | 22 |  0.44 |    0.44 |  95.33
+13700 | 21 |  0.42 |    0.42 |  95.76
+13800 | 20 |  0.40 |    0.40 |  96.16
+13900 | 19 |  0.38 |    0.38 |  96.55
+14000 | 18 |  0.36 |    0.36 |  96.91
+14100 | 17 |  0.34 |    0.34 |  97.25
+14200 | 16 |  0.32 |    0.32 |  97.58
+14300 | 15 |  0.30 |    0.30 |  97.88
+14400 | 14 |  0.28 |    0.28 |  98.16
+14500 | 13 |  0.26 |    0.26 |  98.42
+14600 | 12 |  0.24 |    0.24 |  98.67
+14700 | 11 |  0.22 |    0.22 |  98.89
+14800 | 10 |  0.20 |    0.20 |  99.09
+14900 |  9 |  0.18 |    0.18 |  99.27
+15000 |  8 |  0.16 |    0.16 |  99.43
+15100 |  7 |  0.14 |    0.14 |  99.58
+15200 |  6 |  0.12 |    0.12 |  99.70
+15300 |  5 |  0.10 |    0.10 |  99.80
+15400 |  4 |  0.08 |    0.08 |  99.88
+15500 |  3 |  0.06 |    0.06 |  99.94
+15600 |  2 |  0.04 |    0.04 |  99.98
+15700 |  1 |  0.02 |    0.02 | 100.00
+ &lt;NA&gt; |  0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
+
+DirectRepeatsDensity &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=5.72 sd=7.74
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 | 2863 | 57.84 |   57.84 |  57.84
+    5 |    7 |  0.14 |    0.14 |  57.98
+    6 |   30 |  0.61 |    0.61 |  58.59
+    7 |   33 |  0.67 |    0.67 |  59.25
+    8 |   33 |  0.67 |    0.67 |  59.92
+    9 |   27 |  0.55 |    0.55 |  60.46
+   10 |  838 | 16.93 |   16.93 |  77.39
+   11 |  263 |  5.31 |    5.31 |  82.71
+   12 |  157 |  3.17 |    3.17 |  85.88
+   13 |  101 |  2.04 |    2.04 |  87.92
+   14 |   36 |  0.73 |    0.73 |  88.65
+   15 |   32 |  0.65 |    0.65 |  89.29
+   16 |   26 |  0.53 |    0.53 |  89.82
+   17 |   29 |  0.59 |    0.59 |  90.40
+   18 |   29 |  0.59 |    0.59 |  90.99
+   19 |   20 |  0.40 |    0.40 |  91.39
+   20 |  119 |  2.40 |    2.40 |  93.80
+   21 |   84 |  1.70 |    1.70 |  95.49
+   22 |   46 |  0.93 |    0.93 |  96.42
+   23 |   43 |  0.87 |    0.87 |  97.29
+   24 |   31 |  0.63 |    0.63 |  97.92
+   25 |   10 |  0.20 |    0.20 |  98.12
+   26 |   13 |  0.26 |    0.26 |  98.38
+   27 |    5 |  0.10 |    0.10 |  98.48
+   28 |    7 |  0.14 |    0.14 |  98.63
+   29 |    8 |  0.16 |    0.16 |  98.79
+   30 |   10 |  0.20 |    0.20 |  98.99
+   31 |    7 |  0.14 |    0.14 |  99.13
+   32 |   10 |  0.20 |    0.20 |  99.33
+   33 |    8 |  0.16 |    0.16 |  99.49
+   34 |   10 |  0.20 |    0.20 |  99.70
+   35 |    5 |  0.10 |    0.10 |  99.80
+   36 |    1 |  0.02 |    0.02 |  99.82
+   37 |    1 |  0.02 |    0.02 |  99.84
+   38 |    1 |  0.02 |    0.02 |  99.86
+   39 |    1 |  0.02 |    0.02 |  99.88
+   41 |    1 |  0.02 |    0.02 |  99.90
+   43 |    1 |  0.02 |    0.02 |  99.92
+   44 |    2 |  0.04 |    0.04 |  99.96
+   53 |    1 |  0.02 |    0.02 |  99.98
+   57 |    1 |  0.02 |    0.02 | 100.00
+ &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
+
+MicroHomologyScore &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=90.09 sd=17.27
+
+Value |   N | Raw % | Valid % | Cum. %
+--------------------------------------
+   27 |   1 |  0.02 |    0.02 |   0.02
+   32 |   1 |  0.02 |    0.02 |   0.04
+   33 |   2 |  0.04 |    0.04 |   0.08
+   35 |   2 |  0.04 |    0.04 |   0.12
+   37 |   1 |  0.02 |    0.02 |   0.14
+   40 |   2 |  0.04 |    0.04 |   0.18
+   41 |   1 |  0.02 |    0.02 |   0.20
+   42 |   3 |  0.06 |    0.06 |   0.26
+   43 |   5 |  0.10 |    0.10 |   0.36
+   44 |   3 |  0.06 |    0.06 |   0.42
+   45 |   6 |  0.12 |    0.12 |   0.55
+   46 |   2 |  0.04 |    0.04 |   0.59
+   47 |   3 |  0.06 |    0.06 |   0.65
+   48 |   3 |  0.06 |    0.06 |   0.71
+   49 |   9 |  0.18 |    0.18 |   0.89
+   50 |   4 |  0.08 |    0.08 |   0.97
+   51 |   6 |  0.12 |    0.12 |   1.09
+   52 |   3 |  0.06 |    0.06 |   1.15
+   53 |   9 |  0.18 |    0.18 |   1.33
+   54 |   4 |  0.08 |    0.08 |   1.41
+   55 |  18 |  0.36 |    0.36 |   1.78
+   56 |   5 |  0.10 |    0.10 |   1.88
+   57 |  11 |  0.22 |    0.22 |   2.10
+   58 |  23 |  0.46 |    0.46 |   2.57
+   59 |  21 |  0.42 |    0.42 |   2.99
+   60 |  22 |  0.44 |    0.44 |   3.43
+   61 |  28 |  0.57 |    0.57 |   4.00
+   62 |  31 |  0.63 |    0.63 |   4.63
+   63 |  32 |  0.65 |    0.65 |   5.27
+   64 |  44 |  0.89 |    0.89 |   6.16
+   65 |  28 |  0.57 |    0.57 |   6.73
+   66 |  34 |  0.69 |    0.69 |   7.41
+   67 |  36 |  0.73 |    0.73 |   8.14
+   68 |  55 |  1.11 |    1.11 |   9.25
+   69 |  50 |  1.01 |    1.01 |  10.26
+   70 |  65 |  1.31 |    1.31 |  11.58
+   71 |  61 |  1.23 |    1.23 |  12.81
+   72 |  71 |  1.43 |    1.43 |  14.24
+   73 |  65 |  1.31 |    1.31 |  15.56
+   74 |  73 |  1.47 |    1.47 |  17.03
+   75 |  74 |  1.49 |    1.49 |  18.53
+   76 |  90 |  1.82 |    1.82 |  20.34
+   77 | 107 |  2.16 |    2.16 |  22.51
+   78 | 111 |  2.24 |    2.24 |  24.75
+   79 |  93 |  1.88 |    1.88 |  26.63
+   80 | 105 |  2.12 |    2.12 |  28.75
+   81 | 121 |  2.44 |    2.44 |  31.19
+   82 | 125 |  2.53 |    2.53 |  33.72
+   83 | 126 |  2.55 |    2.55 |  36.26
+   84 | 121 |  2.44 |    2.44 |  38.71
+   85 | 132 |  2.67 |    2.67 |  41.37
+   86 | 114 |  2.30 |    2.30 |  43.68
+   87 | 114 |  2.30 |    2.30 |  45.98
+   88 | 144 |  2.91 |    2.91 |  48.89
+   89 | 128 |  2.59 |    2.59 |  51.47
+   90 | 110 |  2.22 |    2.22 |  53.70
+   91 | 121 |  2.44 |    2.44 |  56.14
+   92 |  97 |  1.96 |    1.96 |  58.10
+   93 |  90 |  1.82 |    1.82 |  59.92
+   94 | 105 |  2.12 |    2.12 |  62.04
+   95 | 124 |  2.51 |    2.51 |  64.55
+   96 | 119 |  2.40 |    2.40 |  66.95
+   97 | 101 |  2.04 |    2.04 |  68.99
+   98 | 117 |  2.36 |    2.36 |  71.35
+   99 |  75 |  1.52 |    1.52 |  72.87
+  100 |  78 |  1.58 |    1.58 |  74.44
+  101 |  78 |  1.58 |    1.58 |  76.02
+  102 |  85 |  1.72 |    1.72 |  77.74
+  103 |  68 |  1.37 |    1.37 |  79.11
+  104 |  78 |  1.58 |    1.58 |  80.69
+  105 |  68 |  1.37 |    1.37 |  82.06
+  106 |  60 |  1.21 |    1.21 |  83.27
+  107 |  59 |  1.19 |    1.19 |  84.46
+  108 |  59 |  1.19 |    1.19 |  85.66
+  109 |  60 |  1.21 |    1.21 |  86.87
+  110 |  67 |  1.35 |    1.35 |  88.22
+  111 |  48 |  0.97 |    0.97 |  89.19
+  112 |  37 |  0.75 |    0.75 |  89.94
+  113 |  41 |  0.83 |    0.83 |  90.77
+  114 |  45 |  0.91 |    0.91 |  91.68
+  115 |  32 |  0.65 |    0.65 |  92.32
+  116 |  37 |  0.75 |    0.75 |  93.07
+  117 |  32 |  0.65 |    0.65 |  93.72
+  118 |  30 |  0.61 |    0.61 |  94.32
+  119 |  21 |  0.42 |    0.42 |  94.75
+  120 |  34 |  0.69 |    0.69 |  95.43
+  121 |  14 |  0.28 |    0.28 |  95.72
+  122 |  22 |  0.44 |    0.44 |  96.16
+  123 |  13 |  0.26 |    0.26 |  96.42
+  124 |  13 |  0.26 |    0.26 |  96.69
+  125 |  21 |  0.42 |    0.42 |  97.11
+  126 |  12 |  0.24 |    0.24 |  97.35
+  127 |  12 |  0.24 |    0.24 |  97.60
+  128 |  14 |  0.28 |    0.28 |  97.88
+  129 |  11 |  0.22 |    0.22 |  98.10
+  130 |  12 |  0.24 |    0.24 |  98.34
+  131 |  13 |  0.26 |    0.26 |  98.61
+  132 |  11 |  0.22 |    0.22 |  98.83
+  133 |   9 |  0.18 |    0.18 |  99.01
+  134 |   4 |  0.08 |    0.08 |  99.09
+  135 |   3 |  0.06 |    0.06 |  99.15
+  136 |   4 |  0.08 |    0.08 |  99.23
+  137 |   5 |  0.10 |    0.10 |  99.33
+  138 |   2 |  0.04 |    0.04 |  99.37
+  139 |   4 |  0.08 |    0.08 |  99.45
+  140 |   2 |  0.04 |    0.04 |  99.49
+  141 |   2 |  0.04 |    0.04 |  99.54
+  142 |   3 |  0.06 |    0.06 |  99.60
+  143 |   3 |  0.06 |    0.06 |  99.66
+  145 |   3 |  0.06 |    0.06 |  99.72
+  146 |   4 |  0.08 |    0.08 |  99.80
+  147 |   3 |  0.06 |    0.06 |  99.86
+  149 |   1 |  0.02 |    0.02 |  99.88
+  150 |   1 |  0.02 |    0.02 |  99.90
+  151 |   1 |  0.02 |    0.02 |  99.92
+  153 |   1 |  0.02 |    0.02 |  99.94
+  158 |   2 |  0.04 |    0.04 |  99.98
+  160 |   1 |  0.02 |    0.02 | 100.00
+ &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
+
+Deletion &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=0.10 sd=0.30
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 | 4466 | 90.22 |   90.22 |  90.22
+    1 |  484 |  9.78 |    9.78 | 100.00
+ &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
+
+InfinitySign &lt;numeric&gt; 
+# total N=4950 valid N=4950 mean=0.18 sd=0.39
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 | 4051 | 81.84 |   81.84 |  81.84
+    1 |  899 | 18.16 |   18.16 | 100.00
+ &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+<pre class="r"><code>HomologyAndRepeats %&gt;% skim()</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4950</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="10%" />
+<col width="14%" />
+<col width="9%" />
+<col width="8%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12533.33</td>
+<td align="right">2345.21</td>
+<td align="right">6000</td>
+<td align="right">10900</td>
+<td align="right">12900</td>
+<td align="right">14500</td>
+<td align="right">15800</td>
+<td align="left">▁▃▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9166.67</td>
+<td align="right">2345.21</td>
+<td align="right">5900</td>
+<td align="right">7200</td>
+<td align="right">8800</td>
+<td align="right">10800</td>
+<td align="right">15700</td>
+<td align="left">▇▆▅▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.72</td>
+<td align="right">7.74</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">57</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">MicroHomologyScore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">90.09</td>
+<td align="right">17.27</td>
+<td align="right">27</td>
+<td align="right">79</td>
+<td align="right">89</td>
+<td align="right">101</td>
+<td align="right">160</td>
+<td align="left">▁▅▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Deletion</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.10</td>
+<td align="right">0.30</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">InfinitySign</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.18</td>
+<td align="right">0.39</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▂</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>HomologyAndRepeats %&gt;%
+  group_by(Deletion) %&gt;%
+  skim()</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4950</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">Deletion</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="8%" />
+<col width="9%" />
+<col width="13%" />
+<col width="8%" />
+<col width="7%" />
+<col width="4%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">Deletion</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12365.74</td>
+<td align="right">2368.70</td>
+<td align="right">6000</td>
+<td align="right">10625</td>
+<td align="right">12700</td>
+<td align="right">14400</td>
+<td align="right">15800</td>
+<td align="left">▁▃▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">FirstWindow</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">14079.75</td>
+<td align="right">1353.30</td>
+<td align="right">8100</td>
+<td align="right">13475</td>
+<td align="right">14200</td>
+<td align="right">15200</td>
+<td align="right">15800</td>
+<td align="left">▁▁▂▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9273.53</td>
+<td align="right">2395.39</td>
+<td align="right">5900</td>
+<td align="right">7200</td>
+<td align="right">8900</td>
+<td align="right">11000</td>
+<td align="right">15700</td>
+<td align="left">▇▆▅▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">8180.58</td>
+<td align="right">1494.07</td>
+<td align="right">5900</td>
+<td align="right">7175</td>
+<td align="right">8000</td>
+<td align="right">9000</td>
+<td align="right">15400</td>
+<td align="left">▇▇▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.68</td>
+<td align="right">7.73</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">57</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.07</td>
+<td align="right">7.81</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">35</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">MicroHomologyScore</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">89.62</td>
+<td align="right">17.14</td>
+<td align="right">27</td>
+<td align="right">78</td>
+<td align="right">89</td>
+<td align="right">100</td>
+<td align="right">160</td>
+<td align="left">▁▅▇▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">MicroHomologyScore</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">94.46</td>
+<td align="right">17.83</td>
+<td align="right">37</td>
+<td align="right">82</td>
+<td align="right">94</td>
+<td align="right">106</td>
+<td align="right">153</td>
+<td align="left">▁▅▇▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">InfinitySign</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.13</td>
+<td align="right">0.34</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">InfinitySign</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.63</td>
+<td align="right">0.48</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▅▁▁▁▇</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>HomologyAndRepeats %&gt;%
+  group_by(InfinitySign) %&gt;%
+  skim()</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">4950</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">InfinitySign</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="9%" />
+<col width="12%" />
+<col width="8%" />
+<col width="7%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">InfinitySign</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FirstWindow</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12119.08</td>
+<td align="right">2370.73</td>
+<td align="right">6000</td>
+<td align="right">10400</td>
+<td align="right">12300</td>
+<td align="right">14200</td>
+<td align="right">15800</td>
+<td align="left">▂▅▆▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">FirstWindow</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">14400.00</td>
+<td align="right">837.13</td>
+<td align="right">13000</td>
+<td align="right">13700</td>
+<td align="right">14400</td>
+<td align="right">15100</td>
+<td align="right">15800</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">SecondWindow</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9536.53</td>
+<td align="right">2406.21</td>
+<td align="right">5900</td>
+<td align="right">7400</td>
+<td align="right">9400</td>
+<td align="right">11300</td>
+<td align="right">15700</td>
+<td align="left">▇▇▆▃▂</td>
+</tr>
+<tr class="even">
+<td align="left">SecondWindow</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">7500.00</td>
+<td align="right">894.93</td>
+<td align="right">6000</td>
+<td align="right">6700</td>
+<td align="right">7500</td>
+<td align="right">8300</td>
+<td align="right">9000</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.63</td>
+<td align="right">7.64</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">44</td>
+<td align="left">▇▅▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">DirectRepeatsDensity</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6.13</td>
+<td align="right">8.15</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">57</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">MicroHomologyScore</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">90.06</td>
+<td align="right">17.26</td>
+<td align="right">27</td>
+<td align="right">79</td>
+<td align="right">89</td>
+<td align="right">101</td>
+<td align="right">160</td>
+<td align="left">▁▃▇▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">MicroHomologyScore</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">90.26</td>
+<td align="right">17.29</td>
+<td align="right">37</td>
+<td align="right">78</td>
+<td align="right">89</td>
+<td align="right">101</td>
+<td align="right">153</td>
+<td align="left">▁▆▇▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Deletion</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.04</td>
+<td align="right">0.21</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Deletion</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.47</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▅</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>## merge HomologyAndRepeats with merged(InvRepDens + GlobalFolding)
+dim(HomologyAndRepeats) # 4950</code></pre>
+<pre><code>[1] 4950    6</code></pre>
+<pre class="r"><code>HomologyAndRepeats &lt;- merge(HomologyAndRepeats,
+                            merged,
+                            by = c(&quot;FirstWindow&quot;, &quot;SecondWindow&quot;)
+)
+dim(HomologyAndRepeats) # diag 500: 4465; diag 1000:  4005</code></pre>
+<pre><code>[1] 4005    8</code></pre>
+<div
+id="is-globalfoldingscore-higher-within-the-cross-according-to-our-infinitysign-model-yes"
+class="section level3">
+<h3>is GlobalFoldingScore higher within the cross according to our
+InfinitySign model? YES!!!</h3>
+<pre class="r"><code>wilcox.test(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+) # diag 1000: 3.358e-09</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore and HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+W = 1431209, p-value = 3.358e-09
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>boxplot(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore,
+  notch = TRUE,
+  names = c(&quot;stem&quot;, &quot;loop&quot;),
+  ylab = &quot;in silico folding score&quot;,
+  outline = FALSE
+)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-boxplot-test-infinity-sign-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pltViolRepFoldingInfSign &lt;-
+  ggbetweenstats(
+    data = HomologyAndRepeats,
+    x = InfinitySign,
+    y = GlobalFoldingScore,
+    type = &quot;np&quot;,
+    # Wilcoxon for two group
+    mean.ci = TRUE,
+    nboot = 10000,
+    # number of iteration for statistical CI
+    k = 5,
+    # number of decimal places for statistical results
+    outlier.tagging = TRUE, # whether outliers need to be tagged
+    outlier.label = Deletion,
+    xlab = &#39;&quot;3D&quot; Position&#39;,
+    # label for the x-axis variable
+    ylab = &quot;in silico folding score&quot;,
+    # label for the y-axis variable
+    title = &quot;The effect of repeats&#39; position on folding score&quot;,
+    # title text for the plot
+    ggtheme = ggthemes::theme_fivethirtyeight(),
+    # choosing a different theme
+    package = &quot;wesanderson&quot;,
+    # package from which color palette is to be taken
+    palette = &quot;Royal1&quot;,
+    # choosing a different color palette
+    notch = TRUE,
+    messages = TRUE
+  )
+# Note: 95% CI for effect size estimate was computed with 10000 bootstrap samples
+# Note: Shapiro-Wilk Normality Test for in silico folding score: p-value = &lt; 0.001
+# Note: Bartlett&#39;s test for homogeneity of variances for factor &quot;3D&quot; Position: p-value = &lt; 0.001
+cowplot::save_plot(
+  plot = pltViolRepFoldingInfSign,
+  base_height = 12,
+  base_asp = 1.618,
+  file = normalizePath(
+    file.path(plots_dir, &quot;violin_rep_folding_infsign_np.pdf&quot;)
+  )
+)
+
+pltViolRepFoldingInfSign</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-violin-test-infinity-sign-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>t.test(
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore,
+  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+) # diag 1000: 0.002639</code></pre>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore and HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore
+t = 3.0144, df = 1003.9, p-value = 0.002639
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.1018345 0.4817022
+sample estimates:
+ mean of x  mean of y 
+0.38932147 0.09755312 </code></pre>
+<pre class="r"><code>pltViolRepFoldingInfSignP &lt;-
+  ggbetweenstats(
+    data = HomologyAndRepeats,
+    x = InfinitySign,
+    y = GlobalFoldingScore,
+    type = &quot;p&quot;,
+    # Wilcoxon for two group
+    mean.ci = TRUE,
+    nboot = 10000,
+    # number of iteration for statistical CI
+    k = 5,
+    # number of decimal places for statistical results
+    outlier.tagging = TRUE, # whether outliers need to be tagged
+    outlier.label = FirstWindow,
+    xlab = &#39;&quot;3D&quot; Position&#39;,
+    # label for the x-axis variable
+    ylab = &quot;in silico folding score&quot;,
+    # label for the y-axis variable
+    title = &quot;The effect of repeats&#39; position on folding score&quot;,
+    # title text for the plot
+    ggtheme = ggthemes::theme_fivethirtyeight(),
+    # choosing a different theme
+    package = &quot;wesanderson&quot;,
+    # package from which color palette is to be taken
+    palette = &quot;Royal1&quot;,
+    # choosing a different color palette
+    notch = TRUE,
+    messages = TRUE
+  )
+# Note: 95% CI for effect size estimate was computed with 10000 bootstrap samples
+# Note: Shapiro-Wilk Normality Test for in silico folding score: p-value = &lt; 0.001
+# Note: Bartlett&#39;s test for homogeneity of variances for factor &quot;3D&quot; Position: p-value = &lt; 0.001
+cowplot::save_plot(
+  plot = pltViolRepFoldingInfSignP,
+  base_height = 8,
+  base_asp = 1.618,
+  file = normalizePath(
+    file.path(plots_dir, &quot;violin_rep_folding_infsign_p.pdf&quot;)
+  )
+)
+
+pltViolRepFoldingInfSignP</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-violin-test-infinity-sign-p-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 1, ]$GlobalFoldingScore) # diag 1000: 0.3893</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.0000  0.0000  0.3893  0.0000 47.0000 </code></pre>
+<pre class="r"><code>summary(HomologyAndRepeats[HomologyAndRepeats$InfinitySign == 0, ]$GlobalFoldingScore) # diag 1000: 0.09755</code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+ 0.00000  0.00000  0.00000  0.09755  0.00000 25.00000 </code></pre>
+</div>
+<div
+id="we-have-to-link-better-global-folding-and-infinitysign-model---till-now-it-was-done-by-eye.-clusterisation-one-cluster"
+class="section level3">
+<h3>we have to link better global folding and InfinitySign model - till
+now it was done by eye. Clusterisation? One cluster?</h3>
+</div>
+</div>
+<div
+id="logistic-regression-homologyandrepeatsdeletion-as-a-function-of-homologyandrepeatsmicrohomologyscore-and-homologyandrepeatsinfinitysign"
+class="section level2">
+<h2>9: LOGISTIC REGRESSION: HomologyAndRepeats<span
+class="math inline">\(Deletion as a function of
+HomologyAndRepeats\)</span>MicroHomologyScore and
+HomologyAndRepeats$InfinitySign:</h2>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + HomologyAndRepeats$InfinitySign,
+    family = &quot;binomial&quot;
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + 
+    HomologyAndRepeats$InfinitySign, family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3434  -0.3920  -0.3293  -0.2893   2.6338  
+
+Coefficients:
+                                       Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                           -4.573709   0.297535 -15.372  &lt; 2e-16 ***
+HomologyAndRepeats$MicroHomologyScore  0.018946   0.003026   6.262  3.8e-10 ***
+HomologyAndRepeats$InfinitySign        2.170671   0.106329  20.415  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2450.6  on 4002  degrees of freedom
+AIC: 2456.6
+
+Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-glm-microhomology-infinity-sign-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-4.5737087","3":"0.297535058","4":"-15.371999","5":"2.522624e-53"},{"1":"HomologyAndRepeats$MicroHomologyScore","2":"0.0189464","3":"0.003025605","4":"6.262019","5":"3.800255e-10"},{"1":"HomologyAndRepeats$InfinitySign","2":"2.1706715","3":"0.106328816","4":"20.414705","5":"1.237754e-92"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>broom::glance(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["null.deviance"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df.null"],"name":[2],"type":["int"],"align":["right"]},{"label":["logLik"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["int"],"align":["right"]},{"label":["nobs"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"2924.693","2":"4004","3":"-1225.306","4":"2456.612","5":"2475.498","6":"2450.612","7":"4002","8":"4005"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$InfinitySign),
+    family = &quot;binomial&quot;
+  )
+summary(a) # PAPER!!! 0.33 + 0.91</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + 
+    scale(HomologyAndRepeats$InfinitySign), family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3434  -0.3920  -0.3293  -0.2893   2.6338  
+
+Coefficients:
+                                             Estimate Std. Error z value
+(Intercept)                                  -2.38296    0.06412 -37.167
+scale(HomologyAndRepeats$MicroHomologyScore)  0.32592    0.05205   6.262
+scale(HomologyAndRepeats$InfinitySign)        0.90579    0.04437  20.415
+                                             Pr(&gt;|z|)    
+(Intercept)                                   &lt; 2e-16 ***
+scale(HomologyAndRepeats$MicroHomologyScore)  3.8e-10 ***
+scale(HomologyAndRepeats$InfinitySign)        &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2450.6  on 4002  degrees of freedom
+AIC: 2456.6
+
+Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-glm-microhomology-infinity-sign-scaled-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-2.3829630","3":"0.06411582","4":"-37.166536","5":"2.370448e-302"},{"1":"scale(HomologyAndRepeats$MicroHomologyScore)","2":"0.3259212","3":"0.05204731","4":"6.262019","5":"3.800255e-10"},{"1":"scale(HomologyAndRepeats$InfinitySign)","2":"0.9057876","3":"0.04436937","4":"20.414705","5":"1.237754e-92"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>broom::glance(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["null.deviance"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df.null"],"name":[2],"type":["int"],"align":["right"]},{"label":["logLik"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["int"],"align":["right"]},{"label":["nobs"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"2924.693","2":"4004","3":"-1225.306","4":"2456.612","5":"2475.498","6":"2450.612","7":"4002","8":"4005"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + HomologyAndRepeats$GlobalFoldingScore,
+    family = &quot;binomial&quot;
+  )
+summary(a) # non significant - may be I have to take it on bigger scale! (1kb without diagonal, because this is global parameter not precise)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore + 
+    HomologyAndRepeats$GlobalFoldingScore, family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.8482  -0.5288  -0.4803  -0.4322   2.4455  
+
+Coefficients:
+                                       Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                           -3.570891   0.266681 -13.390  &lt; 2e-16 ***
+HomologyAndRepeats$MicroHomologyScore  0.017085   0.002793   6.117 9.54e-10 ***
+HomologyAndRepeats$GlobalFoldingScore  0.005585   0.028785   0.194    0.846    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2887.5  on 4002  degrees of freedom
+AIC: 2893.5
+
+Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code># to reconstruct 100 bp matrix back from 1 kb matrix!!!!!
+ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-glm-microhomology-globfold-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-3.570890753","3":"0.266681481","4":"-13.3900964","5":"6.909099e-41"},{"1":"HomologyAndRepeats$MicroHomologyScore","2":"0.017085001","3":"0.002793099","4":"6.1168626","5":"9.543560e-10"},{"1":"HomologyAndRepeats$GlobalFoldingScore","2":"0.005584607","3":"0.028785014","4":"0.1940109","5":"8.461673e-01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>broom::glance(a)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["null.deviance"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df.null"],"name":[2],"type":["int"],"align":["right"]},{"label":["logLik"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["df.residual"],"name":[7],"type":["int"],"align":["right"]},{"label":["nobs"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"2924.693","2":"4004","3":"-1443.742","4":"2893.483","5":"2912.369","6":"2887.483","7":"4002","8":"4005"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="get-residuals-and-correlate-them-with-global-matrix"
+class="section level3">
+<h3>get residuals and correlate them with global matrix</h3>
+<pre class="r"><code>a &lt;-
+  glm(HomologyAndRepeats$Deletion ~ HomologyAndRepeats$MicroHomologyScore,
+      family = &quot;binomial&quot;
+  )
+ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-glm-microhomology-derive-and-test-corr-residuals-global-folding-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>HomologyAndRepeats$Residuals &lt;- residuals(a)
+summary(HomologyAndRepeats$Residuals)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-0.8477 -0.5290 -0.4805 -0.1950 -0.4290  2.4445 </code></pre>
+<pre class="r"><code>pspearman::spearman.test(
+  HomologyAndRepeats$Residuals,
+  HomologyAndRepeats$GlobalFoldingScore
+)</code></pre>
+<pre><code>
+    Spearman&#39;s rank correlation rho
+
+data:  HomologyAndRepeats$Residuals and HomologyAndRepeats$GlobalFoldingScore
+S = 1.0104e+10, p-value = 0.0003666
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+0.05628272 </code></pre>
+<div
+id="reconstruct-global-folding-100-bp-back-from-1kb-resolution-globalfolding1000-assuming-that-global-folding-can-work-remotely-enough."
+class="section level4">
+<h4>reconstruct Global folding 100 bp back from 1kb resolution
+(GlobalFolding1000) assuming that global folding can work remotely
+enough.</h4>
+</div>
+<div
+id="another-idea---to-use-a-distance-from-a-given-cell-to-closest-contact-from-global-matrix---so-infinity-sign-is-not-zero-or-one-but-continuos"
+class="section level4">
+<h4>another idea - to use a distance from a given cell to closest
+contact (from global matrix) - so, infinity sign is not zero or one, but
+continuos!</h4>
+<pre class="r"><code>HomologyAndRepeats$FirstWindowWholeKbRes &lt;-
+  round(HomologyAndRepeats$FirstWindow, -3)
+HomologyAndRepeats$SecondWindowWholeKbRes &lt;-
+  round(HomologyAndRepeats$SecondWindow, -3)
+janitor::tabyl(
+  HomologyAndRepeats,
+  FirstWindowWholeKbRes,
+  SecondWindowWholeKbRes
+)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["FirstWindowWholeKbRes"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["6000"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["7000"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["8000"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["9000"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["10000"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["11000"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["12000"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["13000"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["14000"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["15000"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"7000","2":"15","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0"},{"1":"8000","2":"76","3":"45","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0"},{"1":"9000","2":"63","3":"81","4":"45","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0"},{"1":"10000","2":"77","3":"99","4":"120","5":"45","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0"},{"1":"11000","2":"63","3":"81","4":"99","5":"81","6":"45","7":"0","8":"0","9":"0","10":"0","11":"0"},{"1":"12000","2":"77","3":"99","4":"121","5":"99","6":"120","7":"45","8":"0","9":"0","10":"0","11":"0"},{"1":"13000","2":"63","3":"81","4":"99","5":"81","6":"99","7":"81","8":"45","9":"0","10":"0","11":"0"},{"1":"14000","2":"77","3":"99","4":"121","5":"99","6":"121","7":"99","8":"120","9":"45","10":"0","11":"0"},{"1":"15000","2":"63","3":"81","4":"99","5":"81","6":"99","7":"81","8":"99","9":"81","10":"45","11":"0"},{"1":"16000","2":"28","3":"36","4":"44","5":"36","6":"44","7":"36","8":"44","9":"36","10":"43","11":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>HomologyAndRepeats &lt;- merge(
+  HomologyAndRepeats,
+  GlobalFolding1000,
+  by = c(&quot;FirstWindowWholeKbRes&quot;, &quot;SecondWindowWholeKbRes&quot;)
+)</code></pre>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$GlobalFolding1000Score),
+    family = &quot;binomial&quot;
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + 
+    scale(HomologyAndRepeats$GlobalFolding1000Score), family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.8795  -0.5271  -0.4791  -0.4281   2.4577  
+
+Coefficients:
+                                                 Estimate Std. Error z value
+(Intercept)                                      -2.03721    0.05031 -40.490
+scale(HomologyAndRepeats$MicroHomologyScore)      0.29126    0.04806   6.061
+scale(HomologyAndRepeats$GlobalFolding1000Score)  0.09128    0.04444   2.054
+                                                 Pr(&gt;|z|)    
+(Intercept)                                       &lt; 2e-16 ***
+scale(HomologyAndRepeats$MicroHomologyScore)     1.35e-09 ***
+scale(HomologyAndRepeats$GlobalFolding1000Score)     0.04 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2883.5  on 4002  degrees of freedom
+AIC: 2889.5
+
+Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-final-glm-microhomology-global-folding-scaled-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-2.0372126
+</td>
+<td style="text-align:right;">
+0.0503135
+</td>
+<td style="text-align:right;">
+-40.490337
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+scale(HomologyAndRepeats<span class="math inline">\(MicroHomologyScore)
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.2912598
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.0480566
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 6.060761
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.0000000
+&lt;/td&gt;  &lt;/tr&gt;  &lt;tr&gt;  &lt;td
+style=&quot;text-align:left;&quot;&gt;
+scale(HomologyAndRepeats\)</span>GlobalFolding1000Score)
+</td>
+<td style="text-align:right;">
+0.0912813
+</td>
+<td style="text-align:right;">
+0.0444382
+</td>
+<td style="text-align:right;">
+2.054118
+</td>
+<td style="text-align:right;">
+0.0399643
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>broom::glance(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+null.deviance
+</th>
+<th style="text-align:right;">
+df.null
+</th>
+<th style="text-align:right;">
+logLik
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+<th style="text-align:right;">
+deviance
+</th>
+<th style="text-align:right;">
+df.residual
+</th>
+<th style="text-align:right;">
+nobs
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2924.693
+</td>
+<td style="text-align:right;">
+4004
+</td>
+<td style="text-align:right;">
+-1441.768
+</td>
+<td style="text-align:right;">
+2889.536
+</td>
+<td style="text-align:right;">
+2908.422
+</td>
+<td style="text-align:right;">
+2883.536
+</td>
+<td style="text-align:right;">
+4002
+</td>
+<td style="text-align:right;">
+4005
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div
+id="derive-distance-to-the-strongest-contact-6500-vs-14500-see-heatmap-global-folding-1-kb-resolution"
+class="section level4">
+<h4>derive distance to the strongest contact: 6500 vs 14500 (see
+heatmap: global folding 1 kb resolution)</h4>
+<pre class="r"><code>HomologyAndRepeats$DistanceToContact &lt;- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  HomologyAndRepeats$DistanceToContact[i] &lt;- raster::pointDistance(
+    c(
+      HomologyAndRepeats$FirstWindow[i],
+      HomologyAndRepeats$SecondWindow[i]
+    ),
+    c(14550, 6550),
+    lonlat = FALSE
+  )
+}
+
+skim(HomologyAndRepeats$DistanceToContact) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_type
+</th>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+numeric.mean
+</th>
+<th style="text-align:right;">
+numeric.sd
+</th>
+<th style="text-align:right;">
+numeric.p0
+</th>
+<th style="text-align:right;">
+numeric.p25
+</th>
+<th style="text-align:right;">
+numeric.p50
+</th>
+<th style="text-align:right;">
+numeric.p75
+</th>
+<th style="text-align:right;">
+numeric.p100
+</th>
+<th style="text-align:left;">
+numeric.hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+data
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3726.984
+</td>
+<td style="text-align:right;">
+1747.957
+</td>
+<td style="text-align:right;">
+70.71068
+</td>
+<td style="text-align:right;">
+2392.697
+</td>
+<td style="text-align:right;">
+3842.525
+</td>
+<td style="text-align:right;">
+4962.358
+</td>
+<td style="text-align:right;">
+8245.302
+</td>
+<td style="text-align:left;">
+▃▆▇▅▁
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># the closest: -70; the most distant: -8245</code></pre>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$DistanceToContact),
+    family = &quot;binomial&quot;
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + 
+    scale(HomologyAndRepeats$DistanceToContact), family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3824  -0.5088  -0.3101  -0.1852   3.0099  
+
+Coefficients:
+                                             Estimate Std. Error z value
+(Intercept)                                  -2.56654    0.07383 -34.760
+scale(HomologyAndRepeats$MicroHomologyScore)  0.43224    0.05269   8.203
+scale(HomologyAndRepeats$DistanceToContact)  -1.24881    0.06520 -19.152
+                                             Pr(&gt;|z|)    
+(Intercept)                                   &lt; 2e-16 ***
+scale(HomologyAndRepeats$MicroHomologyScore) 2.34e-16 ***
+scale(HomologyAndRepeats$DistanceToContact)   &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2402.3  on 4002  degrees of freedom
+AIC: 2408.3
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a)</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-final-glm-microhomology-distnce-to-contact-zone-scaled-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-2.566536
+</td>
+<td style="text-align:right;">
+0.0738349
+</td>
+<td style="text-align:right;">
+-34.76046
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+scale(HomologyAndRepeats<span class="math inline">\(MicroHomologyScore)
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.432243
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.0526914
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 8.20330
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0
+&lt;/td&gt;  &lt;/tr&gt;  &lt;tr&gt;  &lt;td
+style=&quot;text-align:left;&quot;&gt;
+scale(HomologyAndRepeats\)</span>DistanceToContact)
+</td>
+<td style="text-align:right;">
+-1.248810
+</td>
+<td style="text-align:right;">
+0.0652043
+</td>
+<td style="text-align:right;">
+-19.15226
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>broom::glance(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+null.deviance
+</th>
+<th style="text-align:right;">
+df.null
+</th>
+<th style="text-align:right;">
+logLik
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+<th style="text-align:right;">
+deviance
+</th>
+<th style="text-align:right;">
+df.residual
+</th>
+<th style="text-align:right;">
+nobs
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2924.693
+</td>
+<td style="text-align:right;">
+4004
+</td>
+<td style="text-align:right;">
+-1201.136
+</td>
+<td style="text-align:right;">
+2408.272
+</td>
+<td style="text-align:right;">
+2427.158
+</td>
+<td style="text-align:right;">
+2402.272
+</td>
+<td style="text-align:right;">
+4002
+</td>
+<td style="text-align:right;">
+4005
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="derive-distance-to-the-common-repeat" class="section level4">
+<h4>derive distance to the common repeat:</h4>
+<pre class="r"><code>HomologyAndRepeats$DistanceToContact &lt;- 0
+for (i in seq_len(nrow(HomologyAndRepeats))) {
+  # i = 1
+  HomologyAndRepeats$DistanceToContact[i] &lt;- pointDistance(
+    c(
+      HomologyAndRepeats$FirstWindow[i],
+      HomologyAndRepeats$SecondWindow[i]
+    ),
+    c(13447, 8469),
+    lonlat = FALSE
+  ) #  (8469-8482 - 13447-13459)
+}
+skim(HomologyAndRepeats$DistanceToContact) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_type
+</th>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+numeric.mean
+</th>
+<th style="text-align:right;">
+numeric.sd
+</th>
+<th style="text-align:right;">
+numeric.p0
+</th>
+<th style="text-align:right;">
+numeric.p25
+</th>
+<th style="text-align:right;">
+numeric.p50
+</th>
+<th style="text-align:right;">
+numeric.p75
+</th>
+<th style="text-align:right;">
+numeric.p100
+</th>
+<th style="text-align:left;">
+numeric.hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+data
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2744.767
+</td>
+<td style="text-align:right;">
+1354.259
+</td>
+<td style="text-align:right;">
+56.30275
+</td>
+<td style="text-align:right;">
+1783.359
+</td>
+<td style="text-align:right;">
+2535.62
+</td>
+<td style="text-align:right;">
+3547.897
+</td>
+<td style="text-align:right;">
+6939.998
+</td>
+<td style="text-align:left;">
+▃▇▅▂▁
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>a &lt;-
+  glm(
+    HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + scale(HomologyAndRepeats$DistanceToContact),
+    family = &quot;binomial&quot;
+  )
+summary(a)</code></pre>
+<pre><code>
+Call:
+glm(formula = HomologyAndRepeats$Deletion ~ scale(HomologyAndRepeats$MicroHomologyScore) + 
+    scale(HomologyAndRepeats$DistanceToContact), family = &quot;binomial&quot;)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.2894  -0.5524  -0.3985  -0.2235   2.8234  
+
+Coefficients:
+                                             Estimate Std. Error z value
+(Intercept)                                  -2.35793    0.06536 -36.077
+scale(HomologyAndRepeats$MicroHomologyScore)  0.27667    0.05038   5.492
+scale(HomologyAndRepeats$DistanceToContact)  -1.00602    0.06878 -14.627
+                                             Pr(&gt;|z|)    
+(Intercept)                                   &lt; 2e-16 ***
+scale(HomologyAndRepeats$MicroHomologyScore) 3.98e-08 ***
+scale(HomologyAndRepeats$DistanceToContact)   &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2924.7  on 4004  degrees of freedom
+Residual deviance: 2609.1  on 4002  degrees of freedom
+AIC: 2615.1
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<pre class="r"><code>ggstatsplot::ggcoefstats(a) </code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-final-glm-microhomology-distnce-to-the-common-repeat-scaled-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>broom::tidy(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-2.3579307
+</td>
+<td style="text-align:right;">
+0.0653587
+</td>
+<td style="text-align:right;">
+-36.076742
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+scale(HomologyAndRepeats<span class="math inline">\(MicroHomologyScore)
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.2766745
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0.0503802
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 5.491729
+&lt;/td&gt;  &lt;td style=&quot;text-align:right;&quot;&gt; 0
+&lt;/td&gt;  &lt;/tr&gt;  &lt;tr&gt;  &lt;td
+style=&quot;text-align:left;&quot;&gt;
+scale(HomologyAndRepeats\)</span>DistanceToContact)
+</td>
+<td style="text-align:right;">
+-1.0060227
+</td>
+<td style="text-align:right;">
+0.0687794
+</td>
+<td style="text-align:right;">
+-14.626799
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>broom::glance(a) %&gt;%
+  kableExtra::kbl() %&gt;%
+  kableExtra::kable_styling(
+    bootstrap_options = c(
+      &quot;bordered&quot;, &quot;condensed&quot;, &quot;responsive&quot;, &quot;striped&quot;
+    )
+  )</code></pre>
+<table class="table table-bordered table-condensed table-responsive table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+null.deviance
+</th>
+<th style="text-align:right;">
+df.null
+</th>
+<th style="text-align:right;">
+logLik
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+<th style="text-align:right;">
+deviance
+</th>
+<th style="text-align:right;">
+df.residual
+</th>
+<th style="text-align:right;">
+nobs
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2924.693
+</td>
+<td style="text-align:right;">
+4004
+</td>
+<td style="text-align:right;">
+-1304.572
+</td>
+<td style="text-align:right;">
+2615.144
+</td>
+<td style="text-align:right;">
+2634.03
+</td>
+<td style="text-align:right;">
+2609.144
+</td>
+<td style="text-align:right;">
+4002
+</td>
+<td style="text-align:right;">
+4005
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div
+id="run-many-logistic-regression-in-the-loop-and-find-the-contact-pointzone-with-the-best-aic"
+class="section level2">
+<h2>10: run many logistic regression in the loop and find the Contact
+Point/zone with the best AIC</h2>
+<pre class="r"><code>mod_fun &lt;- function(Coord1, Coord2) {
+  TempDF &lt;-
+    HomologyAndRepeats %&gt;%
+    dplyr::select(
+      FirstWindow,
+      SecondWindow,
+      Deletion,
+      MicroHomologyScore
+    ) %&gt;%
+    mutate(TempDistanceToContact = purrr::map2_dbl(
+      FirstWindow,
+      SecondWindow,
+      ~ raster::pointDistance(c(.x, .y),
+                              c(
+                                Coord1,
+                                Coord2
+                              ),
+                              lonlat = F
+      )
+    ))
+  a &lt;-
+    glm(
+      TempDF$Deletion ~ scale(TempDF$MicroHomologyScore) + scale(TempDF$TempDistanceToContact),
+      family = &quot;binomial&quot;
+    )
+  return(a)
+}
+
+Results &lt;- HomologyAndRepeats %&gt;%
+  mutate(
+    LogRegr.ContactPoint.Coord1 = FirstWindow + 50,
+    LogRegr.ContactPoint.Coord2 = SecondWindow + 50
+  ) %&gt;%
+  mutate(model = furrr::future_map2(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    mod_fun
+  ))
+
+ResultsTidy &lt;- Results$model %&gt;% purrr::map_dfr(~ broom::tidy(.x)[3, ])
+ResultsGlance &lt;- Results$model %&gt;% purrr::map_dfr(broom::glance)
+
+HomologyAndRepeats$LogRegr.ContactPoint.PiValue &lt;- ResultsTidy$p.value
+HomologyAndRepeats$LogRegr.ContactPoint.Coeff &lt;- ResultsTidy$estimate
+HomologyAndRepeats$LogRegr.ContactPoint.AIC &lt;- ResultsGlance$AIC
+HomologyAndRepeats$LogRegr.ContactPoint.ResidualDeviance &lt;- ResultsGlance$deviance
+HomologyAndRepeats$LogRegr.ContactPoint.Coord1 &lt;- Results$LogRegr.ContactPoint.Coord1
+HomologyAndRepeats$LogRegr.ContactPoint.Coord2 &lt;- Results$LogRegr.ContactPoint.Coord2
+
+rm(Results, ResultsGlance, ResultsTidy)
+invisible(gc())
+
+write.table(
+  HomologyAndRepeats,
+  here(plots_dir, &quot;SlipAndJump.HomologyAndRepeats.txt&quot;) %&gt;%
+    normalizePath(),
+  sep = &quot;\t&quot;
+)</code></pre>
+<pre class="r"><code>HomologyAndRepeats &lt;- read.table(
+  here(plots_dir, &quot;SlipAndJump.HomologyAndRepeats.txt&quot;) %&gt;%
+    normalizePath(),
+  sep = &quot;\t&quot;
+)
+
+HomologyAndRepeats &lt;- HomologyAndRepeats[order(HomologyAndRepeats$LogRegr.ContactPoint.AIC), ]
+names(HomologyAndRepeats)</code></pre>
+<pre><code> [1] &quot;FirstWindowWholeKbRes&quot;                
+ [2] &quot;SecondWindowWholeKbRes&quot;               
+ [3] &quot;FirstWindow&quot;                          
+ [4] &quot;SecondWindow&quot;                         
+ [5] &quot;DirectRepeatsDensity&quot;                 
+ [6] &quot;MicroHomologyScore&quot;                   
+ [7] &quot;Deletion&quot;                             
+ [8] &quot;InfinitySign&quot;                         
+ [9] &quot;InvRepDensScore&quot;                      
+[10] &quot;GlobalFoldingScore&quot;                   
+[11] &quot;Residuals&quot;                            
+[12] &quot;GlobalFolding1000Score&quot;               
+[13] &quot;DistanceToContact&quot;                    
+[14] &quot;LogRegr.ContactPoint.PiValue&quot;         
+[15] &quot;LogRegr.ContactPoint.Coeff&quot;           
+[16] &quot;LogRegr.ContactPoint.AIC&quot;             
+[17] &quot;LogRegr.ContactPoint.ResidualDeviance&quot;
+[18] &quot;LogRegr.ContactPoint.Coord1&quot;          
+[19] &quot;LogRegr.ContactPoint.Coord2&quot;          </code></pre>
+<pre class="r"><code>summary(HomologyAndRepeats$LogRegr.ContactPoint.ResidualDeviance)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   2307    2692    2848    2756    2879    2888 </code></pre>
+<pre class="r"><code>summary(HomologyAndRepeats$LogRegr.ContactPoint.AIC)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   2313    2698    2854    2762    2885    2894 </code></pre>
+<pre class="r"><code>HomologyAndRepeats %&gt;% skim()</code></pre>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+Piped data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+4005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FirstWindowWholeKbRes
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12879.15
+</td>
+<td style="text-align:right;">
+2148.55
+</td>
+<td style="text-align:right;">
+7000.00
+</td>
+<td style="text-align:right;">
+11000.00
+</td>
+<td style="text-align:right;">
+13000.00
+</td>
+<td style="text-align:right;">
+15000.00
+</td>
+<td style="text-align:right;">
+16000.00
+</td>
+<td style="text-align:left;">
+▁▃▆▇▆
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SecondWindowWholeKbRes
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8821.22
+</td>
+<td style="text-align:right;">
+2144.50
+</td>
+<td style="text-align:right;">
+6000.00
+</td>
+<td style="text-align:right;">
+7000.00
+</td>
+<td style="text-align:right;">
+8000.00
+</td>
+<td style="text-align:right;">
+10000.00
+</td>
+<td style="text-align:right;">
+15000.00
+</td>
+<td style="text-align:left;">
+▇▇▆▃▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FirstWindow
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12866.67
+</td>
+<td style="text-align:right;">
+2109.50
+</td>
+<td style="text-align:right;">
+7000.00
+</td>
+<td style="text-align:right;">
+11400.00
+</td>
+<td style="text-align:right;">
+13200.00
+</td>
+<td style="text-align:right;">
+14700.00
+</td>
+<td style="text-align:right;">
+15800.00
+</td>
+<td style="text-align:left;">
+▁▃▅▆▇
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SecondWindow
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8833.33
+</td>
+<td style="text-align:right;">
+2109.50
+</td>
+<td style="text-align:right;">
+5900.00
+</td>
+<td style="text-align:right;">
+7000.00
+</td>
+<td style="text-align:right;">
+8500.00
+</td>
+<td style="text-align:right;">
+10300.00
+</td>
+<td style="text-align:right;">
+14700.00
+</td>
+<td style="text-align:left;">
+▇▆▅▃▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DirectRepeatsDensity
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5.77
+</td>
+<td style="text-align:right;">
+7.79
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:right;">
+57.00
+</td>
+<td style="text-align:left;">
+▇▂▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MicroHomologyScore
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+89.91
+</td>
+<td style="text-align:right;">
+17.20
+</td>
+<td style="text-align:right;">
+27.00
+</td>
+<td style="text-align:right;">
+79.00
+</td>
+<td style="text-align:right;">
+89.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+160.00
+</td>
+<td style="text-align:left;">
+▁▅▇▂▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deletion
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+InfinitySign
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+InvRepDensScore
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.39
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+31.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GlobalFoldingScore
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+1.74
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+47.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-0.20
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+-0.85
+</td>
+<td style="text-align:right;">
+-0.53
+</td>
+<td style="text-align:right;">
+-0.48
+</td>
+<td style="text-align:right;">
+-0.43
+</td>
+<td style="text-align:right;">
+2.44
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GlobalFolding1000Score
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15.41
+</td>
+<td style="text-align:right;">
+37.87
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+173.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DistanceToContact
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2744.77
+</td>
+<td style="text-align:right;">
+1354.26
+</td>
+<td style="text-align:right;">
+56.30
+</td>
+<td style="text-align:right;">
+1783.36
+</td>
+<td style="text-align:right;">
+2535.62
+</td>
+<td style="text-align:right;">
+3547.90
+</td>
+<td style="text-align:right;">
+6940.00
+</td>
+<td style="text-align:left;">
+▃▇▅▂▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.PiValue
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.Coeff
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-0.31
+</td>
+<td style="text-align:right;">
+0.60
+</td>
+<td style="text-align:right;">
+-1.51
+</td>
+<td style="text-align:right;">
+-0.81
+</td>
+<td style="text-align:right;">
+-0.10
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:left;">
+▃▂▂▅▇
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.AIC
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2762.23
+</td>
+<td style="text-align:right;">
+179.48
+</td>
+<td style="text-align:right;">
+2313.25
+</td>
+<td style="text-align:right;">
+2697.87
+</td>
+<td style="text-align:right;">
+2853.59
+</td>
+<td style="text-align:right;">
+2885.22
+</td>
+<td style="text-align:right;">
+2893.52
+</td>
+<td style="text-align:left;">
+▁▁▁▁▇
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.ResidualDeviance
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2756.23
+</td>
+<td style="text-align:right;">
+179.48
+</td>
+<td style="text-align:right;">
+2307.25
+</td>
+<td style="text-align:right;">
+2691.87
+</td>
+<td style="text-align:right;">
+2847.59
+</td>
+<td style="text-align:right;">
+2879.22
+</td>
+<td style="text-align:right;">
+2887.52
+</td>
+<td style="text-align:left;">
+▁▁▁▁▇
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.Coord1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12916.67
+</td>
+<td style="text-align:right;">
+2109.50
+</td>
+<td style="text-align:right;">
+7050.00
+</td>
+<td style="text-align:right;">
+11450.00
+</td>
+<td style="text-align:right;">
+13250.00
+</td>
+<td style="text-align:right;">
+14750.00
+</td>
+<td style="text-align:right;">
+15850.00
+</td>
+<td style="text-align:left;">
+▁▃▅▆▇
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LogRegr.ContactPoint.Coord2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8883.33
+</td>
+<td style="text-align:right;">
+2109.50
+</td>
+<td style="text-align:right;">
+5950.00
+</td>
+<td style="text-align:right;">
+7050.00
+</td>
+<td style="text-align:right;">
+8550.00
+</td>
+<td style="text-align:right;">
+10350.00
+</td>
+<td style="text-align:right;">
+14750.00
+</td>
+<td style="text-align:left;">
+▇▆▅▃▁
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>temp &lt;- HomologyAndRepeats[
+  HomologyAndRepeats$LogRegr.ContactPoint.Coord1 == 11950 &amp;
+    HomologyAndRepeats$LogRegr.ContactPoint.Coord2 == 8950,
+]
+temp</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["FirstWindowWholeKbRes"],"name":[1],"type":["int"],"align":["right"]},{"label":["SecondWindowWholeKbRes"],"name":[2],"type":["int"],"align":["right"]},{"label":["FirstWindow"],"name":[3],"type":["int"],"align":["right"]},{"label":["SecondWindow"],"name":[4],"type":["int"],"align":["right"]},{"label":["DirectRepeatsDensity"],"name":[5],"type":["int"],"align":["right"]},{"label":["MicroHomologyScore"],"name":[6],"type":["int"],"align":["right"]},{"label":["Deletion"],"name":[7],"type":["int"],"align":["right"]},{"label":["InfinitySign"],"name":[8],"type":["int"],"align":["right"]},{"label":["InvRepDensScore"],"name":[9],"type":["int"],"align":["right"]},{"label":["GlobalFoldingScore"],"name":[10],"type":["int"],"align":["right"]},{"label":["Residuals"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["GlobalFolding1000Score"],"name":[12],"type":["int"],"align":["right"]},{"label":["DistanceToContact"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["LogRegr.ContactPoint.PiValue"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["LogRegr.ContactPoint.Coeff"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["LogRegr.ContactPoint.AIC"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["LogRegr.ContactPoint.ResidualDeviance"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["LogRegr.ContactPoint.Coord1"],"name":[18],"type":["int"],"align":["right"]},{"label":["LogRegr.ContactPoint.Coord2"],"name":[19],"type":["int"],"align":["right"]}],"data":[{"1":"12000","2":"9000","3":"11900","4":"8900","5":"12","6":"117","7":"0","8":"0","9":"0","10":"0","11":"-0.6143026","12":"71","13":"1605.917","14":"0.9995779","15":"-2.556173e-05","16":"2893.519","17":"2887.519","18":"11950","19":"8950","_rn_":"1207"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="heatmap-merged-microhomology-and-aic-scores"
+class="section level3">
+<h3>Heatmap merged microhomology and AIC scores</h3>
+<pre class="r"><code>tib &lt;- HomologyAndRepeats %&gt;%
+  dplyr::select(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    MicroHomologyScore,
+    LogRegr.ContactPoint.AIC
+  ) %&gt;%
+  ggasym::asymmetrise(
+    .,
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2
+  )
+
+pltHeatmap_mhAIC &lt;- ggplot(
+  tib,
+  aes(
+    x = LogRegr.ContactPoint.Coord1,
+    y = LogRegr.ContactPoint.Coord2
+  )
+) +
+  geom_asymmat(aes(
+    fill_br = LogRegr.ContactPoint.AIC,
+    fill_tl = MicroHomologyScore
+  )) +
+  scale_fill_br_distiller(
+    type = &quot;seq&quot;,
+    palette = &quot;Spectral&quot;,
+    direction = 1,
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 1,
+      title.position = &quot;top&quot;
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = &quot;seq&quot;,
+    palette = &quot;RdYlGn&quot;,
+    direction = 1,
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 2,
+      title.position = &quot;top&quot;
+    )
+  ) +
+  labs(
+    fill_br = &quot;top-right Contact AIC&quot;,
+    fill_tl = &quot;bottom-left Microhomology&quot;,
+    title = &quot;Model of mtDNA contacts&quot;
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = &quot;white&quot;),
+    panel.grid = element_blank()
+  )
+
+cowplot::save_plot(
+  plot = pltHeatmap_mhAIC,
+  base_height = 8.316,
+  base_width = 11.594,
+  file = normalizePath(
+    file.path(plots_dir, &quot;heatmap_microhomology_AIC.pdf&quot;)
+  )
+)
+
+pltHeatmap_mhAIC</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-heatmap-microhomology_contact_aic-1.png" width="1113.024" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="article-version-figure-2c-heatmap-merged-microhomology-and-aic-scores-with-actual-deletions-circles"
+class="section level3">
+<h3>Article version Figure 2C: Heatmap merged microhomology and AIC
+scores with actual deletions circles</h3>
+<pre class="r"><code>tib &lt;- HomologyAndRepeats %&gt;%
+  dplyr::select(
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2,
+    MicroHomologyScore,
+    LogRegr.ContactPoint.AIC,
+    Deletion
+  ) %&gt;%
+  asymmetrise(
+    .,
+    LogRegr.ContactPoint.Coord1,
+    LogRegr.ContactPoint.Coord2
+  )
+
+pltHeatmap_mhAIC_wt_deletions &lt;- ggplot(
+  tib,
+  aes(
+    x = LogRegr.ContactPoint.Coord1,
+    y = LogRegr.ContactPoint.Coord2
+  )
+) +
+  geom_asymmat(aes(
+    fill_br = LogRegr.ContactPoint.AIC,
+    fill_tl = MicroHomologyScore
+  )) +
+  geom_point(
+    data = subset(tib, Deletion &gt; 0),
+    aes(alpha = 0.3),
+    shape = 1,
+    size = 2.3,
+    color = &quot;#d73027&quot;, # &quot;#041c00&quot;,
+    show.legend = FALSE,
+    na.rm = TRUE
+  ) +
+  scale_fill_br_gradientn(
+    colours = viridis::viridis(2000)[250:2000],
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 1,
+      title.position = &quot;top&quot;,
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  scale_fill_tl_distiller(
+    type = &quot;div&quot;,
+    palette = &quot;RdYlBu&quot;,
+    direction = 1,
+    na.value = &quot;white&quot;,
+    guide = guide_colourbar(
+      direction = &quot;horizontal&quot;,
+      order = 2,
+      title.position = &quot;top&quot;,
+      barwidth = 10, barheight = 1
+    )
+  ) +
+  labs(
+    fill_br = &quot;top-right Contact AIC&quot;,
+    fill_tl = &quot;bottom-left Microhomology&quot;,
+    title = &quot;Model of mtDNA contacts and deletions&quot;
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    panel.background = element_rect(fill = &quot;white&quot;),
+    panel.grid = element_blank(),
+    legend.position = &quot;bottom&quot;,
+    legend.box = &quot;horizontal&quot;
+  )
+
+
+cowplot::save_plot(
+  plot = pltHeatmap_mhAIC_wt_deletions,
+  base_height = 8.316,
+  base_asp = 0.9,
+  file = normalizePath(
+    file.path(plots_dir, &quot;heatmap_microhomology_AIC_wt_deledions.svg&quot;)
+  )
+)
+
+pltHeatmap_mhAIC_wt_deletions</code></pre>
+<p><img src="figure/figure_2cd.Rmd/plt-final-heatmap-microhomology_contact_aic-1.png" width="1113.024" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="figures-2c-d" class="section level2">
+<h2>Figures 2C-D:</h2>
+<pre class="r"><code>pltHeatmap_mhAIC_wt_deletions | gg_bind</code></pre>
+<p><img src="figure/figure_2cd.Rmd/figures_2cd-1.png" width="2226.048" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.1 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+ [1] ggasym_0.1.6       ggstatsplot_0.11.0 pspearman_0.3-1    skimr_2.1.5       
+ [5] raster_3.6-20      sp_1.6-0           patchwork_1.1.2    cowplot_1.1.1     
+ [9] furrr_0.3.1        future_1.32.0      here_1.0.1         lubridate_1.9.2   
+[13] forcats_1.0.0      stringr_1.5.0      dplyr_1.1.1        purrr_1.0.1       
+[17] readr_2.1.4        tidyr_1.3.0        tibble_3.2.1       ggplot2_3.4.2     
+[21] tidyverse_2.0.0    reshape2_1.4.4     workflowr_1.7.0   
+
+loaded via a namespace (and not attached):
+  [1] colorspace_2.1-0       sjlabelled_1.2.0       rprojroot_2.0.3       
+  [4] snakecase_0.11.0       parameters_0.20.2      base64enc_0.1-3       
+  [7] fs_1.6.1               rstudioapi_0.14        listenv_0.9.0         
+ [10] farver_2.1.1           MatrixModels_0.5-1     ggrepel_0.9.3         
+ [13] mvtnorm_1.1-3          fansi_1.0.4            xml2_1.3.3            
+ [16] codetools_0.2-19       cachem_1.0.7           knitr_1.42            
+ [19] sjmisc_2.8.9           zeallot_0.1.0          jsonlite_1.8.4        
+ [22] broom_1.0.4            effectsize_0.8.3       compiler_4.2.2        
+ [25] httr_1.4.5             backports_1.4.1        Matrix_1.5-3          
+ [28] fastmap_1.1.1          cli_3.6.1              later_1.3.0           
+ [31] htmltools_0.5.5        tools_4.2.2            coda_0.19-4           
+ [34] gtable_0.3.3           glue_1.6.2             ggthemes_4.2.4        
+ [37] Rcpp_1.0.10            jquerylib_0.1.4        vctrs_0.6.1           
+ [40] svglite_2.1.1          insight_0.19.1         xfun_0.38             
+ [43] globals_0.16.2         ps_1.7.4               rvest_1.0.3           
+ [46] timechange_0.2.0       lifecycle_1.0.3        renv_0.17.2           
+ [49] terra_1.7-18           getPass_0.2-2          MASS_7.3-58.1         
+ [52] scales_1.2.1           BayesFactor_0.9.12-4.4 ragg_1.2.5            
+ [55] hms_1.1.3              promises_1.2.0.1       parallel_4.2.2        
+ [58] rematch2_2.1.2         RColorBrewer_1.1-3     prismatic_1.1.1       
+ [61] yaml_2.3.7             pbapply_1.7-0          gridExtra_2.3         
+ [64] sass_0.4.5             stringi_1.7.12         paletteer_1.5.0       
+ [67] highr_0.10             bayestestR_0.13.0      repr_1.1.6            
+ [70] rlang_1.1.0            pkgconfig_2.0.3        systemfonts_1.0.4     
+ [73] evaluate_0.20          lattice_0.20-45        labeling_0.4.2        
+ [76] processx_3.8.0         tidyselect_1.2.0       parallelly_1.35.0     
+ [79] plyr_1.8.8             magrittr_2.0.3         R6_2.5.1              
+ [82] generics_0.1.3         pillar_1.9.0           whisker_0.4.1         
+ [85] withr_2.5.0            datawizard_0.7.1       performance_0.10.2    
+ [88] janitor_2.2.0          utf8_1.2.3             correlation_0.8.3     
+ [91] tzdb_0.3.0             rmarkdown_2.21         viridis_0.6.2         
+ [94] grid_4.2.2             callr_3.7.3            git2r_0.31.0          
+ [97] webshot_0.5.4          digest_0.6.31          httpuv_1.6.9          
+[100] textshaping_0.3.6      statsExpressions_1.5.0 munsell_0.5.0         
+[103] kableExtra_1.3.4       viridisLite_0.4.1      bslib_0.4.2           </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

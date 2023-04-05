@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Fig.2B. Influence of repeats on mtDNA deletions distributon</title>
+
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Risk of mitochondrial deletions is affected by the global secondary structure of the human mitochondrial genome</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">HOME</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Figures</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Revision_Clustering_mt_deletions.html">Fig.2A. Clustering analysis of mtDNA deletions</a>
+        </li>
+        <li>
+          <a href="figure_2b.html">Fig.2B. Influence of repeats on mtDNA deletions distributon</a>
+        </li>
+        <li>
+          <a href="figure_2cd.html">Fig.2C-D. *In silico* estimates of mtDNA global structure</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="CopelandDeletionsPca.html">Reanalysis of Deletions PCA data from Copeland et al</a>
+    </li>
+    <li>
+      <a href="MitoBreakDeletionsAndOrlovRepeats.html">Exploratory MITOBREAK and Orlovs data analysis</a>
+    </li>
+    <li>
+      <a href="MitoBreak_vs_RandomInMajorArc.html">Compare Good Mitobreak with Rand version of major arc</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="methods.html">Methods</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="license.html">License</a>
+</li>
+<li>
+  <a href="https://github.com/mitoclub/GlobalStructure">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Fig.2B. Influence of repeats on mtDNA
+deletions distributon</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-04-05
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>GlobalStructure/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230404code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20230404)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230404code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230404)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcommitoclubGlobalStructuretreebaf2fd420af75e5168da862f783d48ecaa29dc66targetblankbaf2fd4a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/mitoclub/GlobalStructure/tree/baf2fd420af75e5168da862f783d48ecaa29dc66" target="_blank">baf2fd4</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+    Ignored:    1_Raw/.DS_Store
+    Ignored:    2_Derived/.DS_Store
+    Ignored:    3_Results/.DS_Store
+    Ignored:    renv/library/
+    Ignored:    renv/staging/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/figure_2b.Rmd</code>) and HTML
+(<code>docs/figure_2b.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/mitoclub/GlobalStructure/blob/baf2fd420af75e5168da862f783d48ecaa29dc66/analysis/figure_2b.Rmd" target="_blank">baf2fd4</a>
+</td>
+<td>
+Evgenii O. Tretiakov
+</td>
+<td>
+2023-04-05
+</td>
+<td>
+Start workflowr project.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="read-victors-file" class="section level2">
+<h2>1: READ VICTOR’s FILE</h2>
+<pre class="r"><code>Rep &lt;- read.table(
+    here(data_dir, &quot;Homo_sapiens_triangles.txt&quot;),
+    sep = &quot;\t&quot;,
+    header = FALSE
+)
+names(Rep) &lt;- c(
+    &quot;DelStart&quot;,
+    &quot;DelEnd&quot;,
+    &quot;DelLength&quot;,
+    &quot;MasterRepeat&quot;,
+    &quot;AlternRepeats1&quot;,
+    &quot;AlternRepeats2&quot;,
+    &quot;AlternRepeats3&quot;,
+    &quot;AlternRepeats4&quot;
+)</code></pre>
+<p>MasterRepeat is a repeat with arms located close to given deletion
+breakpoints AlternativeRepeats1-4 are repeats where: first arm == arm1
+of Master; first arm == arm2 of Master; second arm == arm1 of Master;
+second arm == arm2 of Master; mb_del == realised deletions (exist in
+MitoBreak); non_del - non realised deletions == don’t exist in
+MitoBreak</p>
+</div>
+<div id="filter-out-deletions-within-major-arc" class="section level2">
+<h2>2: filter out deletions within major arc:</h2>
+<ul>
+<li>OH: 110-441</li>
+<li>OL: 5721-5781</li>
+</ul>
+<pre class="r"><code>nrow(Rep)</code></pre>
+<pre><code>[1] 880</code></pre>
+<pre class="r"><code>Rep &lt;- Rep[Rep$DelStart &gt; 5781 &amp;
+    Rep$DelStart &lt; 16569 &amp;
+    Rep$DelEnd &gt; 5781 &amp;
+    Rep$DelEnd &lt; 16569, ]
+nrow(Rep)</code></pre>
+<pre><code>[1] 703</code></pre>
+</div>
+<div id="concatenate-all-alternative-deletions" class="section level2">
+<h2>3: concatenate all alternative deletions</h2>
+<pre class="r"><code>Rep$AllAlternRepeats &lt;- paste(
+    Rep$AlternRepeats1,
+    Rep$AlternRepeats2,
+    Rep$AlternRepeats3,
+    Rep$AlternRepeats4,
+    sep = &quot;,&quot;
+)
+Rep$AllAlternRepeats &lt;- gsub(&quot;\\,\\[\\]\\,&quot;, &quot;,&quot;, Rep$AllAlternRepeats)
+Rep$AllAlternRepeats &lt;- gsub(&quot;^\\[&quot;, &quot;&quot;, Rep$AllAlternRepeats)
+Rep$AllAlternRepeats &lt;- gsub(&quot;\\]$&quot;, &quot;&quot;, Rep$AllAlternRepeats)</code></pre>
+</div>
+<div
+id="prepare-dataset-for-analysis-of-realized-and-nonrealized-deletions-line-by-line"
+class="section level2">
+<h2>4: prepare dataset for analysis of realized and nonrealized
+deletions line by line</h2>
+<pre class="r"><code>Rep$CenterOfRealizedRepeats &lt;- 0
+Rep$CenterOfNonRealizedRepeats &lt;- 0
+
+Rep$LengthOfRealizedRepeats &lt;- 0
+Rep$LengthOfNonRealizedRepeats &lt;- 0
+
+Rep$StartOfRealizedRepeats &lt;- 0
+Rep$StartOfNonRealizedRepeats &lt;- 0
+
+Rep$EndOfRealizedRepeats &lt;- 0
+Rep$EndOfNonRealizedRepeats &lt;- 0
+
+for (i in (1:nrow(Rep))) {
+    # i = 1
+    # format of data to get a dataset of master and all alternative repeats for each deletion (for each line of the dataset)
+    temp &lt;- Rep[i, ]
+    AltRep &lt;- unlist(strsplit(temp$AllAlternRepeats, &quot;\\]\\,\\[&quot;))
+    AltRep &lt;- AltRep[AltRep != &quot;&quot;]
+    AltRep &lt;- data.frame(AltRep)
+    names(AltRep) &lt;- c(&quot;WholeLine&quot;)
+    if (nrow(AltRep) &gt; 0) {
+        AltRep$RepeatType &lt;- &quot;alternative&quot;
+        AltRep$WholeLine &lt;- as.character(AltRep$WholeLine)
+
+        MasterRepeat &lt;- as.character(temp$MasterRepeat)
+        MasterRepeat &lt;- gsub(&quot;^\\[&quot;, &quot;&quot;, MasterRepeat)
+        MasterRepeat &lt;- gsub(&quot;\\]$&quot;, &quot;&quot;, MasterRepeat)
+
+        MasterRepeat &lt;- paste(MasterRepeat, &quot;mb_del&quot;, sep = &quot; &quot;)
+        MasterRepeat &lt;- data.frame(MasterRepeat)
+        names(MasterRepeat) &lt;- c(&quot;WholeLine&quot;)
+        MasterRepeat$RepeatType &lt;- &quot;master&quot;
+
+        AllRep &lt;- rbind(MasterRepeat, AltRep)
+        ReturnFifth &lt;- function(x) {
+            unlist(strsplit(x, &quot; &quot;))[5]
+        }
+        AllRep$RealisedRepeat &lt;- apply(as.matrix(AllRep$WholeLine), 1, FUN = ReturnFifth)
+        ReturnFirst &lt;- function(x) {
+            as.numeric(unlist(strsplit(x, &quot; &quot;))[1])
+        }
+        AllRep$RepStart &lt;- apply(as.matrix(AllRep$WholeLine), 1, FUN = ReturnFirst)
+        ReturnSecond &lt;- function(x) {
+            as.numeric(unlist(strsplit(x, &quot; &quot;))[2])
+        }
+        AllRep$RepEnd &lt;- apply(as.matrix(AllRep$WholeLine), 1, FUN = ReturnSecond)
+        AllRep &lt;- AllRep[AllRep$RepStart &gt; 5781 &amp;
+            AllRep$RepStart &lt; 16569 &amp;
+            AllRep$RepEnd &gt; 5781 &amp;
+            AllRep$RepEnd &lt; 16569, ]
+        if (nrow(AllRep) &gt; 0) {
+            AllRep$Center &lt;- (AllRep$RepEnd - AllRep$RepStart) / 2 + AllRep$RepStart
+            Rep$CenterOfRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;mb_del&quot;, ]$Center)
+            Rep$CenterOfNonRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;non_del&quot;, ]$Center)
+
+            AllRep$Length &lt;- AllRep$RepEnd - AllRep$RepStart
+            Rep$LengthOfRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;mb_del&quot;, ]$Length)
+            Rep$LengthOfNonRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;non_del&quot;, ]$Length)
+
+            Rep$StartOfNonRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepStart)
+            Rep$StartOfRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepStart)
+
+            Rep$EndOfNonRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepEnd)
+            Rep$EndOfRealizedRepeats[i] &lt;- mean(AllRep[AllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepEnd)
+
+            if (i == 1) {
+                FinalAllRep &lt;- AllRep
+            }
+            if (i &gt; 1) {
+                FinalAllRep &lt;- rbind(FinalAllRep, AllRep)
+            }
+        }
+    }
+}
+nrow(Rep) # 703</code></pre>
+<pre><code>[1] 703</code></pre>
+<pre class="r"><code>Rep &lt;- Rep[Rep$CenterOfRealizedRepeats &gt; 0, ]
+nrow(Rep) # 643</code></pre>
+<pre><code>[1] 643</code></pre>
+<pre class="r"><code>Rep &lt;- Rep[Rep$CenterOfNonRealizedRepeats &gt; 0, ] # it means there is at least one extra (third) arm to analyze
+nrow(Rep) # 643</code></pre>
+<pre><code>[1] 643</code></pre>
+<pre class="r"><code>Rep &lt;- Rep[!is.na(Rep$LengthOfRealizedRepeat), ] # 618
+nrow(Rep)</code></pre>
+<pre><code>[1] 618</code></pre>
+</div>
+<div
+id="copare-position-of-repeats-with-realized-deletions-vs-rest-repeats"
+class="section level2">
+<h2>5: Copare position of repeats with realized deletions vs rest
+repeats</h2>
+<pre class="r"><code>## center is a bit higher in realized repeats
+wilcox.test(Rep$CenterOfRealizedRepeats,
+    Rep$CenterOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  Rep$CenterOfRealizedRepeats and Rep$CenterOfNonRealizedRepeats
+V = 114853, p-value = 1.506e-05
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>t.test(Rep$CenterOfRealizedRepeats,
+    Rep$CenterOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Paired t-test
+
+data:  Rep$CenterOfRealizedRepeats and Rep$CenterOfNonRealizedRepeats
+t = 4.619, df = 617, p-value = 4.696e-06
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 162.6072 403.1435
+sample estimates:
+mean difference 
+       282.8754 </code></pre>
+<pre class="r"><code>summary(Rep$CenterOfRealizedRepeats)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   8590   10634   11334   11500   12409   15647 </code></pre>
+<pre class="r"><code>summary(Rep$CenterOfNonRealizedRepeats)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   7021   10292   11290   11217   12196   15889 </code></pre>
+<pre class="r"><code>boxplot(Rep$CenterOfRealizedRepeats,
+    Rep$CenterOfNonRealizedRepeats,
+    notch = TRUE,
+    names = c(
+        &quot;CenterOfRealizedRepeats&quot;,
+        &quot;CenterOfNonRealizedRepeats&quot;
+    )
+)</code></pre>
+<p><img src="figure/figure_2b.Rmd/plt-boxplot-position-1.png" width="384" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>RepReal &lt;- Rep %&gt;%
+    select(
+        Realized = CenterOfRealizedRepeats,
+        NonRealized = CenterOfNonRealizedRepeats
+    ) %&gt;%
+    gather(., Realized, NonRealized,
+        key = &quot;Deletion&quot;,
+        value = &quot;CenterOfRepeats&quot;
+    )
+
+pltViolRepCenterRelease &lt;- ggstatsplot::ggbetweenstats(
+    data = RepReal,
+    x = Deletion,
+    y = CenterOfRepeats,
+    notch = TRUE,
+    # show notched box plot
+    mean.ci = TRUE,
+    # whether to display confidence interval for means
+    k = 5,
+    # number of decimal places for statistical results
+    # outlier.tagging = TRUE, # whether outliers need to be tagged
+    # outlier.label = ContactZone, # variable to be used for the outlier tag
+    xlab = &quot;Realisation of deletion&quot;,
+    # label for the x-axis variable
+    ylab = &quot;Center of Repeats&quot;,
+    # label for the y-axis variable
+    title = &quot;The effect of repeats&#39; position on deletion realisation&quot;,
+    # title text for the plot
+    ggtheme = ggthemes::theme_fivethirtyeight(),
+    # choosing a different theme
+    ggstatsplot.layer = FALSE,
+    # turn off `ggstatsplot` theme layer
+    package = &quot;wesanderson&quot;,
+    # package from which color palette is to be taken
+    palette = &quot;Royal1&quot;,
+    # choosing a different color palette
+    messages = TRUE
+)
+# Note: Shapiro-Wilk Normality Test for Center of Repeats: p-value = 0.003
+# Note: Bartlett&#39;s test for homogeneity of variances for factor Realisation of deletion: p-value = &lt; 0.001
+cowplot::save_plot(
+    plot = pltViolRepCenterRelease,
+    base_height = 8,
+    base_asp = 1.618,
+    file = normalizePath(
+        file.path(plots_dir, &quot;violin_rep_center_release.pdf&quot;)
+    )
+)
+
+pltViolRepCenterRelease</code></pre>
+<p><img src="figure/figure_2b.Rmd/plt-violin-position-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="copare-length-of-repeats-with-realized-deletions-vs-rest-repeats"
+class="section level2">
+<h2>6: Copare length of repeats with realized deletions vs rest
+repeats</h2>
+<pre class="r"><code>## deletion is longer in realized repeats
+wilcox.test(
+    Rep$LengthOfRealizedRepeats,
+    Rep$LengthOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  Rep$LengthOfRealizedRepeats and Rep$LengthOfNonRealizedRepeats
+V = 175286, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>t.test(
+    Rep$LengthOfRealizedRepeats,
+    Rep$LengthOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Paired t-test
+
+data:  Rep$LengthOfRealizedRepeats and Rep$LengthOfNonRealizedRepeats
+t = 24.481, df = 617, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1837.842 2158.412
+sample estimates:
+mean difference 
+       1998.127 </code></pre>
+<pre class="r"><code>summary(Rep$LengthOfRealizedRepeats) # 5643  mean</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     18    4420    5501    5643    7066    9682 </code></pre>
+<pre class="r"><code>summary(Rep$LengthOfNonRealizedRepeats) # 3450 Median 3645 mean</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     12    2767    3450    3645    4489    8950 </code></pre>
+<pre class="r"><code>summary(Rep$LengthOfRealizedRepeats - Rep$LengthOfNonRealizedRepeats) # 1998 mean</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  -4890     585    2116    1998    3335    7416 </code></pre>
+<pre class="r"><code>boxplot(Rep$LengthOfRealizedRepeats,
+    Rep$LengthOfNonRealizedRepeats,
+    notch = TRUE,
+    names = c(
+        &quot;LengthOfRealizedRepeats&quot;,
+        &quot;LengthOfNonRealizedRepeats&quot;
+    )
+)</code></pre>
+<p><img src="figure/figure_2b.Rmd/plt-boxplot-length-1.png" width="384" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>RepReal &lt;-
+    Rep %&gt;%
+    select(
+        Realized = LengthOfRealizedRepeats,
+        NonRealized = LengthOfNonRealizedRepeats
+    ) %&gt;%
+    gather(., Realized, NonRealized,
+        key = &quot;Deletion&quot;,
+        value = &quot;DistanceBetweenRepeats&quot;
+    ) %&gt;%
+    full_join(., RepReal)
+
+pltViolRepFlankLengthRelease &lt;-
+    ggstatsplot::ggbetweenstats(
+        data = RepReal,
+        x = Deletion,
+        y = DistanceBetweenRepeats,
+        notch = TRUE,
+        # show notched box plot
+        mean.ci = TRUE,
+        # whether to display confidence interval for means
+        k = 5,
+        # number of decimal places for statistical results
+        # outlier.tagging = TRUE, # whether outliers need to be tagged
+        # outlier.label = ContactZone, # variable to be used for the outlier tag
+        xlab = &quot;Realisation of deletion&quot;,
+        # label for the x-axis variable
+        ylab = &quot;Distance between Repeats&quot;,
+        # label for the y-axis variable
+        title = &quot;The effect of repeats&#39; distance on deletion realisation&quot;,
+        # title text for the plot
+        ggtheme = ggthemes::theme_fivethirtyeight(),
+        # choosing a different theme
+        ggstatsplot.layer = FALSE,
+        # turn off `ggstatsplot` theme layer
+        package = &quot;wesanderson&quot;,
+        # package from which color palette is to be taken
+        palette = &quot;Royal1&quot;,
+        # choosing a different color palette
+        messages = TRUE
+    )
+# Note: Bartlett&#39;s test for homogeneity of variances for factor Realisation of deletion: p-value = &lt; 0.001
+cowplot::save_plot(
+    plot = pltViolRepFlankLengthRelease,
+    base_height = 8,
+    base_asp = 1.618,
+    file = normalizePath(
+        file.path(plots_dir, &quot;violin_rep_flanked_length_release.pdf&quot;)
+    )
+)
+
+pltViolRepFlankLengthRelease</code></pre>
+<p><img src="figure/figure_2b.Rmd/plt-violin-length-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="start-of-repeats-comparison-for-realized-deletions-vs-rest-repeats"
+class="section level2">
+<h2>7: Start of repeats comparison for realized deletions vs rest
+repeats</h2>
+<pre class="r"><code>## start and end in realized versus non-realized repeats
+wilcox.test(Rep$StartOfRealizedRepeats,
+    Rep$StartOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  Rep$StartOfRealizedRepeats and Rep$StartOfNonRealizedRepeats
+V = 44922, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>t.test(Rep$StartOfRealizedRepeats,
+    Rep$StartOfNonRealizedRepeats,
+    paired = TRUE
+) # significant</code></pre>
+<pre><code>
+    Paired t-test
+
+data:  Rep$StartOfRealizedRepeats and Rep$StartOfNonRealizedRepeats
+t = -9.2587, df = 617, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -868.0955 -564.2809
+sample estimates:
+mean difference 
+      -716.1882 </code></pre>
+<pre class="r"><code>summary(Rep$StartOfRealizedRepeats) # mean 8678: 25%: 7401 - 75% 9764:</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   5810    7401    8472    8678    9764   15638 </code></pre>
+<pre class="r"><code>quantile(Rep$StartOfRealizedRepeats, 0.1) # 6465</code></pre>
+<pre><code> 10% 
+6465 </code></pre>
+<pre class="r"><code>quantile(Rep$StartOfRealizedRepeats, 0.9) # 10954</code></pre>
+<pre><code>  90% 
+10954 </code></pre>
+<pre class="r"><code>summary(Rep$StartOfNonRealizedRepeats) # mean 9394</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   5873    8330    9112    9394   10434   15718 </code></pre>
+<pre class="r"><code>summary(Rep$StartOfNonRealizedRepeats - Rep$StartOfRealizedRepeats) # mean 716 =&gt; non realised start later (~700 bp): 9394 - 8678</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-6137.0  -303.1   393.0   716.2  1797.4  7416.5 </code></pre>
+</div>
+<div
+id="end-of-repeats-comparison-for-realized-deletions-vs-rest-repeats"
+class="section level2">
+<h2>8: End of repeats comparison for realized deletions vs rest
+repeats</h2>
+<pre class="r"><code>wilcox.test(Rep$EndOfRealizedRepeats, Rep$EndOfNonRealizedRepeats, paired = TRUE) # significant</code></pre>
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  Rep$EndOfRealizedRepeats and Rep$EndOfNonRealizedRepeats
+V = 125093, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>t.test(Rep$EndOfRealizedRepeats, Rep$EndOfNonRealizedRepeats, paired = TRUE) # significant</code></pre>
+<pre><code>
+    Paired t-test
+
+data:  Rep$EndOfRealizedRepeats and Rep$EndOfNonRealizedRepeats
+t = 18.41, df = 617, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 1145.196 1418.682
+sample estimates:
+mean difference 
+       1281.939 </code></pre>
+<pre class="r"><code>summary(Rep$EndOfRealizedRepeats) # 14321 mean</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  10970   13696   14124   14321   15362   16274 </code></pre>
+<pre class="r"><code>summary(Rep$EndOfNonRealizedRepeats) # 13039 mean</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   7451   12132   13270   13039   13992   16261 </code></pre>
+<pre class="r"><code>summary(Rep$EndOfNonRealizedRepeats - Rep$EndOfRealizedRepeats) # mean -1281=&gt; non realised end earlier (~1300 bp): 13039 - 14321</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-7334.5 -2198.6  -934.2 -1281.9     0.0  4890.0 </code></pre>
+<pre class="r"><code>quantile(Rep$EndOfRealizedRepeats, 0.1) # 13286</code></pre>
+<pre><code>    10% 
+13286.6 </code></pre>
+<pre class="r"><code>quantile(Rep$EndOfRealizedRepeats, 0.9) # 15863</code></pre>
+<pre><code>    90% 
+15863.4 </code></pre>
+</div>
+<div id="visualize-it-in-terms-of-xstart-and-yend"
+class="section level2">
+<h2>9: Visualize it in terms of X(start) and Y(end)</h2>
+<pre class="r"><code>plot(
+    FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepStart,
+    FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepEnd,
+    pch = 16,
+    col = &quot;grey&quot;,
+    xlim = c(5781, 16569),
+    ylim = c(16569, 5781),
+    xlab = &quot;&quot;,
+    ylab = &quot;&quot;
+)
+par(new = TRUE)
+plot(
+    FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepStart,
+    FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepEnd,
+    pch = 16,
+    col = &quot;red&quot;,
+    xlim = c(5781, 16569),
+    ylim = c(16569, 5781),
+    xlab = &quot;Start&quot;,
+    ylab = &quot;End&quot;
+)</code></pre>
+<p><img src="figure/figure_2b.Rmd/plt-simple-repeats-cols-by-realization-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Visualise difference between density distributions of realized vs non-realized repeats.
+sp &lt;- ggplot(
+  FinalAllRep,
+  aes(
+    RepStart,
+    RepEnd
+  )
+) +
+  aes(colour = RealisedRepeat) +
+  geom_point() +
+  scale_y_reverse() +
+  theme_minimal(17) +
+  xlab(&quot;5’&quot;) +
+  ylab(&quot;3’&quot;) +
+  scale_x_continuous(breaks = c(15000, 12000, 9000, 6000), position = &quot;bottom&quot;) +
+  scale_color_manual(
+    values = c(&quot;red&quot;, &quot;grey&quot;),
+    labels = c(
+      &quot;Realized repeats&quot;,
+      &quot;Non-realized repeats&quot;
+    )
+  ) +
+  theme(
+    legend.position = &quot;bottom&quot;,
+    legend.title = element_blank(),
+    legend.box = &quot;horizontal&quot;
+  )
+
+gg_realised &lt;-
+  ggExtra::ggMarginal(
+    sp,
+    type = &quot;density&quot;,
+    margins = &quot;both&quot;,
+    size = 3,
+    groupColour = TRUE,
+    groupFill = TRUE
+  )
+
+cowplot::save_plot(here(plots_dir, &quot;real-vs-nonreal-repeats.svg&quot;), gg_realised, base_asp = 0.868, base_height = 7)</code></pre>
+<pre class="r"><code>wilcox.test(FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepStart, FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepStart)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepStart and FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepStart
+W = 1354700, p-value = 1.299e-07
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>wilcox.test(FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepEnd, FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepEnd)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  FinalAllRep[FinalAllRep$RealisedRepeat == &quot;mb_del&quot;, ]$RepEnd and FinalAllRep[FinalAllRep$RealisedRepeat == &quot;non_del&quot;, ]$RepEnd
+W = 2151564, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>FinalAllRep$RealisedRepeat &lt;- as.factor(FinalAllRep$RealisedRepeat)
+summary(FinalAllRep$RealisedRepeat)</code></pre>
+<pre><code> mb_del non_del 
+    902    3391 </code></pre>
+</div>
+<div
+id="enrichment-of-repeats-realised-as-a-deletion-in-the-contact-zone"
+class="section level2">
+<h2>10: Enrichment of repeats realised as a deletion in the contact
+zone</h2>
+<pre class="r"><code>StartA &lt;- 6000 # 7000
+StartB &lt;- 9000 # 10000
+EndA &lt;- 13000
+EndB &lt;- 16000
+R.In &lt;- nrow(Rep[Rep$StartOfRealizedRepeats &gt;= StartA &amp;
+    Rep$StartOfRealizedRepeats &lt;= StartB &amp;
+    Rep$EndOfRealizedRepeats &gt;= EndA &amp;
+    Rep$EndOfRealizedRepeats &lt;= EndB, ])
+R.Out &lt;- nrow(Rep[(Rep$StartOfRealizedRepeats &lt; StartA |
+    Rep$StartOfRealizedRepeats &gt; StartB) |
+    (Rep$EndOfRealizedRepeats &lt; EndA |
+        Rep$EndOfRealizedRepeats &gt; EndB), ])
+R.In + R.Out # 324 + 294 = 618</code></pre>
+<pre><code>[1] 618</code></pre>
+<pre class="r"><code>NR.In &lt;- nrow(Rep[Rep$StartOfNonRealizedRepeats &gt;= StartA &amp;
+    Rep$StartOfNonRealizedRepeats &lt;= StartB &amp;
+    Rep$EndOfNonRealizedRepeats &gt;= EndA &amp;
+    Rep$EndOfNonRealizedRepeats &lt;= EndB, ])
+NR.Out &lt;- nrow(Rep[(Rep$StartOfNonRealizedRepeats &lt; StartA |
+    Rep$StartOfNonRealizedRepeats &gt; StartB) |
+    (Rep$EndOfNonRealizedRepeats &lt; EndA |
+        Rep$EndOfNonRealizedRepeats &gt; EndB), ])
+NR.In + NR.Out # 79 + 598 = 618</code></pre>
+<pre><code>[1] 618</code></pre>
+<pre class="r"><code>X &lt;- cbind(c(R.In, R.Out), c(NR.In, NR.Out))
+fisher.test(X) # odds 7.5, p-value &lt; 2.2e-16</code></pre>
+<pre><code>
+    Fisher&#39;s Exact Test for Count Data
+
+data:  X
+p-value &lt; 2.2e-16
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+  5.615152 10.113074
+sample estimates:
+odds ratio 
+  7.505642 </code></pre>
+<p>Visualize it as mosaic plot</p>
+<pre class="r"><code>X &lt;- data.frame(X)
+names(X) &lt;- c(&quot;R&quot;, &quot;NR&quot;)
+row.names(X) &lt;- c(&quot;IN&quot;, &quot;OUT&quot;)
+mosaicplot(X, main = &quot;&quot;)</code></pre>
+<p><img src="figure/figure_2b.Rmd/contact-zone-deletion-realisation-of-repeat-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<div id="figure-2b" class="section level2">
+<h2>Figure 2B:</h2>
+<pre class="r"><code>gg_realised</code></pre>
+<p><img src="figure/figure_2b.Rmd/unnamed-chunk-2-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>Visualise difference between density distributions of realized vs
+non-realized repeats.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.1 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+ [1] ggpubr_0.6.0    here_1.0.1      lubridate_1.9.2 forcats_1.0.0  
+ [5] stringr_1.5.0   dplyr_1.1.1     purrr_1.0.1     readr_2.1.4    
+ [9] tidyr_1.3.0     tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+[13] workflowr_1.7.0
+
+loaded via a namespace (and not attached):
+ [1] fs_1.6.1               insight_0.19.1         httr_1.4.5            
+ [4] rprojroot_2.0.3        tools_4.2.2            backports_1.4.1       
+ [7] bslib_0.4.2            utf8_1.2.3             R6_2.5.1              
+[10] statsExpressions_1.5.0 colorspace_2.1-0       withr_2.5.0           
+[13] tidyselect_1.2.0       processx_3.8.0         compiler_4.2.2        
+[16] git2r_0.31.0           textshaping_0.3.6      performance_0.10.2    
+[19] cli_3.6.1              prismatic_1.1.1        labeling_0.4.2        
+[22] bayestestR_0.13.0      sass_0.4.5             scales_1.2.1          
+[25] mvtnorm_1.1-3          callr_3.7.3            pbapply_1.7-0         
+[28] systemfonts_1.0.4      digest_0.6.31          svglite_2.1.1         
+[31] rmarkdown_2.21         pkgconfig_2.0.3        htmltools_0.5.5       
+[34] fastmap_1.1.1          highr_0.10             ggthemes_4.2.4        
+[37] rlang_1.1.0            rstudioapi_0.14        shiny_1.7.4           
+[40] farver_2.1.1           jquerylib_0.1.4        generics_0.1.3        
+[43] jsonlite_1.8.4         car_3.1-2              magrittr_2.0.3        
+[46] parameters_0.20.2      patchwork_1.1.2        Matrix_1.5-3          
+[49] Rcpp_1.0.10            munsell_0.5.0          fansi_1.0.4           
+[52] abind_1.4-5            lifecycle_1.0.3        stringi_1.7.12        
+[55] whisker_0.4.1          yaml_2.3.7             carData_3.0-5         
+[58] grid_4.2.2             paletteer_1.5.0        ggrepel_0.9.3         
+[61] parallel_4.2.2         promises_1.2.0.1       miniUI_0.1.1.1        
+[64] lattice_0.20-45        cowplot_1.1.1          hms_1.1.3             
+[67] zeallot_0.1.0          knitr_1.42             ps_1.7.4              
+[70] pillar_1.9.0           ggsignif_0.6.4         effectsize_0.8.3      
+[73] glue_1.6.2             evaluate_0.20          getPass_0.2-2         
+[76] renv_0.17.2            vctrs_0.6.1            tzdb_0.3.0            
+[79] httpuv_1.6.9           MatrixModels_0.5-1     gtable_0.3.3          
+[82] BayesFactor_0.9.12-4.4 rematch2_2.1.2         datawizard_0.7.1      
+[85] cachem_1.0.7           ggExtra_0.10.0         xfun_0.38             
+[88] mime_0.12              xtable_1.8-4           correlation_0.8.3     
+[91] broom_1.0.4            coda_0.19-4            rstatix_0.7.2         
+[94] later_1.3.0            ragg_1.2.5             ggstatsplot_0.11.0    
+[97] timechange_0.2.0       ellipsis_0.3.2        </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
