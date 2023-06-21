@@ -24,6 +24,8 @@ navbar:
     - text: "Methods"
       href: methods.html
   right:
+    - text: "Shamanskiy, V. et al. (2023)"
+      href: https://doi.org/10.1186/s12915-023-01606-1
     - text: "License"
       href: license.html
     - icon: fa-github

@@ -12,8 +12,8 @@ editor_options:
 ---
 
 This repository contains code and output of the analysis of mitochondria
-DNA deletions data for the article [Shamanskiy V et al.,
-2023](https://doi.org/ "Shamanskiy V et al.,").
+DNA deletions data for the article [Shamanskiy, V. et al.,
+2023](https://doi.org/10.1186/s12915-023-01606-1 "Shamanskiy, V. et al. (2023) Secondary structure of the human mitochondrial genome affects formation of deletions, BMC Biology, 21(1), p. 103. Available at: https://doi.org/10.1186/s12915-023-01606-1").
 
 Please see file `CITATION` in the root of this GitHub repo that contains
 the citation information.
